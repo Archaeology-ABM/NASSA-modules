@@ -20,8 +20,8 @@ description: >
   A collection of methods for random walk in NetLogo, including various movement restrictions, biases, and algorithm alternatives.
 references:
   bibFile: references.bib
-  moduleReferences: romanowska_agent-based_2021
-  useExampleReferences: romanowska_agent-based_2021
+  moduleReferences: [ romanowska_agent-based_2021 ]
+  useExampleReferences: [ romanowska_agent-based_2021 ]
 domainKeywords:
   subjects: 
     - random walk

@@ -13,8 +13,8 @@ description: >
 relatedModules: [ 0000-NASSA-002 ]
 references:
   bibFile: references.bib
-  moduleReferences: Epstein2008
-  useExampleReferences: romanowska_agent-based_2021
+  moduleReferences: [ Epstein2008 ]
+  useExampleReferences: [ romanowska_agent-based_2021 ]
 domainKeywords:
   regions: 
     - Global

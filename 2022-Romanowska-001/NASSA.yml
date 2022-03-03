@@ -1,4 +1,4 @@
-id: 2022-Romanowska-01
+id: 2022-Romanowska-001
 moduleType: Algorithm
 title: Multiple agent placement in specific geographical location
 moduleVersion: 0.1.0
@@ -29,8 +29,8 @@ description: >
 relatedModules: [ 2022-Romanowska-002 ]
 references:
   bibFile: references.bib
-  moduleReferences: romanowska_agent-based_2021
-  useExampleReferences: romanowska_agent-based_2021
+  moduleReferences: [ romanowska_agent-based_2021 ]
+  useExampleReferences: [ romanowska_agent-based_2021 ]
 modellingKeywords:
   - agent initialisation
   - grid initialisation
