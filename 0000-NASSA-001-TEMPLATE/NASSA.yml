@@ -1,6 +1,6 @@
 id: YEAR-SURNAME-000
 moduleType: Algorithm
-title: Module name or title. It must include a useful description of module. Max. 100 characters.
+title: (TEMPLATE) Module name or title including a useful description of module. Max. 100 characters.
 moduleVersion: 0.1.0
 contributors:
  - name: SURNAME, NAME with no accent marks
@@ -13,8 +13,8 @@ description: >
 relatedModules: [ 0000-NASSA-002 ]
 references:
   bibFile: references.bib
-  moduleReferences: ThisIsACitationKey2021
-  useExampleReferences: ThisIsAnotherCitationKey2022
+  moduleReferences: Epstein2008
+  useExampleReferences: romanowska_agent-based_2021
 domainKeywords:
   regions: 
     - Global
