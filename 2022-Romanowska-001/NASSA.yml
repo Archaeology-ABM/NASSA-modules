@@ -1,0 +1,67 @@
+id: 2022-Romanowska-01
+moduleType: Algorithm
+title: Multiple agent placement in specific geographical location
+moduleVersion: 0.1.0
+contributors:
+  - name: Romanowska, Iza
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Wren, Colin D.
+    roles: [ "Author", "Copyright Holder" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Cabtree, Stefani A.
+    roles: [ "Author", "Copyright Holder" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Boogers, Stef
+    roles: [ "Contributor" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Angourakis, Andreas
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: andros.spica@gmail.com
+    orcid: 0000-0002-9946-8142
+lastUpdateDate: 2022-02-01
+description: >
+  Set up an input number of agents (turtles) at an input location (cell or patch) in an grid holding the input spatial data (map).
+relatedModules: [ 2022-Romanowska-002 ]
+references:
+  bibFile: references.bib
+  moduleReferences: romanowska_agent-based_2021
+  useExampleReferences: romanowska_agent-based_2021
+modellingKeywords:
+  - agent initialisation
+  - grid initialisation
+  - time initialisation
+programmingKeywords:
+  - function
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation
+softwareDependencies:
+  - NetLogo version x.x.x
+inputs:
+  - name: map (spatial input data)
+    type: png/bmp (grid or raster)
+    description: image file containing the colour representation of spatial data (e.g. elevation). The example file attached ("world.png") was taken from the public repository associated to Romanowska, Wren, & Crabtree 2021 (https://github.com/SantaFeInstitute/ABMA/blob/master/ch1/ch1_map.png). 
+  - name: numberOfTurtles
+    type: integer
+    description: number of agents (turtles) to be created
+  - name: inputX
+    type: integer
+    unit: limited by dimensions of grid width
+    description: x coordinate of the desired/created agents’ location 
+  - name: inputY
+    type: integer
+    unit: limited by dimensions of grid height
+    description: y coordinate of the desired/created agents’ location
+outputs:
+  - name: agents
+    type: object (agentset)
+    description: agents initialised at input location
+  - name: world
+    type: object (world)
+    description: world’s grid initialised with input spatial data
+license: MIT

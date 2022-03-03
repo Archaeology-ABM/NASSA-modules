@@ -1,0 +1,38 @@
+id: 2021-GALAN-001
+moduleType: Algorithm
+title: Random Walk in R
+moduleVersion: 0.1.0
+contributors:
+  - name: Galan, Jose M.
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+lastUpdateDate: 2021-11-15
+description: >
+  Collection of methods for producing random walks in two-dimensional space in R, including alternatives for grid and non-grid space. Uses tidyverse "tibble" to keep track of trajectories.
+domainKeywords:
+  subjects: 
+    - random walk
+modellingKeywords:
+  - agent behaviour self
+programmingKeywords:
+  - Object-oriented programming
+  - Nondeterministic algorithm
+implementations:
+  - language: R
+    codeDir: r_implementation
+softwareDependencies: 
+  - R >= v4.0 
+  - tidyverse (R package) >= 1.3.0
+  - ggrepel (R package) >= 0.9.1
+inputs:
+  - name: initialX, initialY
+    type: float (numeric)
+    unit: no specific unit
+    description: initial position x and y coordinates
+outputs:
+  - name: trajectory
+    type: data frame (tibble)
+    description: A dataframe with three columns holding numeric (named "steps", "X", and "Y") where each row correspond to the index and xy coordinates of a step in a random walk.
+readmeFile: README.md
+license: MIT

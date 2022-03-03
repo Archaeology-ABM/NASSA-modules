@@ -1,0 +1,54 @@
+id: 2021-ROMANOWSKA-001
+moduleType: Algorithm
+title: Pedestrian random walk in NetLogo (ch2.1)
+moduleVersion: 0.1.0
+contributors:
+  - name: Romanowska, Iza
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Wren, Colin D.
+    roles: [ "Author", "Copyright Holder" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Cabtree, Stefani A.
+    roles: [ "Author", "Copyright Holder" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+lastUpdateDate: 2021-11-15
+description: >
+  A collection of methods for random walk in NetLogo, including various movement restrictions, biases, and algorithm alternatives.
+references:
+  bibFile: references.bib
+  moduleReferences: romanowska_agent-based_2021
+  useExampleReferences: romanowska_agent-based_2021
+domainKeywords:
+  subjects: 
+    - random walk
+modellingKeywords:
+  - agent initialisation
+  - agent behaviour self
+programmingKeywords:
+  - Object-oriented programming
+  - Nondeterministic algorithm
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation
+softwareDependencies: 
+  - NetLogo >= v6.1.1
+  - Rnd (NetLogo extension)
+inputs:
+  - name: (initial) xcor, ycor
+    type: float (absolute position) or integer (patch coordinate)
+    unit: no specific unit, but within world dimensions
+    description: initial position of the agent (turtle) as x and y coordinates.
+  - name: walk (name tag of the method to select)
+    type: string
+    unit: accepted values are "random1", "random2", "random3", "random4", "random-patches", "correlated", "target", "weighted-random", "levy", "restricted", "leap-frog", "IDD"
+    description: this input is an intermediate reference to the procedures that perform specific variations of random walk. Therefore, it can be bypassed as an input. Note - there are some values hard-coded inside each procedure that could be used as parameters or variable inputs. 
+outputs:
+  - name: (current) xcor, ycor
+    type: float (absolute position) or integer (patch coordinate)
+    unit: no specific unit, but within world dimensions
+    description: Current position of the agent (turtle) as x and y coordinates.
+license: CC BY-SA 4.0

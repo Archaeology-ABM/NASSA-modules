@@ -1,0 +1,85 @@
+id: 2022-Romanowska-002
+moduleType: Submodel
+title: Out of Africa dispersal - Conditional isotropic diffusion
+moduleVersion: 0.1.0
+contributors:
+  - name: Romanowska, Iza
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Wren, Colin D.
+    roles: [ "Author", "Copyright Holder" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Cabtree, Stefani A.
+    roles: [ "Author", "Copyright Holder" ]
+    email: my.stable@email.com
+    orcid: 1234-1234-1234-1234
+  - name: Angourakis, Andreas
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: andros.spica@gmail.com
+    orcid: 0000-0002-9946-8142
+lastUpdateDate: 2022-02-01
+description: >
+  A generalisation of a demic diffusion model, where a number of agents (turtles) are initialised at a given region in a given map, and then reproduce themselves at each time step with a certain probability and only if there is a free adjacent grid cell (patch). A reimplementation of the classical study by Young and Bettinger (1992) investigating the possible drivers behind the Out of Africa dispersal of modern humans. The module code is an adaptation of the content of "ch1_Y&Bdispersal.nlogo" in the public repository associated to Romanowska, Wren, & Crabtree 2021 (https://github.com/SantaFeInstitute/ABMA/blob/master/ch1).    
+relatedModules: [ 2022-Romanowska-001 ]
+references:
+  bibFile: references.bib
+  moduleReferences: [ romanowska_agent-based_2021, young_numic_1992 ]
+  useExampleReferences: romanowska_agent-based_2021
+domainKeywords:
+  regions: 
+    - Global
+  periods: 
+    - Palaeolithic
+  subjects: 
+    - diffusion 
+    - dispersal
+    - colonisation
+modellingKeywords:
+  - initialisation
+  - run-time
+programmingKeywords:
+  - function
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation
+softwareDependencies:
+  - NetLogo version x.x.x
+inputs:
+  - name: map (input spatial data)
+    type: png/bmp (grid or raster)
+    description: image file containing the colour representation of spatial data differentiating land and sea. The sea must be represented in white. The example file attached ("world.png") was taken from the public repository associated to Romanowska, Wren, & Crabtree 2021 (https://github.com/SantaFeInstitute/ABMA/blob/master/ch1/ch1_map.png). 
+  - name: number-turtles
+    type: integer
+    description: number of agents to be created and placed in the 2D array (the world)
+  - name: inputX
+    type: integer
+    unit: limited by dimensions of grid width
+    description: initial x coordinate of the center of the region where agents are created in initialisation 
+  - name: inputY
+    type: integer
+    unit: limited by dimensions of grid height
+    description: initial y coordinate of the center of the region where agents are created in initialisation
+  - name: maxInitialDistanceFromPoint
+    type: integer
+    unit: patches (grid cells)
+    description: maximum distance from input point where agents are created in initialisation
+  - name: numberOfTurtles
+    type: integer
+    unit: turtles (agents)
+    description: number of agents to be created and placed in the 2D array (the world)
+  - name: pop_growth
+    type: float
+    description: probability of an agent reproducing once each time step. Value set through slider in interface (0 - 1, 0.05 increment).
+outputs:
+  - name: world
+    type: object (world)
+    description: world’s grid initialised with input spatial data
+  - name: agents
+    type: object (agentset)
+    description: agents positioned over land patches (grid cells) with a particular colour as a proxy of their lineage.
+  - name: tickcounter
+    type: integer
+    description: simulation time step counter
+license: CC BY-SA 4.0

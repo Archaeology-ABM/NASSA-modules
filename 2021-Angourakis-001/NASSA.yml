@@ -1,0 +1,56 @@
+id: 2021-ANGOURAKIS-001
+moduleType: Algorithm
+title: Random walk in 2D space based on agent angle orientation
+moduleVersion: 0.1.0
+contributors:
+  - name: Angourakis, Andreas
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: andros.spica@gmail.com
+    orcid: 0000-0002-9946-8142
+lastUpdateDate: 2021-11-15
+description: >
+  An implementation of random walk in Python, which defines an agent class `Walker` capable of several movement algorithms based on angle and movement step distance in a continuous 2D space.
+domainKeywords:
+  subjects: 
+    - random walk
+modellingKeywords:
+  - agent behaviour self
+programmingKeywords:
+  - Object-oriented programming
+  - Nondeterministic algorithm
+implementations:
+  - language: Python
+    codeDir: python_implementation
+softwareDependencies: 
+  - Python >= v.3.9 
+  - math (Python module)
+  - random (Python module)
+inputs:
+  - name: worldDimensions
+    type: dictionary (Dict)
+    unit: no specific unit
+    description: The 2D world dimensions or limits. Specifically, the minimum and maximum coordinates in x and y that are considered valid positions in space. It is a dictionary with 'x' and 'y' keys, each associated to a two-item tupple of floats, representing minimum and maximum coordinates; e.g. {'x':(-50,50), 'y':(-50,50)}
+  - name: angleLeftMax, angleRightMax
+    type: float
+    unit: angular degrees
+    description: Left and right angles in relation to an agent current angular direction that mark the maximum range of stochastic variation in direction for a step in a random walks. Both values must be set within the 0-180 interval. If both are set to 180, the direction of the previous step will have no impact on the direction of the next step (i.e. angle will be sampled from a 0-360 degrees interval).
+  - name: moveDistanceMin, moveDistanceMax
+    type: float
+    unit: no specific unit, but within the scale set by worldDimensions
+    description: Minimum and maximum distance travelled after a step. When moveDistanceMin is less than moveDistanceMax, these mark the maximum range of stochastic variation in distance per step. If these are equal, distance travelled per step will be constant. MoveDistanceMin must be a positive number equal to or less than MoveDistanceMin. MoveDistanceMin must be a positive number equal to or greater than MoveDistanceMin, but less than the maximum world distance set by worldDimensions.  
+  - name: (initial) x, y
+    type: float
+    unit: no specific unit, but within the scale set by worldDimensions.
+    description: initial x and y coordinates of the agent's position.
+outputs:
+  - name: positionX, positionY
+    type: float
+    unit: no specific unit, but within the scale set by worldDimensions
+    description: the agent's position in x and y coordinates within the 2D space set by worldDimensions.
+  - name: direction
+    type: float
+    unit: angular degrees
+    description: the agent's angular direction in degrees.
+readmeFile: README.md
+docsDir: documentation/
+license: MIT
