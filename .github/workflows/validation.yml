@@ -1,0 +1,27 @@
+name: module library validation (nassa-hs)
+
+# Trigger the workflow on push or pull request, but only for the main branch
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    name: nassa-hs validation
+    runs-on: ubuntu-latest
+    steps:
+        
+    - name: Install nassa
+      run: |
+        wget https://github.com/Archaeology-ABM/nassa-hs/releases/latest/download/nassa-Linux
+        chmod +x nassa-Linux
+        
+    - name: Clone data repo
+      uses: actions/checkout@v2
+      with:
+        path: data
+
+    - name: Validation
+      run: |
+        ./nassa-Linux validate -d data
