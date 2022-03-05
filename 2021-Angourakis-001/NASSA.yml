@@ -1,4 +1,5 @@
 id: 2021-ANGOURAKIS-001
+nassaVersion: 0.1.0
 moduleType: Algorithm
 title: Random walk in 2D space based on agent angle orientation
 moduleVersion: 0.1.0
