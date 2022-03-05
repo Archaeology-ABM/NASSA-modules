@@ -39,7 +39,7 @@ programmingKeywords:
   - function
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation
+    codeDir: netlogo_implementation/
 softwareDependencies:
   - NetLogo version x.x.x
 inputs:
@@ -64,4 +64,6 @@ outputs:
   - name: world
     type: object (world)
     description: world’s grid initialised with input spatial data
+readmeFile: README.md
+docsDir: documentation/
 license: MIT

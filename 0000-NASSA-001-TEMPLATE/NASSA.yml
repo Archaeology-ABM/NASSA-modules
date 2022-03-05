@@ -30,7 +30,7 @@ programmingKeywords:
   - function
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation
+    codeDir: netlogo_implementation/
 softwareDependencies:
   - language/software version x.x.x
   - extension version

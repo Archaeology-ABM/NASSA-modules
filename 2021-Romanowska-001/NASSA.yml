@@ -33,7 +33,7 @@ programmingKeywords:
   - Nondeterministic algorithm
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation
+    codeDir: netlogo_implementation/
 softwareDependencies: 
   - NetLogo >= v6.1.1
   - Rnd (NetLogo extension)
@@ -51,4 +51,6 @@ outputs:
     type: float (absolute position) or integer (patch coordinate)
     unit: no specific unit, but within world dimensions
     description: Current position of the agent (turtle) as x and y coordinates.
+readmeFile: README.md
+docsDir: documentation/
 license: CC BY-SA 4.0

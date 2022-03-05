@@ -20,7 +20,7 @@ programmingKeywords:
   - Nondeterministic algorithm
 implementations:
   - language: Python
-    codeDir: python_implementation
+    codeDir: python_implementation/
 softwareDependencies: 
   - Python >= v.3.9 
   - math (Python module)
