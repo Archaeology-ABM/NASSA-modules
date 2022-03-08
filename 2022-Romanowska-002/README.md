@@ -13,4 +13,6 @@ Romanowska, I., Wren, C., Crabtree, S. 2021. Agent-Based Modeling for Archaeolog
 
 ## Further information
 
-![variables and parametres](documentation/Out%20of%20Africa%20dispersal%20-%20Conditional%20isotropic%20diffusion%20interface.png)
+![variables and parametres](documentation/netlogo/Out%20of%20Africa%20dispersal%20-%20Conditional%20isotropic%20diffusion%20interface.png)
+
+See full list of documentation resources in [`documentation`](documentation/tableOfContents.md).

@@ -13,4 +13,6 @@ Romanowska, I., Wren, C., Crabtree, S. 2021. Agent-Based Modeling for Archaeolog
 
 ## Further information
 
-![variables and parametres](documentation/LoadWorldImageAndPlaceAgents%20interface.png)
+![variables and parametres](documentation/netlogo/LoadWorldImageAndPlaceAgents%20interface.png)
+
+See full list of documentation resources in [`documentation`](documentation/tableOfContents.md).
