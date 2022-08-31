@@ -1,0 +1,31 @@
+---
+title: ####module_name####
+editor_options: 
+  chunk_output_type: console
+link-citations: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r dependencies}
+library(magrittr)
+
+module_name <- "####module_name####"
+module_path <- file.path("../..", module_name)
+```
+
+
+```{r ymlfile}
+nassa_yml_file <- list.files(module_path, pattern = "NASSA.yml", full.names = TRUE)
+nassa_yml <- yaml::read_yaml(nassa_yml_file)
+```
+
+***
+
+`r nassa_yml$title` (Last updated: `r nassa_yml$lastUpdateDate`), 
