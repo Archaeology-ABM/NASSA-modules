@@ -1,4 +1,4 @@
-Module name or title
+Multiple agent placement in specific geographical location
 # Documentation - NetLogo implementation
 ## Table of contents
 

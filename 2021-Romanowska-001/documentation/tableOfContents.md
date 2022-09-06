@@ -1,4 +1,4 @@
-Module name or title
+Pedestrian random walk in NetLogo (ch2.1)
 # General documentation
 ## Table of contents
 

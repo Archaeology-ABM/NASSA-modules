@@ -1,4 +1,4 @@
-Module name or title
+Random Walk in R
 # General documentation
 ## Table of contents
 

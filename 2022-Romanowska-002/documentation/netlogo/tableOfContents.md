@@ -1,4 +1,4 @@
-Module name or title
+Out of Africa dispersal - Conditional isotropic diffusion
 # Documentation - NetLogo implementation
 ## Table of contents
 

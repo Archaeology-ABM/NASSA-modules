@@ -1,4 +1,4 @@
-Module name or title
+Random walk in 2D space based on agent angle orientation
 # Documentation - Python implementation
 ## Table of contents
 
