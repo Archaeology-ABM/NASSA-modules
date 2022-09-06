@@ -42,6 +42,9 @@ implementations:
 softwareDependencies:
   - NetLogo version 6.2.2
 inputs:
+  - name: seed
+    type: integer
+    description: random generator seed number used as `random-seed seed`. 
   - name: initial-households
     type: integer
     unit: households

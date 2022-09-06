@@ -96,6 +96,8 @@ to setup
   clear-all
   reset-ticks
 
+  random-seed seed
+
   setup-clusters
 
   setup-population
@@ -619,9 +621,9 @@ count people with [susceptible? = true]
 11
 
 MONITOR
-1092
+1146
 10
-1221
+1275
 55
 Actual process
 process
@@ -1633,6 +1635,17 @@ transmission-prob-range4-stddev
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+1089
+10
+1142
+70
+seed
+0.0
+1
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?
