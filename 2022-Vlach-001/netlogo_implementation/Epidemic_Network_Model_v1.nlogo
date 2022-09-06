@@ -1,41 +1,152 @@
-;global varaibles settings
-globals [house-counter died-counter process
-         nw-betcen nw-eigcen nw-clocen nw-clucoe nw-mod ;network metrics
-         pos-spread neg-spread count-spread count-daily-contact count-daily-transmission count-daily-transmission-pers]
+;;; global varaibles settings
+globals [
+  house-counter
+  died-counter
+  process
+  ;;; constants
+  range1-search-radius-share
+  range2-search-radius-share
+  range3-search-radius-share
+  range4-search-radius-share
+  range1-initial-connections-share
+  range2-initial-connections-share
+  range3-initial-connections-share
+  range4-initial-connections-share
+  ;;; network metrics
+  nw-betcen
+  nw-eigcen
+  nw-clocen
+  nw-clucoe
+  nw-mod
+  pos-spread
+  neg-spread
+  count-spread
+  count-daily-contact
+  count-daily-transmission
+  count-daily-transmission-pers
+]
 
-;breed setup
-breed [persons person]
+;;; breed setup
+breed [people person]
 breed [households household]
 undirected-link-breed [connections connection]
 
-;variables declaration for breeds
-households-own [inhabitants tf-link? house]
-connections-own [t-prob l-length l-infected-in t-range active?]
-persons-own [personal-id household-id my-connection-count my-connection-count1 my-connection-count2 my-connection-count3 my-connection-count4 initial-degree infected-in my-daily-contacts actual-contacts sec-case-count
-             susceptible? incubation? prodromal? contag? recovered? died?
-             ill-duration ill-duration-l ill-duration-p ill-duration-c death-in imovable-in died-in imoved-in stage movable? imune? to-infect
-             stage-counter-l stage-counter-p stage-counter-c]
-patches-own [house? house-id household-pop future-settlement?]
+;;; variables declaration for breeds
+households-own [
+  inhabitants
+  tf-link?
+  house
+]
 
-to setup ;main setup
+connections-own [
+  t-prob
+  l-length
+  l-infected-in
+  t-range
+  active?
+]
+
+people-own [
+  personal-id
+  household-id
+  my-connection-count
+  my-connection-count1
+  my-connection-count2
+  my-connection-count3
+  my-connection-count4
+  initial-degree
+  infected-in
+  my-daily-contacts
+  actual-contacts
+  sec-case-count
+  susceptible?
+  incubation?
+  prodromal?
+  contag?
+  recovered?
+  died?
+  ill-duration
+  ill-duration-l
+  ill-duration-p
+  ill-duration-c
+  death-in
+  imovable-in
+  died-in
+  imoved-in
+  stage
+  movable?
+  imune?
+  to-infect
+  stage-counter-l
+  stage-counter-p
+  stage-counter-c
+]
+
+patches-own [
+  house?
+  house-id
+  household-pop
+  future-settlement?
+]
+
+to setup
+
+  ;;; main setup
+
   clear-all
   reset-ticks
+
+  setup-clusters
+
+  setup-population
+
+  start-epidemy
+
+  go
+
+end
+
+to setup-clusters
 
   ask patches
      [set house? false
       set future-settlement? false]
 
   ask n-of initial-clusters patches with [future-settlement? = false]
-      [ask patches in-radius (cluster-size + (random cluster-size))
+      [ask patches in-radius (cluster-radius-min + (random cluster-radius-max))
           [set future-settlement? true]]
 
-  setup-population
-  epidemy
-  go
 end
 
-to setup-population ;setup featuring demography context
-  ask n-of ini-houses patches with [future-settlement? = true] ;create chosen number of households (slider)
+to setup-population ;;; setup featuring demography context
+
+  set-constants
+
+  setup-households
+
+  setup-people
+
+end
+
+to set-constants
+
+  ;;; set constants
+  set range1-search-radius-share 0.125
+  set range2-search-radius-share 0.25
+  set range3-search-radius-share 0.5
+  set range4-search-radius-share 1
+
+  set range1-initial-connections-share 1
+  set range2-initial-connections-share 0.75
+  set range3-initial-connections-share 0.5
+  set range4-initial-connections-share 0.25
+
+end
+
+to setup-households
+
+  ;;; create chosen number of households (slider)
+  ask n-of initial-households patches with [future-settlement? = true]
       [set house? true
        set house-counter (house-counter + 1)
        set house-id house-counter
@@ -46,10 +157,11 @@ to setup-population ;setup featuring demography context
          set size 1
          set house [house-id] of patch-here]]
 
-  ask households ;create population of households based on population coefficient variable (slider)
+  ;;; create population of households based on population coefficient variable (slider)
+  ask households
      [let future-id [house-id] of self
-      let actual-random ((random-exponential population-coeficient) + 4)
-      hatch-persons actual-random
+      let actual-random ((random-exponential population-coefficient) + 4)
+      hatch-people actual-random
         [move-to one-of patches in-radius 2 with [future-settlement? = true]
           set household-id future-id
           set shape "person"
@@ -70,23 +182,28 @@ to setup-population ;setup featuring demography context
           set personal-id [who] of self]
       set household-pop actual-random]
 
-  ask persons ;create links between individuals (fundamental settings for degree distribution, distance of individual contacts and transmission probability)
+end
+
+to setup-people
+
+  ;;; create links between individuals (fundamental settings for degree distribution, distance of individual contacts and transmission probability)
+  ask people
     [let my-id-now [personal-id] of self
-     let my-neighbor-comm1 persons with [personal-id != my-id-now] in-radius (search-radius * 0.125) ;agentset in range 1 (closest vicinity)
-     let my-neighbor-comm2 persons with [personal-id != my-id-now] in-radius (search-radius * 0.25) ;agentset in range 2 (more remote individuals)
-     let my-neighbor-comm3 persons with [personal-id != my-id-now] in-radius (search-radius * 0.5) ;agentset in range 3 (remote individuals)
-     let my-neighbor-comm4 persons with [personal-id != my-id-now] in-radius (search-radius) ;agentset in range 4 (individuals in maximum search radius)
-     create-connections-with n-of (random max-links) my-neighbor-comm1 ;establish links in in range 1
-                 [set t-prob random-normal 1 0.25 ;set link transmission probability in range 1
+     let my-neighbor-comm1 people with [personal-id != my-id-now] in-radius (search-radius * range1-search-radius-share) ;;; agentset in range 1 (closest vicinity)
+     let my-neighbor-comm2 people with [personal-id != my-id-now] in-radius (search-radius * range2-search-radius-share) ;;; agentset in range 2 (more remote individuals)
+     let my-neighbor-comm3 people with [personal-id != my-id-now] in-radius (search-radius * range3-search-radius-share) ;;; agentset in range 3 (remote individuals)
+     let my-neighbor-comm4 people with [personal-id != my-id-now] in-radius (search-radius * range4-search-radius-share) ;;; agentset in range 4 (individuals in maximum search radius)
+     create-connections-with n-of (random (max-connections * range1-initial-connections-share)) my-neighbor-comm1 ;;; establish links in in range 1
+                 [set t-prob random-normal transmission-prob-range1-mean transmission-prob-range1-stddev ;;; set link transmission probability in range 1
                   set t-range 1]
-     create-connections-with n-of ((random max-links) * 0.75) my-neighbor-comm2 ;establish links in in range 2
-                 [set t-prob random-normal 0.5 0.25 ;set link transmission probability in range 2
+     create-connections-with n-of (random (max-connections * range2-initial-connections-share)) my-neighbor-comm2 ;;; establish links in range 2
+                 [set t-prob random-normal transmission-prob-range2-mean transmission-prob-range2-stddev ;;; set link transmission probability in range 2
                   set t-range 2]
-     create-connections-with n-of ((random max-links) * 0.5) my-neighbor-comm3 ;establish links in in range 3
-                 [set t-prob random-normal 0.25 0.25 ;set link transmission probability in range 3
+     create-connections-with n-of (random (max-connections * range3-initial-connections-share)) my-neighbor-comm3 ;;; establish links in range 3
+                 [set t-prob random-normal transmission-prob-range3-mean transmission-prob-range3-stddev ;;; set link transmission probability in range 3
                   set t-range 3]
-     create-connections-with n-of ((random max-links) * 0.25) my-neighbor-comm4 ;establish links in in range 4
-                 [set t-prob random-normal 0.125 0.25 ;set link transmission probability in range 4
+     create-connections-with n-of (random (max-connections * range4-initial-connections-share)) my-neighbor-comm4 ;;; establish links in range 4
+                 [set t-prob random-normal transmission-prob-range4-mean transmission-prob-range4-stddev ;;; set link transmission probability in range 4
                   set t-range 4]
       set my-connection-count count my-connections
       set my-connection-count1 count my-connections with [t-range = 1]
@@ -101,45 +218,62 @@ to setup-population ;setup featuring demography context
       set hidden? true]
 end
 
-to epidemy ;setup first infected individuals of the household nearest to the centre of the environment
+to start-epidemy
+
+  ;;; setup first infected individuals of the household nearest to the centre of the environment
+
   ask min-one-of households [distance patch 0 0]
       [let my-id [house] of self
-        ask min-n-of initial-infected persons [distance myself]
+        ask min-n-of initial-infected people [distance myself]
            [set incubation? true
             set stage "incubation"
-            set stage-counter-l random (dur-latent + (random-normal dur-latent-var dur-latent-var))]]
+            set stage-counter-l get-stage-duration "latent"]]
 end
 
-to go ;iterative call of the processes connected with epidemiological development and calculation of variables
+to go
+
+  ;;; iterative call of the processes connected with epidemiological development and calculation of variables
+
   set count-daily-contact 0
   set count-daily-transmission 0
   set count-daily-transmission-pers 0
 
-  ask connections ;to hide links of disease transmission (red) older than 100 iterations
+  ;;; to hide links of disease transmission (red) older than 100 iterations
+  ask connections
       [if (l-infected-in < (ticks - 100))
         [set hidden? true]]
 
-  ifelse any? persons with [incubation? = true or prodromal? = true or contag? = true] ;to run simulation only any active stage of disease is present
+  ;;; to run simulation only any active stage of disease is present
+  ifelse any? people with [incubation? = true or prodromal? = true or contag? = true]
     [infection-spread
      disease-development]
     [stop]
 
-  ask persons with [susceptible? = true] ;update count of active links amongst suspectible individuals
+  ;;; update count of active links amongst suspectible individuals
+  ask people with [susceptible? = true]
         [set my-connection-count count my-connections with [active? = true]]
 
   tick
 end
 
-to infection-spread ;procedures to calculate disease transmission between linked individuals
+to infection-spread
+
+  ;;; procedures to calculate disease transmission between linked individuals
+
   set process "infection spread"
 
-  if any? persons with [contag? = true and movable? = true and any? connections with [active? = true]] ;to ask all respective agents
-     [set count-daily-transmission-pers count persons with [contag? = true and movable? = true and any? connections with [active? = true]]
-      ask persons with [contag? = true and movable? = true and any? connections with [active? = true]]
-        [ifelse my-connection-count > daily-track ;set amount of daily contacts to perform
-              [set my-daily-contacts daily-track]
+  ;;; to ask all respective agents
+  if any? people with [contag? = true and movable? = true and any? connections with [active? = true]]
+     [set count-daily-transmission-pers count people with [contag? = true and movable? = true and any? connections with [active? = true]]
+      ask people with [contag? = true and movable? = true and any? connections with [active? = true]]
+        [
+          ;;; set amount of daily contacts to perform
+          ifelse my-connection-count > max-daily-contacts
+              [set my-daily-contacts max-daily-contacts]
               [set my-daily-contacts random my-connection-count]
-         repeat random (my-daily-contacts) ;calculate each of daily contact and disease transmission probability
+
+          ;;; calculate each of daily contact and disease transmission probability
+          repeat random (my-daily-contacts)
               [let present-my-daily-contacts my-connection-count
                set count-spread (count-spread + 1)
                set count-daily-contact (count-daily-contact + 1)
@@ -147,7 +281,7 @@ to infection-spread ;procedures to calculate disease transmission between linked
                let my-connection one-of my-connections with [active? = true]
                if my-connection-count > 0
                   [ask my-connection
-                      [ifelse random 100 < ((spread-prob * t-prob) / (0.1 + (random present-my-daily-contacts)))
+                      [ifelse (random-float 1) * (0.1 + (random present-my-daily-contacts)) < (spread-rate / 100) * t-prob
                           [set pos-spread (pos-spread + 1)
                            set count-daily-transmission (count-daily-transmission + 1)
                            set hidden? false
@@ -157,7 +291,7 @@ to infection-spread ;procedures to calculate disease transmission between linked
                                [if susceptible? = true
                                    [set incubation? true
                                     set stage "incubation"
-                                    set stage-counter-l (dur-latent + (random-normal dur-latent-var dur-latent-var))
+                                    set stage-counter-l get-stage-duration "latent"
                                     set susceptible? false
                                     set infected-in ticks]]
                                     ask other-end
@@ -166,10 +300,13 @@ to infection-spread ;procedures to calculate disease transmission between linked
         set my-connection-count count my-connections with [active? = true]]]]
 end
 
-to disease-development ;procedures to calculate development of the disease in individual stages - Susceptible-Latent(Incubation)-Prodromal-Contagious-Recovered/Died
+to disease-development
+
+  ;;; procedures to calculate development of the disease in individual stages - Susceptible-Latent(Incubation)-Prodromal-Contagious-Recovered/Died
+
   set process "disease development"
 
-  ask persons with [contag? = true]
+  ask people with [contag? = true]
     [set stage-counter-c (stage-counter-c - 1)
      set ill-duration (ill-duration + 1)
      set ill-duration-c (ill-duration-c + 1)
@@ -189,35 +326,35 @@ to disease-development ;procedures to calculate development of the disease in in
          ask my-connections
             [set active? false]]]
 
-  ask persons with [prodromal? = true]
+  ask people with [prodromal? = true]
     [set stage-counter-p (stage-counter-p - 1)
      set ill-duration (ill-duration + 1)
      set ill-duration-p (ill-duration-p + 1)
      if stage-counter-p <= 0
-        [set stage-counter-c ((dur-cont) + (random-normal dur-cont-var dur-cont-var))
+        [set stage-counter-c get-stage-duration "contagious"
          let my-random random int stage-counter-c
          set prodromal? false
          set contag? true
          set stage "contagious"
-         if random 100 < died-prob
+         if random-float 1 < mortality-rate / 100
                     [set death-in (my-random / 2)]
          set imovable-in (my-random * 2)
          set color yellow
          set size 2]]
 
-  ask persons with [incubation? = true]
+  ask people with [incubation? = true]
     [set stage-counter-l (stage-counter-l - 1)
      set ill-duration (ill-duration + 1)
      set ill-duration-l (ill-duration-l + 1)
      if stage-counter-l <= 0
-        [set stage-counter-p ((dur-prod) + (random-normal dur-prod-var dur-prod-var))
+        [set stage-counter-p get-stage-duration "prodromal"
          set incubation? false
          set prodromal? true
          set stage "prodromal"
          set color green
          set size 2]]
 
-  ask persons with [contag? = true and death-in <= 0]
+  ask people with [contag? = true and death-in <= 0]
       [set contag? false
        set died? true
        set stage "death"
@@ -227,9 +364,25 @@ to disease-development ;procedures to calculate development of the disease in in
        ask my-connections
              [set active? false]]
 
-  ask persons with [contag? = true and imovable-in <= 0] ;persons with deveoped contagious stage cease their movement
+  ;;; people with deveoped contagious stage cease their movement
+  ask people with [contag? = true and imovable-in <= 0]
         [set movable? false
          set imoved-in ill-duration]
+end
+
+to-report get-stage-duration [ stageName ]
+
+  if (stageName = "latent")
+  [ report round random-normal duration-latent-mean duration-latent-stddev ]
+
+  if (stageName = "prodromal")
+  [ report round random-normal duration-prodromal-mean duration-prodromal-stddev ]
+
+  if (stageName = "contagious")
+  [ report round random-normal duration-contagious-mean duration-contagious-stddev ]
+
+  error (word "'" stageName "' is not a valid stage name.")
+
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -294,12 +447,12 @@ NIL
 1
 
 SLIDER
-974
-96
-1100
-129
-ini-houses
-ini-houses
+975
+65
+1101
+98
+initial-households
+initial-households
 50
 2000
 1000.0
@@ -314,16 +467,16 @@ MONITOR
 1424
 55
 Population
-count persons with [died? = false]
+count people with [died? = false]
 17
 1
 11
 
 PLOT
-974
-370
-1483
-575
+973
+615
+1482
+735
 Epidemics development
 NIL
 NIL
@@ -335,18 +488,18 @@ true
 true
 "" ""
 PENS
-"Prodromal" 1.0 0 -7500403 true "" "plot count persons with [prodromal? = true]"
-"Contag" 1.0 0 -2674135 true "" "plot count persons with [contag? = true]"
-"Incubation" 1.0 0 -6459832 true "" "plot count persons with [incubation? = true]"
-"Infected" 1.0 0 -13345367 true "" "plot count persons with [incubation? = true or contag? = true or prodromal? = true]"
+"Prodromal" 1.0 0 -7500403 true "" "plot count people with [prodromal? = true]"
+"Contag" 1.0 0 -2674135 true "" "plot count people with [contag? = true]"
+"Incubation" 1.0 0 -6459832 true "" "plot count people with [incubation? = true]"
+"Infected" 1.0 0 -13345367 true "" "plot count people with [incubation? = true or contag? = true or prodromal? = true]"
 
 SLIDER
-1305
-325
-1417
-358
-spread-prob
-spread-prob
+1043
+398
+1217
+431
+spread-rate
+spread-rate
 0
 100
 25.0
@@ -356,12 +509,12 @@ spread-prob
 HORIZONTAL
 
 SLIDER
-1305
-291
-1417
-324
-died-prob
-died-prob
+1306
+317
+1480
+350
+mortality-rate
+mortality-rate
 0
 100
 20.0
@@ -376,7 +529,7 @@ MONITOR
 1411
 101
 latent
-count persons with [incubation? = true]
+count people with [incubation? = true]
 17
 1
 11
@@ -387,7 +540,7 @@ MONITOR
 1473
 101
 prodromal
-count persons with [prodromal? = true]
+count people with [prodromal? = true]
 17
 1
 11
@@ -398,7 +551,7 @@ MONITOR
 1539
 101
 contagious
-count persons with [contag? = true]
+count people with [contag? = true]
 17
 1
 11
@@ -409,7 +562,7 @@ MONITOR
 1601
 101
 recovered
-count persons with [recovered? = true]
+count people with [recovered? = true]
 17
 1
 11
@@ -449,7 +602,7 @@ MONITOR
 1484
 55
 dens/km2
-count persons / 400
+count people / 400
 2
 1
 11
@@ -460,7 +613,7 @@ MONITOR
 1667
 101
 susceptible
-count persons with [susceptible? = true]
+count people with [susceptible? = true]
 1
 1
 11
@@ -492,10 +645,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-1562
-189
-1634
-222
+1664
+158
+1736
+191
 Hide links
 ask links\n  [set hidden? true]
 NIL
@@ -514,16 +667,16 @@ MONITOR
 1536
 55
 Died%
-count persons with [died? = true] / (count persons / 100)
+count people with [died? = true] / (count people / 100)
 1
 1
 11
 
 BUTTON
-1562
-223
-1634
-256
+1664
+192
+1736
+225
 Unhide links
 ask links\n  [set hidden? false]
 NIL
@@ -537,12 +690,12 @@ NIL
 1
 
 BUTTON
-1636
-189
-1735
-222
+1654
+228
+1753
+261
 Hide recovered
-ask persons with [recovered? = true or died? = true]\n   [set hidden? true]
+ask people with [recovered? = true or died? = true]\n   [set hidden? true]
 NIL
 1
 T
@@ -554,10 +707,10 @@ NIL
 1
 
 PLOT
-974
-576
-1483
-778
+975
+736
+1484
+856
 Population
 NIL
 NIL
@@ -569,10 +722,10 @@ true
 true
 "" ""
 PENS
-"Died" 1.0 0 -11221820 true "" "plot count persons with [died? = true]"
-"Recovered" 1.0 0 -955883 true "" "plot count persons with [recovered? = true]"
-"Susceptible" 1.0 0 -7500403 true "" "plot count persons with [susceptible? = true]"
-"Total" 1.0 0 -16448764 true "" "plot count persons - count persons with [died? = true]"
+"Died" 1.0 0 -11221820 true "" "plot count people with [died? = true]"
+"Recovered" 1.0 0 -955883 true "" "plot count people with [recovered? = true]"
+"Susceptible" 1.0 0 -7500403 true "" "plot count people with [susceptible? = true]"
+"Total" 1.0 0 -16448764 true "" "plot count people - count people with [died? = true]"
 
 MONITOR
 1538
@@ -580,18 +733,18 @@ MONITOR
 1588
 55
 Sus%
-count persons with [susceptible? = true] / (count persons / 100)
+count people with [susceptible? = true] / (count people / 100)
 1
 1
 11
 
 BUTTON
-1636
-223
-1735
-256
+1654
+262
+1753
+295
 Unhide recovered
-ask persons with [recovered? = true or died? = true]\n   [set hidden? false]
+ask people with [recovered? = true or died? = true]\n   [set hidden? false]
 NIL
 1
 T
@@ -603,12 +756,12 @@ NIL
 1
 
 SLIDER
-974
-130
-1100
-163
-population-coeficient
-population-coeficient
+975
+99
+1101
+132
+population-coefficient
+population-coefficient
 1
 5
 3.0
@@ -638,16 +791,16 @@ MONITOR
 1474
 147
 Degree
-mean [my-connection-count] of persons
+mean [my-connection-count] of people
 2
 1
 11
 
 SLIDER
-974
-164
-1100
-197
+975
+133
+1101
+166
 initial-clusters
 initial-clusters
 5
@@ -659,14 +812,14 @@ NIL
 HORIZONTAL
 
 SLIDER
-974
-198
-1100
-231
-cluster-size
-cluster-size
+975
+167
+1101
+200
+cluster-radius-min
+cluster-radius-min
 1
-10
+cluster-radius-max
 5.0
 1
 1
@@ -689,7 +842,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [my-connection-count] of persons"
+"default" 1.0 1 -16777216 true "" "histogram [my-connection-count] of people"
 
 MONITOR
 1669
@@ -697,7 +850,7 @@ MONITOR
 1719
 101
 died
-count persons with [died? = true]
+count people with [died? = true]
 17
 1
 11
@@ -736,8 +889,8 @@ SLIDER
 334
 1101
 367
-daily-track
-daily-track
+max-daily-contacts
+max-daily-contacts
 5
 100
 30.0
@@ -747,12 +900,12 @@ NIL
 HORIZONTAL
 
 SLIDER
-1303
-175
-1415
-208
-dur-latent
-dur-latent
+1315
+180
+1474
+213
+duration-latent-mean
+duration-latent-mean
 1
 20
 12.0
@@ -762,12 +915,12 @@ NIL
 HORIZONTAL
 
 SLIDER
-1304
-209
-1416
-242
-dur-prod
-dur-prod
+1316
+211
+1476
+244
+duration-prodromal-mean
+duration-prodromal-mean
 1
 20
 3.0
@@ -777,12 +930,12 @@ NIL
 HORIZONTAL
 
 SLIDER
-1304
+1316
 243
-1416
+1475
 276
-dur-cont
-dur-cont
+duration-contagious-mean
+duration-contagious-mean
 1
 20
 9.0
@@ -797,7 +950,7 @@ MONITOR
 1640
 55
 MEAN R
-mean [sec-case-count] of persons + 1
+mean [sec-case-count] of people + 1
 3
 1
 11
@@ -876,12 +1029,12 @@ neg-spread / (count-spread / 100)
 11
 
 SLIDER
-1417
-175
-1530
-208
-dur-latent-var
-dur-latent-var
+1472
+179
+1644
+212
+duration-latent-stddev
+duration-latent-stddev
 1
 10
 3.0
@@ -891,12 +1044,12 @@ NIL
 HORIZONTAL
 
 SLIDER
-1418
-210
-1529
-243
-dur-prod-var
-dur-prod-var
+1474
+211
+1646
+244
+duration-prodromal-stddev
+duration-prodromal-stddev
 1
 10
 2.0
@@ -906,12 +1059,12 @@ NIL
 HORIZONTAL
 
 SLIDER
-1417
-244
-1529
-277
-dur-cont-var
-dur-cont-var
+1475
+242
+1650
+275
+duration-contagious-stddev
+duration-contagious-stddev
 1
 10
 3.0
@@ -922,7 +1075,7 @@ HORIZONTAL
 
 PLOT
 975
-781
+857
 1482
 977
 Infected contacts
@@ -936,7 +1089,7 @@ true
 true
 "" ""
 PENS
-"Contacts" 1.0 0 -16777216 true "" "if any? persons with [contag? = true] [plot count-daily-contact]"
+"Contacts" 1.0 0 -16777216 true "" "if any? people with [contag? = true] [plot count-daily-contact]"
 
 PLOT
 1758
@@ -954,7 +1107,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [ill-duration] of persons with [ill-duration > 0]"
+"default" 1.0 1 -16777216 true "" "histogram [ill-duration] of people with [ill-duration > 0]"
 
 PLOT
 1758
@@ -972,7 +1125,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [ill-duration-l] of persons with [ill-duration-l > 0]"
+"default" 1.0 1 -16777216 true "" "histogram [ill-duration-l] of people with [ill-duration-l > 0]"
 
 PLOT
 1759
@@ -990,7 +1143,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [ill-duration-p] of persons with [ill-duration-p > 0]"
+"default" 1.0 1 -16777216 true "" "histogram [ill-duration-p] of people with [ill-duration-p > 0]"
 
 PLOT
 1759
@@ -1008,7 +1161,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [ill-duration-c] of persons with [ill-duration-c > 0]"
+"default" 1.0 1 -16777216 true "" "histogram [ill-duration-c] of people with [ill-duration-c > 0]"
 
 PLOT
 1759
@@ -1026,7 +1179,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [died-in] of persons with [died? = true and died-in > 0]"
+"default" 1.0 1 -16777216 true "" "histogram [died-in] of people with [died? = true and died-in > 0]"
 
 PLOT
 1759
@@ -1044,7 +1197,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [imoved-in] of persons with [imoved-in > 0]"
+"default" 1.0 1 -16777216 true "" "histogram [imoved-in] of people with [imoved-in > 0]"
 
 MONITOR
 1476
@@ -1052,47 +1205,47 @@ MONITOR
 1526
 147
 STD
-standard-deviation [my-connection-count] of persons
+standard-deviation [my-connection-count] of people
 2
 1
 11
 
 TEXTBOX
-1108
-100
-1224
-128
+1109
+69
+1225
+97
 initial count of households
 11
 0.0
 1
 
 TEXTBOX
-1108
-133
-1219
-161
-household size variance coeficient
+1109
+102
+1220
+130
+household size variance coefficient
 11
 0.0
 1
 
 TEXTBOX
-1109
-167
-1221
-195
+1110
+136
+1222
+164
 initial count of clusters/settlements
 11
 0.0
 1
 
 TEXTBOX
-1108
-203
-1217
-231
-variace coeficient of cluster size
+1109
+186
+1218
+214
+Minimum/maximum cluster radius
 11
 0.0
 1
@@ -1100,9 +1253,9 @@ variace coeficient of cluster size
 TEXTBOX
 1109
 235
-1219
-263
-max search distance to establish links
+1233
+277
+maximum search distance to establish links
 11
 0.0
 1
@@ -1112,8 +1265,8 @@ SLIDER
 266
 1100
 299
-max-links
-max-links
+max-connections
+max-connections
 1
 20
 5.0
@@ -1123,20 +1276,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-1307
-157
-1518
-175
+1371
+159
+1558
+177
 DISEASE STAGE DURATION SETTINGS
 11
 0.0
 1
 
 TEXTBOX
-1564
-172
-1744
-190
+1657
+124
+1770
+156
 VISIBILITY OF LINKS/RECOVERED
 11
 0.0
@@ -1173,9 +1326,9 @@ Link properties
 1
 
 TEXTBOX
-1242
+1258
 187
-1288
+1304
 205
 latent
 11
@@ -1183,9 +1336,9 @@ latent
 1
 
 TEXTBOX
-1242
+1258
 166
-1297
+1313
 184
 PERIOD
 11
@@ -1193,9 +1346,9 @@ PERIOD
 1
 
 TEXTBOX
-1242
+1258
 220
-1392
+1309
 238
 prodromal
 11
@@ -1203,9 +1356,9 @@ prodromal
 1
 
 TEXTBOX
-1242
+1258
 252
-1392
+1314
 270
 contagious
 11
@@ -1213,20 +1366,20 @@ contagious
 1
 
 TEXTBOX
-1246
-293
-1301
-321
+1247
+319
+1302
+347
 mortality rate
 11
 0.0
 1
 
 TEXTBOX
-1246
-328
-1305
-358
+984
+401
+1043
+431
 spread probability
 11
 0.0
@@ -1245,19 +1398,19 @@ number of initial cases
 TEXTBOX
 1109
 338
-1204
-366
-number of max daily contacts
+1220
+380
+maximum number of daily contacts
 11
 0.0
 1
 
 TEXTBOX
 1109
-270
-1221
-298
-mean links per distance range
+265
+1253
+307
+maximum number of connections per distance range
 11
 0.0
 1
@@ -1327,14 +1480,159 @@ LINK COUNT IN SEARCH DISTANCE RANGES
 1
 
 TEXTBOX
-985
-80
-1090
-98
+986
+49
+1091
+67
 MAIN SETTINGS
 11
 0.0
 1
+
+SLIDER
+973
+199
+1101
+232
+cluster-radius-max
+cluster-radius-max
+cluster-radius-min + 1
+100
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+TEXTBOX
+1070
+380
+1220
+398
+TRANSMISSION RATES
+11
+0.0
+1
+
+SLIDER
+989
+438
+1227
+471
+transmission-prob-range1-mean
+transmission-prob-range1-mean
+0
+1
+1.0
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1228
+438
+1466
+471
+transmission-prob-range1-stddev
+transmission-prob-range1-stddev
+0
+1
+0.25
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+989
+471
+1227
+504
+transmission-prob-range2-mean
+transmission-prob-range2-mean
+0
+1
+0.5
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1228
+471
+1466
+504
+transmission-prob-range2-stddev
+transmission-prob-range2-stddev
+0
+1
+0.25
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+990
+503
+1228
+536
+transmission-prob-range3-mean
+transmission-prob-range3-mean
+0
+1
+0.25
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1229
+504
+1467
+537
+transmission-prob-range3-stddev
+transmission-prob-range3-stddev
+0
+1
+0.25
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+991
+537
+1229
+570
+transmission-prob-range4-mean
+transmission-prob-range4-mean
+0
+1
+0.125
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1229
+537
+1467
+570
+transmission-prob-range4-stddev
+transmission-prob-range4-stddev
+0
+1
+0.25
+0.001
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1678,7 +1976,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.0
+NetLogo 6.2.2
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
