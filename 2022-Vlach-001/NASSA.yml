@@ -1,0 +1,148 @@
+id: 2022-Vlach-001
+nassaVersion: 0.1.0
+moduleType: Submodel
+title: Epidemic Network
+moduleVersion: 0.1.0
+contributors:
+  - name: Vlach, Marek
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: vlach@arub.cz
+    orcid: 0000-0003-0805-4938
+  - name: Angourakis, Andreas
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: andros.spica@gmail.com
+    orcid: 0000-0002-9946-8142
+lastUpdateDate: 2022-09-06
+description: >
+  Experimental environment for tasting of large array of theoretical conditions for development epidemic event within various quantitative, spatial and connectedness (network structure) aspects.
+relatedModules: [ 2022-Romanowska-001 ]
+references:
+  bibFile: references.bib
+  moduleReferences: [ vlach_2022 ]
+  useExampleReferences: [ vlach_2022 ]
+domainKeywords:
+  regions: 
+    - Global
+    - European
+  periods: 
+    - Roman
+  subjects: 
+    - demography
+    - household
+    - epidemics
+    - networks
+modellingKeywords:
+  - initialisation
+  - run-time
+programmingKeywords:
+  - Nondeterministic algorithm
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation/
+softwareDependencies:
+  - NetLogo version 6.2.2
+inputs:
+  - name: initial-households
+    type: integer
+    unit: households
+    description: initial count of households. 
+  - name: population-coefficient
+    type: integer
+    unit: people
+    description: household size variance coefficient (mean of exponential distribution).
+  - name: initial-clusters
+    type: integer
+    unit: clusters/settlements
+    description: initial count of clusters/settlements.
+  - name: cluster-radius-min, cluster-radius-max
+    type: integer
+    unit: patch-widths
+    description: minimum/maximum cluster radius used to sample a random cluster radius from an uniform distribution, as `in-radius (min-cluster-radius + (random max-cluster-radius))`.
+  - name: search-radius
+    type: integer
+    unit: patch-widths
+    description: maximum search distance to establish links.
+  - name: max-connections
+    type: integer
+    unit: connections
+    description: maximum number of connections (links) per distance range.
+  - name: initial-infected
+    type: integer
+    unit: people
+    description: number of initial cases or people agents initialised with the "incubation" stage and a stochastic state of stage 1 counter.
+  - name: max-daily-contacts
+    type: integer
+    unit: connections
+    description: maximum number of connections to be considered contacts each day.
+  - name: duration-latent-mean, duration-latent-stddev
+    type: float
+    unit: ticks
+    description: Mean and standard deviation of duration of the latent stage of the disease, used in `random-normal duration-latent-mean duration-latent-stddev`.
+  - name: duration-prodromal-mean, duration-prodromal-stddev
+    type: float
+    unit: ticks
+    description: Mean and standard deviation of duration of the prodromal stage of the disease, used in `random-normal duration-prodromal-mean duration-prodromal-stddev`.
+  - name: duration-contagious-mean, duration-contagious-stddev
+    type: float
+    unit: ticks
+    description: Mean and standard deviation of duration of the contagious stage of the disease, used in `random-normal duration-contagious-mean duration-contagious-stddev`.
+  - name: mortality-rate
+    type: float
+    unit: percentage of population
+    description: Average mortality rate applied to all individuals (`people`) in the population.
+  - name: transmission-prob-range1-mean, transmission-prob-range1-stddev
+    type: float
+    unit: ticks
+    description: Mean and standard deviation of transmission probability towards people within range 1 (search-radius * 0.125), used in `random-normal transmission-prob-range1-mean transmission-prob-range1-stddev`.
+  - name: transmission-prob-range2-mean, transmission-prob-range2-stddev
+    type: float
+    description: Mean and standard deviation of transmission probability towards people within range 2 (search-radius * 0.25), used in `random-normal transmission-prob-range2-mean transmission-prob-range2-stddev`.
+  - name: transmission-prob-range3-mean, transmission-prob-range3-stddev
+    type: float
+    description: Mean and standard deviation of transmission probability towards people within range 3 (search-radius * 0.5), used in `random-normal transmission-prob-range3-mean transmission-prob-range3-stddev`.
+  - name: transmission-prob-range4-mean, transmission-prob-range4-stddev
+    type: float
+    description: Mean and standard deviation of transmission probability towards people within range 4 (search-radius), used in `random-normal transmission-prob-range4-mean transmission-prob-range4-stddev`.
+  - name: range1-search-radius-share, range2-search-radius-share, range3-search-radius-share, range4-search-radius-share
+    type: float
+    description: the proportion of `search-radius` effective for each transmission range.
+  - name: range1-initial-connections-share, range2-initial-connections-share, range3-initial-connections-share, range4-initial-connections-share
+    type: float
+    description: the proportion of `max-connections` from which a random sample is taken as initial contacts of the infected people for each distance range.
+outputs:
+  - name: pos-spread
+    type: ?
+    description: ?
+  - name: neg-spread
+    type: ?
+    description: ?
+  - name: count-spread
+    type: ?
+    description: ?
+  - name: count-daily-contact
+    type: ?
+    description: ?
+  - name: count-daily-transmission
+    type: ?
+    description: ?
+  - name: count-daily-transmission-pers
+    type: ?
+    description: ?
+  - name: nw-betcen
+    type: ?
+    description: ?
+  - name: nw-eigcen
+    type: ?
+    description: ?
+  - name: nw-clocen
+    type: ?
+    description: ?
+  - name: nw-clucoe
+    type: ?
+    description: ?
+  - name: nw-mod
+    type: ?
+    description: ?
+readmeFile: README.md
+docsDir: documentation/
+license: CC BY-SA 4.0
