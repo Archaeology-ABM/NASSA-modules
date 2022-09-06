@@ -111,38 +111,38 @@ inputs:
     description: the proportion of `max-connections` from which a random sample is taken as initial contacts of the infected people for each distance range.
 outputs:
   - name: pos-spread
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: neg-spread
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: count-spread
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: count-daily-contact
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: count-daily-transmission
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: count-daily-transmission-pers
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: nw-betcen
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: nw-eigcen
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: nw-clocen
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: nw-clucoe
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
   - name: nw-mod
-    type: ?
-    description: ?
+    type: TO-DO
+    description: TO-DO
 readmeFile: README.md
 docsDir: documentation/
 license: CC BY-SA 4.0
