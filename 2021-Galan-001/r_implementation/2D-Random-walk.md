@@ -1,5 +1,5 @@
 ---
-title: "Random Walk in R"
+title: "Random walk in data frames in R"
 output: 
   html_document:
     keep_md: true
@@ -10,18 +10,47 @@ output:
 Libraries required
 
 ```r
+library(ggplot2)
 library(tidyverse)
 ```
 
 ```
-## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+## Warning: package 'tidyverse' was built under R version 3.6.3
 ```
 
 ```
-## v ggplot2 3.3.2     v purrr   0.3.4
-## v tibble  3.0.4     v dplyr   1.0.2
-## v tidyr   1.1.2     v stringr 1.4.0
-## v readr   1.4.0     v forcats 0.5.0
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+```
+
+```
+## v tibble  3.1.1     v dplyr   1.0.6
+## v tidyr   1.1.3     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.1
+## v purrr   0.3.4
+```
+
+```
+## Warning: package 'tibble' was built under R version 3.6.3
+```
+
+```
+## Warning: package 'tidyr' was built under R version 3.6.3
+```
+
+```
+## Warning: package 'readr' was built under R version 3.6.3
+```
+
+```
+## Warning: package 'purrr' was built under R version 3.6.3
+```
+
+```
+## Warning: package 'dplyr' was built under R version 3.6.3
+```
+
+```
+## Warning: package 'forcats' was built under R version 3.6.3
 ```
 
 ```
@@ -32,6 +61,10 @@ library(tidyverse)
 
 ```r
 library(ggrepel)
+```
+
+```
+## Warning: package 'ggrepel' was built under R version 3.6.3
 ```
 
 Define initial parameters of the 2D movement
@@ -70,7 +103,7 @@ ggplot(trajectory, aes(X,Y,label=steps))+
   ggtitle("Simultaeous random walk in a grid")
 ```
 
-![](2D-Random-walk_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](2D-Random-walk_files/figure-html/simultaneous-in-2Dgrid-1.png)<!-- -->
 
 
 ## Method 2. Sequential random movement in X and Y in a bidimensional grid
@@ -94,7 +127,7 @@ ggplot(trajectory, aes(X,Y,label=steps))+
   ggtitle("Sequential random walk in a grid")
 ```
 
-![](2D-Random-walk_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](2D-Random-walk_files/figure-html/sequential-in-2Dgrid-1.png)<!-- -->
 
 ## Method 3. 2D Random walk not constrained to a grid (fixed step)
 
@@ -116,7 +149,7 @@ ggplot(trajectory, aes(X,Y,label=steps))+
   geom_text_repel()+
   xlab("x coordinate") + 
   ylab("y coordinate") +
-  ggtitle("2D random walk")
+  ggtitle("Sequential random walk in continuous 2D space")
 ```
 
-![](2D-Random-walk_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](2D-Random-walk_files/figure-html/sequential-2Dcontinuous-1.png)<!-- -->

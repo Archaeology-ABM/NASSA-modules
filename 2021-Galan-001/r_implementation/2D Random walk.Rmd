@@ -1,5 +1,5 @@
 ---
-title: "Random Walk in R"
+title: "Random walk in data frames in R"
 output: 
   html_document:
     keep_md: true
@@ -9,6 +9,7 @@ output:
 
 Libraries required
 ```{r}
+library(ggplot2)
 library(tidyverse)
 library(ggrepel)
 ```
@@ -35,7 +36,7 @@ trajectory$X<-c(initialX,initialX+cumsum(sample(c(-1,1),size = n-1,replace=TRUE)
 trajectory$Y<-c(initialY,initialY+cumsum(sample(c(-1,1),size = n-1,replace=TRUE)))
 ```
 
-```{r}
+```{r simultaneous-in-2Dgrid}
 ggplot(trajectory, aes(X,Y,label=steps))+
   geom_path()+
   geom_point()+
@@ -57,7 +58,7 @@ trajectory$Y<-c(initialY,initialY+cumsum(aux2*sample(c(-1,1),size = n-1,replace=
 ```
 
 
-```{r}
+```{r sequential-in-2Dgrid}
 ggplot(trajectory, aes(X,Y,label=steps))+
   geom_path()+
   geom_point()+
@@ -80,13 +81,13 @@ trajectory$Y<-c(initialY,initialY+cumsum(aux3))
 ```
 
 
-```{r}
+```{r sequential-2Dcontinuous}
 ggplot(trajectory, aes(X,Y,label=steps))+
   geom_path()+
   geom_point()+
   geom_text_repel()+
   xlab("x coordinate") + 
   ylab("y coordinate") +
-  ggtitle("2D random walk")
+  ggtitle("Sequential random walk in continuous 2D space")
 
 ```
