@@ -1,16 +1,20 @@
 id: 2021-Galan-001
 nassaVersion: 0.1.0
 moduleType: Algorithm
-title: Random Walk in R
+title: Random walk in data frames
 moduleVersion: 0.1.0
 contributors:
   - name: Galan, Jose M.
     roles: [ "Author", "Copyright Holder", "Creator" ]
-    email: my.stable@email.com
-    orcid: 1234-1234-1234-1234
-lastUpdateDate: 2021-11-15
+    email: jmgalan@ubu.es
+    orcid: 0000-0003-3360-7602
+  - name: Angourakis, Andreas
+    roles: [ "Contributor" ]
+    email: andros.spica@gmail.com
+    orcid: 0000-0002-9946-8142
+lastUpdateDate: 2022-09-07
 description: >
-  Collection of methods for producing random walks in two-dimensional space in R, including alternatives for grid and non-grid space. Uses tidyverse "tibble" to keep track of trajectories.
+  Collection of methods for producing random walks in two-dimensional space outputting position coordinates in data frames, including alternatives for grid and non-grid space. In R, it uses tidyverse "tibble" to construct the data frames that store trajectories.
 domainKeywords:
   subjects: 
     - random walk
@@ -24,17 +28,18 @@ implementations:
     codeDir: r_implementation/
 softwareDependencies: 
   - R >= v4.0 
-  - tidyverse (R package) >= 1.3.0
+  - tidyverse (R package) >= 1.3.1
+  - ggplot2 (R package) >= 3.3.6
   - ggrepel (R package) >= 0.9.1
 inputs:
   - name: initialX, initialY
     type: float (numeric)
     unit: no specific unit
-    description: initial position x and y coordinates
+    description: initial position x and y coordinates.
 outputs:
   - name: trajectory
-    type: data frame (tibble)
-    description: A dataframe with three columns holding numeric (named "steps", "X", and "Y") where each row correspond to the index and xy coordinates of a step in a random walk.
+    type: data frame
+    description: A dataframe (tibble in R) with three columns holding numeric variables (named "steps", "X", and "Y") where each row correspond to the index and xy coordinates of a step in a random walk.
 readmeFile: README.md
 docsDir: documentation/
 license: MIT
