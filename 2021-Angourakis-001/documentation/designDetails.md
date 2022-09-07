@@ -1,4 +1,6 @@
 
+Random walk in 2D space based on agent angle orientation
+# Design details
 ## class `Walker`
 The class includes methods for random walk (that could be extended with other walking methods). This is directly applicable to object-oriented implementations (e.g., Python), but could be adapted to build equivalent versions in other types of languages. 
 
