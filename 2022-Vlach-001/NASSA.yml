@@ -9,13 +9,12 @@ contributors:
     email: vlach@arub.cz
     orcid: 0000-0003-0805-4938
   - name: Angourakis, Andreas
-    roles: [ "Author", "Copyright Holder", "Creator" ]
+    roles: [ "Contributor" ]
     email: andros.spica@gmail.com
     orcid: 0000-0002-9946-8142
-lastUpdateDate: 2022-09-06
+lastUpdateDate: 2022-09-07
 description: >
-  Experimental environment for tasting of large array of theoretical conditions for development epidemic event within various quantitative, spatial and connectedness (network structure) aspects.
-relatedModules: [ 2022-Romanowska-001 ]
+  Experimental environment for testing of large array of theoretical conditions for development epidemic event within various quantitative, spatial and connectedness (network structure) aspects.
 references:
   bibFile: references.bib
   moduleReferences: [ vlach_2022 ]
