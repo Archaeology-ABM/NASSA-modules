@@ -17,7 +17,7 @@ contributors:
     email: my.stable@email.com
     orcid: 1234-1234-1234-1234
   - name: Angourakis, Andreas
-    roles: [ "Author", "Copyright Holder", "Creator" ]
+    roles: [ "Contributor" ]
     email: andros.spica@gmail.com
     orcid: 0000-0002-9946-8142
 lastUpdateDate: 2022-02-01

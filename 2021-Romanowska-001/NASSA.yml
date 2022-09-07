@@ -16,7 +16,11 @@ contributors:
     roles: [ "Author", "Copyright Holder" ]
     email: my.stable@email.com
     orcid: 1234-1234-1234-1234
-lastUpdateDate: 2021-11-15
+  - name: Angourakis, Andreas
+    roles: [ "Contributor" ]
+    email: andros.spica@gmail.com
+    orcid: 0000-0002-9946-8142
+lastUpdateDate: 2022-09-07
 description: >
   A collection of methods for random walk in NetLogo, including various movement restrictions, biases, and algorithm alternatives.
 references:
