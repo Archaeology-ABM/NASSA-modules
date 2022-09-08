@@ -46,5 +46,4 @@ outputs:
     unit: Variable/object unit of measurement, if applicable.
     description: Variable/object description. Meaning, data structure, or any other relevant information for data analysis and interpretation or the use of the output as input in another module.
 docsDir: documentation/
-designDetailsFile: documentation/designDetails.md
 license: MIT

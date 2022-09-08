@@ -6,6 +6,6 @@ Module name or title
   
 - ... (other general documentation files)
   
-- [NetLogo implementation](netlogo/tableOfContents.md) : documentation specific to the NetLogo implementation.
+- [NetLogo implementation](../netlogo_implementation/documentation/tableOfContents.md) : documentation specific to the NetLogo implementation.
   
 - ... (other implementations)

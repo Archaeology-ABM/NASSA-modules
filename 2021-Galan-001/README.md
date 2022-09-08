@@ -11,6 +11,6 @@ MIT
 
 ## Further information
 
-[Code and demostration in Rmarkdown](htmlpreview.github.io/?https://github.com/Archaeology-ABM/NASSA-modules/blob/main/2021-Galan-001/2D-Random-walk.html)
+[Code and demostration in Rmarkdown](htmlpreview.github.io/?https://github.com/Archaeology-ABM/NASSA-modules/blob/main/2021-Galan-001/r_implementation/2D-Random-walk.html)
 
 See full list of documentation resources in [`documentation`](documentation/tableOfContents.md).

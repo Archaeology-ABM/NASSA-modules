@@ -6,7 +6,7 @@ moduleVersion: 0.1.0
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
-    email: my.stable@email.com
+    email: iromanowska@aias.au.dk
     orcid: 1234-1234-1234-1234
   - name: Wren, Colin D.
     roles: [ "Author", "Copyright Holder" ]

@@ -8,4 +8,4 @@ Random walk in 2D space based on agent angle orientation
 
 ![`variablesAndParameters.xcf` and `variablesAndParameters.png`](variablesAndParameters.png)
 
-- [Python implementation](python/tableOfContents.md) : documentation specific to the Python implementation.
+- [Python implementation](../python_implementation/documentation/tableOfContents.md): documentation specific to the Python implementation.
