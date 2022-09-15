@@ -51,11 +51,13 @@ write(c(
   "```{r, echo=FALSE}
     options(DT.options = list(
       pageLength = 25, 
-      language = list(search = 'Filter:'), 
+      language = list(search = 'Search by ID or Title:'), 
       initComplete = JS(
         \"function(settings, json) {\",
         \"$(this.api().table().header()).css({'background-color': '#03989e'});\",
-        \"}\")
+        \"}\"
+      ),
+      columnDefs = list(list(targets = c(2, 3), orderable = FALSE), list(targets = c(2, 3), searchable = FALSE))
     ))
     
     DT::datatable(nassa_table[, c('id', 'title', 'moduleVersion', 'View')], 
