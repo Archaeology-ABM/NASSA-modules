@@ -60,7 +60,8 @@ write(c(
     
     DT::datatable(nassa_table[, c('id', 'title', 'moduleVersion', 'View')], 
                   rownames = FALSE,
-                  escape = FALSE) %>% 
+                  escape = FALSE,
+                  colnames = c('ID', 'Title', 'Current version', '')) %>% 
       DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
         DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center') %>% 
           DT::formatStyle(0, target = 'row', 
