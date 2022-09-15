@@ -1,5 +1,5 @@
 library(magrittr)
-library(kableExtra)
+#library(kableExtra)
 library(DT)
 
 repo_path <- ".."
@@ -23,7 +23,7 @@ nassa_table <- purrr::map_dfr(
       title = nassa_yml$title,
       moduleVersion = nassa_yml$moduleVersion,
       #contributors = paste(nassa_yml$contributors, collapse = ', '), # use this structure to print out nested yml fields
-      `View` = paste0("[View](", path, ".html)"),
+      `View` = paste0("<a href=\"", path, ".html\">View</a>"),
     )
   }
 )
@@ -49,9 +49,23 @@ write(c(
   # TO-DO: add text print of the current release version tag and date of last update
   # TD approach:
   "```{r, echo=FALSE}
-    options(DT.options = list(pageLength = 25, language = list(search = 'Filter:')))
+    options(DT.options = list(
+      pageLength = 25, 
+      language = list(search = 'Filter:'), 
+      initComplete = JS(
+        \"function(settings, json) {\",
+        \"$(this.api().table().header()).css({'background-color': '#03989e'});\",
+        \"}\")
+    ))
     
-    DT::datatable(nassa_table[, c('id', 'title', 'moduleVersion',   'View')])
+    DT::datatable(nassa_table[, c('id', 'title', 'moduleVersion', 'View')], 
+                  rownames = FALSE,
+                  escape = FALSE) %>% 
+      DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
+        DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center') %>% 
+          DT::formatStyle(0, target = 'row', 
+            fontStyle = styleRow(1, 'italic'), 
+            color = styleRow(1, 'grey'))
   ```"
   # kable approach:
   # knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
