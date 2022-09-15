@@ -1,4 +1,5 @@
 library(magrittr)
+library(kableExtra)
 
 repo_path <- ".."
 
@@ -20,6 +21,7 @@ nassa_table <- purrr::map_dfr(
       id = nassa_yml$id,
       title = nassa_yml$title,
       moduleVersion = nassa_yml$moduleVersion,
+      #contributors = paste(nassa_yml$contributors, collapse = ', '), # use this structure to print out nested yml fields
       `View` = paste0("[View](", path, ".html)"),
     )
   }
@@ -39,12 +41,31 @@ purrr::walk(nassa_table$path, generate_Rmd)
 
 write(c(
   "---",
-  "title: NASSA modules",
+  #"title: NASSA modules",
   "---",
   "",
-  knitr::kable(nassa_table, format = "pipe") %>% as.character()
-  ),
-  file = file.path("website_source", "index.Rmd")
+  "<table class='pageHeader'><tr><td><h1 class='pageTitle'>Module library</h1></td><td style='text-align:right;'><img src='images/NASSA-logo.png' width='300px' alt='NASSA-logo'></td></tr></table>",
+  # TO-DO: add text print of the current release version tag and date of last update
+  # kable approach:
+  knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
+               col.names =   c("ID", "Title", "Current version", ""),
+               align =       c('l',  'l',     'c',               'c'),
+               format = "html",
+               table.attr = "class=\'moduleList\'"
+  ) %>% kableExtra::kable_styling() %>% kableExtra::column_spec(
+    # style specific for the ID column
+    column = 1, 
+    width = '200px', 
+    bold = TRUE,
+    border_right = TRUE
+  ) %>% kableExtra::row_spec(
+    # style specific for TEMPLATE module rows
+    row = c(1), # add more row numbers when adding new templates to the library. TO-DO: possibly code an automatic filter
+    color = 'grey',
+    italic = TRUE
+  ) %>% as.character()
+),
+file = file.path("website_source", "index.Rmd")
 )
 
 #### render website from .Rmd files

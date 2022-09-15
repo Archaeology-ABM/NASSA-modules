@@ -1,3 +1,24 @@
 body {
   background-color: white;
 }
+
+.moduleList {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+
+.pageHeader {
+  border: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.pageTitle {
+  font-family: verdana;
+  font-style: normal;
+  font-size: 300%;
+}
