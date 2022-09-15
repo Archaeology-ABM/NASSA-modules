@@ -1,6 +1,7 @@
 /website_source/*
 !/website_source/_site.yml
 !/website_source/styles.css
+!/website_source/index.Rmd
 
 # History files
 .Rhistory
