@@ -1,5 +1,6 @@
 library(magrittr)
 library(kableExtra)
+library(DT)
 
 repo_path <- ".."
 
@@ -46,24 +47,30 @@ write(c(
   "",
   "<table class='pageHeader'><tr><td><h1 class='pageTitle'>Module library</h1></td><td style='text-align:right;'><img src='images/NASSA-logo.png' width='300px' alt='NASSA-logo'></td></tr></table>",
   # TO-DO: add text print of the current release version tag and date of last update
+  # TD approach:
+  "```{r, echo=FALSE}
+    options(DT.options = list(pageLength = 25, language = list(search = 'Filter:')))
+    
+    DT::datatable(nassa_table[, c('id', 'title', 'moduleVersion',   'View')])
+  ```"
   # kable approach:
-  knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
-               col.names =   c("ID", "Title", "Current version", ""),
-               align =       c('l',  'l',     'c',               'c'),
-               format = "html",
-               table.attr = "class=\'moduleList\'"
-  ) %>% kableExtra::kable_styling() %>% kableExtra::column_spec(
-    # style specific for the ID column
-    column = 1, 
-    width = '200px', 
-    bold = TRUE,
-    border_right = TRUE
-  ) %>% kableExtra::row_spec(
-    # style specific for TEMPLATE module rows
-    row = c(1), # add more row numbers when adding new templates to the library. TO-DO: possibly code an automatic filter
-    color = 'grey',
-    italic = TRUE
-  ) %>% as.character()
+  # knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
+  #              col.names =   c("ID", "Title", "Current version", ""),
+  #              align =       c('l',  'l',     'c',               'c'),
+  #              format = "html",
+  #              table.attr = "class=\'moduleList\'"
+  # ) %>% kableExtra::kable_styling() %>% kableExtra::column_spec(
+  #   # style specific for the ID column
+  #   column = 1, 
+  #   width = '200px', 
+  #   bold = TRUE,
+  #   border_right = TRUE
+  # ) %>% kableExtra::row_spec(
+  #   # style specific for TEMPLATE module rows
+  #   row = c(1), # add more row numbers when adding new templates to the library. TO-DO: possibly code an automatic filter
+  #   color = 'grey',
+  #   italic = TRUE
+  #) %>% as.character()
 ),
 file = file.path("website_source", "index.Rmd")
 )
