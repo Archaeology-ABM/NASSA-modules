@@ -2,7 +2,17 @@
 #title: NASSA modules
 ---
 
-<table class='pageHeader'><tr><td><h1 class='pageTitle'>Module library</h1></td><td style='text-align:right;'><img src='images/NASSA-logo.png' width='300px' alt='NASSA-logo'></td></tr></table>
+<table class='pageHeader'>
+  <tr>
+    <td>
+      <h1 class='pageTitle'>Module library</h1>
+      <i style="text-align:right; color:grey;">`r paste(libraryVersion, '- ', format(Sys.time(), '%d/%m/%y'))`</i>
+    </td>
+    <td style='text-align:right;'>
+      <img src='images/NASSA-logo.png' width='300px' alt='NASSA-logo'>
+    </td>
+  </tr>
+</table>
 
 ```{r, echo=FALSE}
 options(DT.options = list(

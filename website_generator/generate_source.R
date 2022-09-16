@@ -38,6 +38,9 @@ generate_Rmd <- function(x) {
 }
 purrr::walk(nassa_table$path, generate_Rmd)
 
+# set NASSA-modules version and current date as args when rendering site
+libraryVersion = "v0.0.0" # TO-DO: get current NASSA-modules version (main)
+
 #### render website from .Rmd files
 
-rmarkdown::render_site(input = "website_source")
+rmarkdown::render_site(input = "website_source", envir = parent.frame())
