@@ -35,6 +35,8 @@ nassa_yml <- yaml::read_yaml(nassa_yml_file)
 
 `r nassa_yml$id`, (Last updated: `r nassa_yml$lastUpdateDate`) 
 
+***
+
 <div class="row">
 <div class="column">
 
@@ -170,6 +172,8 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
 
 #### README
 
+<div class="readme">
+
 ```{r readme, results='asis'}
 if (!is.null(nassa_yml$readmeFile)) {
   readme_file <- file.path(module_path, nassa_yml$readmeFile)
@@ -177,6 +181,8 @@ if (!is.null(nassa_yml$readmeFile)) {
   cat(readme, sep = "\n\n")
 }
 ```
+
+</div>
 
 ***
 

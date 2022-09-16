@@ -40,3 +40,9 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
 .column {
   flex: 50%;
 }
+
+.readme {
+  border:1px solid black;
+  padding: 20px;
+  margin: 20px;
+}
