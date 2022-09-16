@@ -1,5 +1,4 @@
 ---
-title: ####module_name####
 editor_options: 
   chunk_output_type: console
 link-citations: false
@@ -15,17 +14,103 @@ knitr::opts_chunk$set(
 
 ```{r dependencies}
 library(magrittr)
-
-module_name <- "####module_name####"
-module_path <- file.path("../..", module_name)
+library(visNetwork)
+library(fontawesome)
+library(htmltools)
 ```
 
 
 ```{r ymlfile}
+module_name <- "####module_name####"#"2022-Romanowska-001"
+module_path <- file.path("../..", module_name)#file.path("..", module_name)
 nassa_yml_file <- list.files(module_path, pattern = "NASSA.yml", full.names = TRUE)
 nassa_yml <- yaml::read_yaml(nassa_yml_file)
 ```
 
+# `r nassa_yml$title`
+
+`r nassa_yml$id`, (Last updated: `r nassa_yml$lastUpdateDate`) 
+
+```{r authors, results='asis'}
+authors <- purrr::map_chr(
+  nassa_yml$contributors, \(x) {
+    author = x$name
+    roles = paste(x$roles, collapse = ", ")
+    email = x$email
+    orcid = x$orcid
+    paste(
+      strong(author),
+      paste0(
+        tags$a(
+        fontawesome::fa("envelope", fill = "#03989E"),
+        target = "_blank",
+        href = paste0("mailto:", email)
+        ),
+        tags$a(
+          fontawesome::fa("orcid", fill = "#03989E"),
+          target = "_blank",
+          href = paste0("https://orcid.org/", orcid)
+        )
+      ),
+      paste0("(", roles, ")")
+    )
+  }
+)
+
+cat(paste(authors, collapse = ", "))
+```
+
 ***
 
-`r nassa_yml$title` (Last updated: `r nassa_yml$lastUpdateDate`), 
+### Module input and output
+
+```{r in_and_out, results='asis'}
+if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
+  
+  inputs <- purrr::map_dfr(nassa_yml$inputs, \(x) { tibble::as_tibble(x) }) %>%
+    dplyr::transmute(
+      id = seq_len(dplyr::n()) + 1,
+      label = name,
+      group = "input",
+      title = paste0(
+        "<b>Data type:</b> ", type, "<br>",
+        "<b>Description:</b> ", description
+      )
+    )
+  outputs <- purrr::map_dfr(nassa_yml$outputs, \(x) { tibble::as_tibble(x) }) %>%
+      dplyr::transmute(
+      id = seq_len(dplyr::n()) + max(inputs$id),
+      label = name,
+      group = "output",
+      title = paste0(
+        "<b>Data type:</b> ", type, "<br>",
+        "<b>Description:</b> ", description
+      )
+    )
+  
+  nodes <- dplyr::bind_rows(inputs, outputs, tibble::tibble(id = 1, group = "module"))
+  edges <- dplyr::bind_rows(
+    toCenter   = data.frame(from = inputs$id, to = 1),
+    fromCenter = data.frame(from = 1, to = outputs$id)
+  )
+  visNetwork(nodes, edges, width = "100%") %>%
+    visGroups(groupname = "input", color = list(border = "black", background = "white")) %>%
+    visGroups(
+      shape = "diamond",
+      groupname = "output", color = list(border = "black", background = "lightgrey")
+    ) %>%
+    visGroups(
+      shape = "hexagon",
+      size = 40,
+      groupname = "module", color = list(border = "black", background = "#03989E")
+    ) %>%
+    visNodes(
+      shadow = TRUE
+    ) %>%
+    visEdges(
+      color = list(color = "darkgrey"),
+      arrows = list(to = list(enabled = TRUE, scaleFactor = 1))
+    )
+
+} else { cat("Not provided") }
+```
