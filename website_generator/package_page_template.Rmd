@@ -51,7 +51,7 @@ authors <- purrr::map_chr(
     orcid = x$orcid
     paste(
       strong(author),
-      paste0(
+      paste(
         htmltools::tags$a(
           fontawesome::fa("envelope", fill = "#03989E"),
           target = "_blank",
@@ -71,25 +71,33 @@ authors <- purrr::map_chr(
 cat(paste(authors, collapse = "<br>"))
 ```
 
-#### Code
+---
+
+#### Module files at
 
 ```{r}
 github_link <- htmltools::tags$a(
-  fontawesome::fa("github", fill = "#03989E"),
+  fontawesome::fa("github", fill = "#03989E", height = '100px'),
   target = "_blank",
   href = paste0("https://github.com/Archaeology-ABM/NASSA-modules/tree/main/", module_name)
 )
+### TO-DO: get a schematic printout of the file structure to be shown at the right side of the GiHub icon?
+```
+
+`r github_link`
+
+</div>
+<div class="column">
+
+#### Languages
+
+```{r}
 languages <- purrr::map(nassa_yml$implementations, function(y) {
   htmltools::tags$span(class = "badge", y$language)
 })
 ```
 
-See this module's code on GitHub: `r github_link`
-
-Languages: `r languages`
-
-</div>
-<div class="column">
+`r languages`
 
 #### Tags
 
