@@ -146,6 +146,18 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
     toCenter   = data.frame(from = inputs$id, to = 1),
     fromCenter = data.frame(from = 1, to = outputs$id)
   )
+  
+  numberOfElementsMax = 24 # an arbitrary ceiling value for adjusting label size of nodes
+  numberOfElements = min(c(length(inputs) + length(outputs), numberOfElementsMax)) 
+  
+  labelSizeMin = 10
+  labelSizeMax = 48
+  labelSizeAdj = labelSizeMin + (labelSizeMax - labelSizeMin) * (1 - numberOfElements / numberOfElementsMax) ^ 0.6
+  
+  initZoomMin = 0.3
+  initZoomMax = 1
+  initZoomAdj = initZoomMin + (initZoomMax - initZoomMin) * (1 - numberOfElements / numberOfElementsMax) ^ 3
+  
   visNetwork(nodes, edges, width = "100%") %>%
     visGroups(groupname = "input", color = list(border = "black", background = "white")) %>%
     visGroups(
@@ -158,6 +170,7 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
       groupname = "module", color = list(border = "black", background = "#03989E")
     ) %>%
     visNodes(
+      font = list(size = labelSizeAdj),
       shadow = TRUE
     ) %>%
     visEdges(
