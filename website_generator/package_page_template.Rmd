@@ -177,6 +177,10 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
       color = list(color = "darkgrey"),
       arrows = list(to = list(enabled = TRUE, scaleFactor = 1))
     ) %>%
+    # set a hierarchical layout
+    visHierarchicalLayout(direction = 'LR', sortMethod = 'directed', levelSeparation = 500) %>%
+    # initialise zoom in proportion to the number of nodes
+    visEvents(startStabilizing = paste0("function() {this.moveTo({scale:", initZoomAdj, "})}"), type = "once") %>% visPhysics(stabilization = FALSE) %>%
     visInteraction(
       tooltipStyle = 
         'position: fixed;visibility:hidden;padding: 5px;
