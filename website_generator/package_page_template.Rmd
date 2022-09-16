@@ -41,12 +41,12 @@ authors <- purrr::map_chr(
     paste(
       strong(author),
       paste0(
-        tags$a(
+        htmltools::tags$a(
         fontawesome::fa("envelope", fill = "#03989E"),
         target = "_blank",
         href = paste0("mailto:", email)
         ),
-        tags$a(
+        htmltools::tags$a(
           fontawesome::fa("orcid", fill = "#03989E"),
           target = "_blank",
           href = paste0("https://orcid.org/", orcid)
