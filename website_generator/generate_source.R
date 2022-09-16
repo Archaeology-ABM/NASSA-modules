@@ -39,7 +39,7 @@ generate_Rmd <- function(x) {
 purrr::walk(nassa_table$path, generate_Rmd)
 
 # set NASSA-modules version and current date as args when rendering site
-libraryVersion = "v0.0.0" # TO-DO: get current NASSA-modules version (main)
+libraryVersion = names(git2r::tags(git2r::discover_repository()))[-1]
 
 #### render website from .Rmd files
 
