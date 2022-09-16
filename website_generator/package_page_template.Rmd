@@ -2,6 +2,9 @@
 editor_options: 
   chunk_output_type: console
 link-citations: false
+output:
+  html_document:
+    css: styles.css #website_source/styles.css
 ---
 
 ```{r setup, include=FALSE}
@@ -19,10 +22,9 @@ library(fontawesome)
 library(htmltools)
 ```
 
-
 ```{r ymlfile}
-module_name <- "####module_name####"#"2022-Romanowska-001"
-module_path <- file.path("../..", module_name)#file.path("..", module_name)
+module_name <- "####module_name####" #"2022-Romanowska-002"
+module_path <- file.path("../..", module_name) #file.path("..", module_name)
 nassa_yml_file <- list.files(module_path, pattern = "NASSA.yml", full.names = TRUE)
 nassa_yml <- yaml::read_yaml(nassa_yml_file)
 ```
@@ -30,6 +32,11 @@ nassa_yml <- yaml::read_yaml(nassa_yml_file)
 # `r nassa_yml$title`
 
 `r nassa_yml$id`, (Last updated: `r nassa_yml$lastUpdateDate`) 
+
+<div class="row">
+<div class="column">
+
+#### Authors
 
 ```{r authors, results='asis'}
 authors <- purrr::map_chr(
@@ -42,9 +49,9 @@ authors <- purrr::map_chr(
       strong(author),
       paste0(
         htmltools::tags$a(
-        fontawesome::fa("envelope", fill = "#03989E"),
-        target = "_blank",
-        href = paste0("mailto:", email)
+          fontawesome::fa("envelope", fill = "#03989E"),
+          target = "_blank",
+          href = paste0("mailto:", email)
         ),
         htmltools::tags$a(
           fontawesome::fa("orcid", fill = "#03989E"),
@@ -57,12 +64,52 @@ authors <- purrr::map_chr(
   }
 )
 
-cat(paste(authors, collapse = ", "))
+cat(paste(authors, collapse = "<br>"))
 ```
 
-***
+#### Code
 
-### Module input and output
+```{r}
+github_link <- htmltools::tags$a(
+  fontawesome::fa("github", fill = "#03989E"),
+  target = "_blank",
+  href = paste0("https://github.com/Archaeology-ABM/NASSA-modules/tree/main/", module_name)
+)
+languages <- purrr::map(nassa_yml$implementations, function(y) {
+  htmltools::tags$span(class = "badge", y$language)
+})
+```
+
+See this module's code on GitHub: `r github_link`
+
+Languages: `r languages`
+
+</div>
+<div class="column">
+
+#### Tags
+
+```{r tags}
+ba <- function(x) {
+  purrr::map(x, function(y) {
+    htmltools::tags$span(class = "badge", y)
+  })
+}
+```
+
+<table>
+<tr><td>Class:</td><td>`r ba(nassa_yml$moduleType)`</td></tr>
+<tr><td>Regions:</td><td>`r ba(nassa_yml$domainKeywords$regions)`</td></tr>
+<tr><td>Periods:</td><td>`r ba(nassa_yml$domainKeywords$periods)`</td></tr>
+<tr><td>Subjects:</td><td>`r ba(nassa_yml$domainKeywords$subjects)`</td></tr>
+<tr><td>Model:</td><td>`r ba(nassa_yml$modellingKeywords)`</td></tr>
+<tr><td>Programming:</td><td>`r ba(nassa_yml$programmingKeywords)`</td></tr>
+</table> 
+
+</div>
+</div>
+
+***
 
 ```{r in_and_out, results='asis'}
 if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
@@ -112,5 +159,5 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
       arrows = list(to = list(enabled = TRUE, scaleFactor = 1))
     )
 
-} else { cat("Not provided") }
+} else { cat("Modue in- and output not provided") }
 ```

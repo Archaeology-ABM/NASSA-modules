@@ -22,3 +22,21 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   font-style: normal;
   font-size: 300%;
 }
+
+.badge {
+  background-color: #03989E;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.row {
+  display: flex;
+  margin: auto;
+  width: 100%;
+}
+
+.column {
+  flex: 50%;
+}
