@@ -1,6 +1,7 @@
 library(magrittr)
 #library(kableExtra)
 library(DT)
+library(git2r)
 
 repo_path <- ".."
 
