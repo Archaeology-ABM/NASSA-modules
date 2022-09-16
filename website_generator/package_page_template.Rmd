@@ -173,7 +173,7 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
          max-width:300px;word-break: normal'
     )
 
-} else { cat("Modue in- and output not provided") }
+} else { cat("Module in- and output not provided") }
 ```
 
 ***
@@ -186,6 +186,16 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
 if (!is.null(nassa_yml$readmeFile)) {
   readme_file <- file.path(module_path, nassa_yml$readmeFile)
   readme <- readLines(readme_file)
+  ### correct relative paths 
+  for (aLineIndex in 1:length(readme))
+  {
+    if (!grepl("\\]\\(http", readme[aLineIndex])) # or ignore all html links by using "\\.htm"
+    {
+      # position relative path at the module root as intended in README.md
+      readme[aLineIndex] <- gsub("\\]\\(", paste0("](../../../", nassa_yml$id, "/"), readme[aLineIndex])
+    }
+  }
+  #readme <- gsub("\\]\\(", paste0("](../../../", nassa_yml$id, "/"), readme) # TO-DO: find passing regular expression that selects fragment while excluding html links
   cat(readme, sep = "\n\n")
 }
 ```
