@@ -5,6 +5,8 @@ link-citations: false
 output:
   html_document:
     css: styles.css #website_source/styles.css
+bibliography: "`r cur_bib <- paste0('####module_name####', '.bib'); if (file.exists(cur_bib)) { cur_bib } else { 'dummy.bib' }`"
+nocite: '@*' #add all items to the bibliography
 ---
 
 ```{r setup, include=FALSE}
@@ -111,6 +113,8 @@ ba <- function(x) {
 
 ***
 
+#### Input and output
+
 ```{r in_and_out, results='asis'}
 if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
   
@@ -161,3 +165,21 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
 
 } else { cat("Modue in- and output not provided") }
 ```
+
+***
+
+#### README
+
+```{r readme, results='asis'}
+if (!is.null(nassa_yml$readmeFile)) {
+  readme_file <- file.path(module_path, nassa_yml$readmeFile)
+  readme <- readLines(readme_file)
+  cat(readme, sep = "\n\n")
+}
+```
+
+***
+
+#### References
+
+<div id="refs"></div>

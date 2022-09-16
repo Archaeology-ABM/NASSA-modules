@@ -42,6 +42,18 @@ purrr::walk(nassa_table$path, generate_Rmd)
 # set NASSA-modules version and current date as args when rendering site
 libraryVersion = names(git2r::tags(git2r::discover_repository()))[-1]
 
+#### copy the .bib file for each package ####
+
+copy_bib <- function(x) {
+  pac_path <- file.path(repo_path, x)
+  bib_file <- list.files(pac_path, pattern = ".bib", full.names = TRUE)
+  if (length(bib_file) == 1) {
+    out_path <- file.path("website_source", paste0(x, ".bib"))
+    file.copy(bib_file, out_path)
+  }
+}
+purrr::walk(nassa_table$path, copy_bib)
+
 #### render website from .Rmd files
 
 rmarkdown::render_site(input = "website_source", envir = parent.frame())
