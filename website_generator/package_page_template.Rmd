@@ -211,6 +211,8 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
 if (!is.null(nassa_yml$readmeFile)) {
   readme_file <- file.path(module_path, nassa_yml$readmeFile)
   readme <- readLines(readme_file)
+  ### correct rocket emoticon (used to mark NASSA oficial member submission)
+  readme <- gsub("\\(NASSA submission \\:rocket\\:\\)", "(NASSA submission &#128640;)", readme)
   ### correct relative paths 
   for (aLineIndex in 1:length(readme))
   {
