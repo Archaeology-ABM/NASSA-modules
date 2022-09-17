@@ -73,7 +73,7 @@ cat(paste(authors, collapse = "<br>"))
 
 ---
 
-#### Module files at
+#### Module files
 
 ```{r}
 github_link <- htmltools::tags$a(
@@ -81,10 +81,35 @@ github_link <- htmltools::tags$a(
   target = "_blank",
   href = paste0("https://github.com/Archaeology-ABM/NASSA-modules/tree/main/", module_name)
 )
+download_link <- htmltools::tags$a(
+  fontawesome::fa("download", fill = "#03989E", height = '100px'),
+  target = "_blank",
+  href = paste0(
+    "https://minhaskamal.github.io/DownGit/#/home?url=", # using DownGit tool
+    "https://github.com/Archaeology-ABM/NASSA-modules/tree/main/", 
+    module_name)
+)
 ### TO-DO: get a schematic printout of the file structure to be shown at the right side of the GiHub icon?
 ```
 
-`r github_link`
+<table class="pageHeader">
+  <tr id="structGrid">
+    <td>
+    Go to repository
+    </td>
+    <td style="text-align: left;">
+    Download
+    </td>
+  </tr>
+  <tr id="structGrid">
+    <td>
+    `r github_link`
+    </td>
+    <td style="text-align: left;">
+    `r download_link`
+    </td>
+  </tr>
+</table>
 
 </div>
 <div class="column">

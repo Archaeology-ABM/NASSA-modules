@@ -46,3 +46,10 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   padding: 20px;
   margin: 20px;
 }
+
+#structGrid {
+  border: 0;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: transparent;
+}
