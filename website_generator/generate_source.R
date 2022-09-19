@@ -14,6 +14,10 @@ nassa_yml_paths <- list.files(
   full.names = T  
 )
 
+badge_series <- function(x) {
+  paste('<span class="badge">', x, '</span>', collapse = '&nbsp;')
+}
+
 nassa_table <- purrr::map_dfr(
   nassa_yml_paths,
   function(nassa_yml_path) {
@@ -24,6 +28,11 @@ nassa_table <- purrr::map_dfr(
       title = nassa_yml$title,
       moduleVersion = nassa_yml$moduleVersion,
       #contributors = paste(nassa_yml$contributors, collapse = ', '), # use this structure to print out nested yml fields
+      domainKeywords = badge_series(c(nassa_yml$domainKeywords$regions,
+                                      nassa_yml$domainKeywords$periods,
+                                      nassa_yml$domainKeywords$subjects)),
+      modellingKeywords = badge_series(nassa_yml$modellingKeywords),
+      programmingKeywords = badge_series(nassa_yml$programmingKeywords),
       `View` = paste0("<a href=\"", path, ".html\">View</a>"),
     )
   }

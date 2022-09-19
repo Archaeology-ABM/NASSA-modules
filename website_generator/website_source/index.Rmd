@@ -15,26 +15,38 @@
 </table>
 
 ```{r, echo=FALSE}
+nassa_table_print <- nassa_table[, c('id', 'title', 'moduleVersion', 
+                                     'domainKeywords', 'modellingKeywords', 'programmingKeywords', 
+                                     'View')]
+colDisplayNames <-                 c('ID', 'Title', 'Current version', 
+                                     'Domain Keywords', 'Modelling Keywords', 'Programming Keywords', 
+                                     '')
+
 options(DT.options = list(
   pageLength = 25, 
-  language = list(search = 'Search by ID or Title:'), 
-  initComplete = JS(
+  language = list(search = 'Search by ID, Title or keyword:'), 
+  initComplete = DT::JS(
     "function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#03989e'});",
     "}"
   ),
-  columnDefs = list(list(targets = c(2, 3), orderable = FALSE), list(targets = c(2, 3), searchable = FALSE))
+  # Define which columns are not to be used for sorting or searching
+  columnDefs = list(
+    list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
+         orderable = FALSE), 
+    list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
+         searchable = FALSE))
 ))
 
-DT::datatable(nassa_table[, c('id', 'title', 'moduleVersion', 'View')], 
+DT::datatable(nassa_table_print, 
               rownames = FALSE,
               escape = FALSE,
-              colnames = c('ID', 'Title', 'Current version', '')) %>% 
+              colnames = colDisplayNames) %>% 
   DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
-    DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center') %>% 
+    DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center', columnWidth = '50px') %>% 
       DT::formatStyle(0, target = 'row', 
-        fontStyle = styleRow(1, 'italic'), 
-        color = styleRow(1, 'grey'))
+        fontStyle = DT::styleRow(1, 'italic'), 
+        color = DT::styleRow(1, 'grey'))
 
 # kable approach:
 # knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
