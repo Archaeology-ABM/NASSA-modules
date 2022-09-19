@@ -130,7 +130,7 @@ download_link <- htmltools::tags$a(
 
 ```{r}
 languages <- purrr::map(nassa_yml$implementations, function(y) {
-  htmltools::tags$span(class = "badge", id = "badgeDefault", y$language)
+  htmltools::tags$span(class = "badge", id = "badgeLanguage", y$language)
 })
 ```
 
@@ -139,7 +139,7 @@ languages <- purrr::map(nassa_yml$implementations, function(y) {
 #### Tags
 
 ```{r tags}
-badge_series <- function(x, type = 'badgeDefault') {
+badge_series <- function(x, type = 'badgeLanguage') {
   if (length(x) > 0) {
     prefix <- paste0('<span class="badge" id="',  type, '">')
     return(paste(prefix, x, '</span>', collapse = '&nbsp;'))
@@ -155,7 +155,7 @@ badge_series <- function(x, type = 'badgeDefault') {
 ```
 
 <table>
-<tr><td>Class:</td><td>`r badge_series(nassa_yml$moduleType)`</td></tr>
+<tr><td>Class:</td><td>`r badge_series(nassa_yml$moduleType, "badgeModuleType")`</td></tr>
 <tr><td>Regions:</td><td>`r badge_series(nassa_yml$domainKeywords$regions, "badgeRegions")`</td></tr>
 <tr><td>Periods:</td><td>`r badge_series(nassa_yml$domainKeywords$periods, "badgePeriods")`</td></tr>
 <tr><td>Subjects:</td><td>`r badge_series(nassa_yml$domainKeywords$subjects, "badgeSubjects")`</td></tr>

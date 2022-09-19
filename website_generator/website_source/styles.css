@@ -30,8 +30,12 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   border-radius: 5px;
 }
 
-#badgeDefault {
+#badgeModuleType {
   background-color: #03989E;
+}
+
+#badgeLanguage {
+  background-color: #468B77;
 }
 
 #badgeRegions {
@@ -52,6 +56,12 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
 
 #badgeProgramming {
   background-color: #AB3F69;
+}
+
+.legend {
+  border: 0;
+  border-collapse: collapse;
+  text-align: right;
 }
 
 .row {

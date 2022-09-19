@@ -16,10 +16,10 @@
 
 ```{r, echo=FALSE}
 nassa_table_print <- nassa_table[, c('id', 'title', 'moduleVersion', 
-                                     'domainKeywords', 'modellingKeywords', 'programmingKeywords', 
+                                     'Keywords', 
                                      'View')]
 colDisplayNames <-                 c('ID', 'Title', 'Current version', 
-                                     'Domain Keywords', 'Modelling Keywords', 'Programming Keywords', 
+                                     'Keywords', 
                                      '')
 
 options(DT.options = list(
@@ -67,3 +67,32 @@ DT::datatable(nassa_table_print,
 #   italic = TRUE
 #) %>% as.character()
 ```
+
+<table class='legend'>
+  <tr>
+    <td>
+    Keyword color-coding:
+    </td>
+    <td>
+      <span class="badge" id="badgeModuleType">Module type</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeLanguage">Programming language</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeRegions">Regions</span>
+    </td>
+    <td>
+      <span class="badge" id="badgePeriods">Periods</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeSubjects">Subjects</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeModelling">Modelling</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeProgramming">Programming</span>
+    </td>
+  </tr>
+</table>
