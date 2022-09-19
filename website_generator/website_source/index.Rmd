@@ -71,7 +71,7 @@ DT::datatable(nassa_table_print,
 <table class='legend'>
   <tr>
     <td>
-    Keyword color-coding:
+    Keyword colour-coding:
     </td>
     <td>
       <span class="badge" id="badgeModuleType">Module type</span>
