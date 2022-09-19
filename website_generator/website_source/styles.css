@@ -24,11 +24,34 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
 }
 
 .badge {
-  background-color: #03989E;
   color: white;
   padding: 4px 8px;
   text-align: center;
   border-radius: 5px;
+}
+
+#badgeDefault {
+  background-color: #03989E;
+}
+
+#badgeRegions {
+  background-color: #324B4C;
+}
+
+#badgePeriods {
+  background-color: #95B0B2;
+}
+
+#badgeSubjects {
+  background-color: #8284BE;
+}
+
+#badgeModelling {
+  background-color: #FF8945;
+}
+
+#badgeProgramming {
+  background-color: #AB3F69;
 }
 
 .row {
