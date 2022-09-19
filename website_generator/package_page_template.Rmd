@@ -126,13 +126,17 @@ download_link <- htmltools::tags$a(
 </div>
 <div class="column">
 
-#### Languages
+#### Module type
+
+`r badge_series(nassa_yml$moduleType, "badgeModuleType")`
 
 ```{r}
 languages <- purrr::map(nassa_yml$implementations, function(y) {
   htmltools::tags$span(class = "badge", id = "badgeLanguage", y$language)
 })
 ```
+
+#### Languages
 
 `r languages`
 
@@ -155,12 +159,11 @@ badge_series <- function(x, type = 'badgeLanguage') {
 ```
 
 <table>
-<tr><td>Class:</td><td>`r badge_series(nassa_yml$moduleType, "badgeModuleType")`</td></tr>
+<tr><td>Modelling:</td><td>`r badge_series(nassa_yml$modellingKeywords, "badgeModelling")`</td></tr>
+<tr><td>Programming:</td><td>`r badge_series(nassa_yml$programmingKeywords, "badgeProgramming")`</td></tr>
 <tr><td>Regions:</td><td>`r badge_series(nassa_yml$domainKeywords$regions, "badgeRegions")`</td></tr>
 <tr><td>Periods:</td><td>`r badge_series(nassa_yml$domainKeywords$periods, "badgePeriods")`</td></tr>
 <tr><td>Subjects:</td><td>`r badge_series(nassa_yml$domainKeywords$subjects, "badgeSubjects")`</td></tr>
-<tr><td>Model:</td><td>`r badge_series(nassa_yml$modellingKeywords, "badgeModelling")`</td></tr>
-<tr><td>Programming:</td><td>`r badge_series(nassa_yml$programmingKeywords, "badgeProgramming")`</td></tr>
 </table> 
 
 </div>
