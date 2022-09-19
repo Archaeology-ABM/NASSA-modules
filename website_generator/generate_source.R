@@ -35,6 +35,7 @@ nassa_table <- purrr::map_dfr(
       #contributors = paste(nassa_yml$contributors, collapse = ', '), # use this structure to print out nested yml fields
       Keywords = paste(badge_series(nassa_yml$moduleType, type = 'badgeModuleType'),
                        badge_series(nassa_yml$implementations[[1]]$language, type = 'badgeLanguage'),
+                       '<br>',
                        badge_series(nassa_yml$domainKeywords$regions, type = 'badgeRegions'),
                        badge_series(nassa_yml$domainKeywords$periods, type = 'badgePeriods'),
                        badge_series(nassa_yml$domainKeywords$subjects, type = 'badgeSubjects'),
