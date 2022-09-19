@@ -76,6 +76,18 @@ cat(paste(authors, collapse = "<br>"))
 #### Module files
 
 ```{r}
+dir_size <- function(path, recursive = TRUE) {
+  stopifnot(is.character(path))
+  files <- list.files(path, full.names = T, recursive = recursive)
+  vect_size <- sapply(files, function(x) file.size(x))
+  size_files <- sum(vect_size)
+  return(round(size_files/10**6, digits = 2)) # in MB, rounded to two decimal digits
+}
+
+moduleSize <- paste(dir_size(module_path), "MB")
+```
+
+```{r}
 github_link <- htmltools::tags$a(
   fontawesome::fa("github", fill = "#03989E", height = '100px'),
   target = "_blank",
@@ -97,15 +109,15 @@ download_link <- htmltools::tags$a(
     <td>
     Go to repository
     </td>
-    <td style="text-align: left;">
-    Download
+    <td>
+    Download (`r moduleSize`)
     </td>
   </tr>
   <tr id="structGrid">
     <td>
     `r github_link`
     </td>
-    <td style="text-align: left;">
+    <td>
     `r download_link`
     </td>
   </tr>
