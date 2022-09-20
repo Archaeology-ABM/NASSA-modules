@@ -115,22 +115,22 @@ inputs:
 outputs:
   - name: pos-spread
     type: intiget
-    description: Count of positive disease transmission encounter (passed to other person)
+    description: Count of positive disease transmission encounter of an individual (passed to other person)
   - name: neg-spread
     type: intiget
-    description: Count of negative disease transmission encounter (not passed to other person)
+    description: Count of negative disease transmission encounter of an individual (not passed to other person)
   - name: count-spread
     type: intiget
-    description: TO-DO
+    description: Cummulative number of daily contacts
   - name: count-daily-contact
     type: intiget
-    description: Sum of all daily contacts
+    description: Sum of all daily contacts for the actual day (reset each day)
   - name: count-daily-transmission
     type: intiget
-    description: TO-DO
+    description: Sum of all daily disease transmission encounter for the actual day (reset each day)
   - name: count-daily-transmission-pers
     type: intiget
-    description: TO-DO
+    description: Number of people with the potential to performing a disease transmission encounter for the actual day (reset each day)
   - name: nw-betcen
     type: float
     description: Network metrics: betweenness centrality
