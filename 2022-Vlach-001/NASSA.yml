@@ -115,16 +115,16 @@ inputs:
 outputs:
   - name: pos-spread
     type: intiget
-    description: TO-DO
+    description: Count of positive disease transmission encounter (passed to other person)
   - name: neg-spread
     type: intiget
-    description: TO-DO
+    description: Count of negative disease transmission encounter (not passed to other person)
   - name: count-spread
     type: intiget
     description: TO-DO
   - name: count-daily-contact
     type: intiget
-    description: TO-DO
+    description: Sum of all daily contacts
   - name: count-daily-transmission
     type: intiget
     description: TO-DO
@@ -133,19 +133,19 @@ outputs:
     description: TO-DO
   - name: nw-betcen
     type: float
-    description: TO-DO
+    description: Network metrics: betweenness centrality
   - name: nw-eigcen
     type: float
-    description: TO-DO
+    description: Network metrics: eigenvector centrality
   - name: nw-clocen
     type: float
-    description: TO-DO
+    description: Network metrics: closeness centrality
   - name: nw-clucoe
     type: float
-    description: TO-DO
+    description: Network metrics: clustering coefficient
   - name: nw-mod
     type: float
-    description: TO-DO
+    description: Network metrics: modularity
 readmeFile: README.md
 docsDir: documentation/
 license: CC BY-SA 4.0
