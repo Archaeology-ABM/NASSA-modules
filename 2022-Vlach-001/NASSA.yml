@@ -114,38 +114,38 @@ inputs:
     description: the proportion of `max-connections` from which a random sample is taken as initial contacts of the infected people for each distance range.
 outputs:
   - name: pos-spread
-    type: intiget
+    type: integer
     description: Count of positive disease transmission encounter of an individual (passed to other person)
   - name: neg-spread
-    type: intiget
+    type: integer
     description: Count of negative disease transmission encounter of an individual (not passed to other person)
   - name: count-spread
-    type: intiget
+    type: integer
     description: Cummulative number of daily contacts
   - name: count-daily-contact
-    type: intiget
+    type: integer
     description: Sum of all daily contacts for the actual day (reset each day)
   - name: count-daily-transmission
-    type: intiget
+    type: integer
     description: Sum of all daily disease transmission encounter for the actual day (reset each day)
   - name: count-daily-transmission-pers
-    type: intiget
+    type: integer
     description: Number of people with the potential to performing a disease transmission encounter for the actual day (reset each day)
   - name: nw-betcen
     type: float
-    description: Network metrics: betweenness centrality
+    description: Network metrics':' betweenness centrality
   - name: nw-eigcen
     type: float
-    description: Network metrics: eigenvector centrality
+    description: Network metrics':' eigenvector centrality
   - name: nw-clocen
     type: float
-    description: Network metrics: closeness centrality
+    description: Network metrics':' closeness centrality
   - name: nw-clucoe
     type: float
-    description: Network metrics: clustering coefficient
+    description: Network metrics':' clustering coefficient
   - name: nw-mod
     type: float
-    description: Network metrics: modularity
+    description: Network metrics':' modularity
 readmeFile: README.md
 docsDir: documentation/
 license: CC BY-SA 4.0
