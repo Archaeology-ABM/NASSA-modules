@@ -18,7 +18,6 @@ description: >
 references:
   bibFile: references.bib
   moduleReferences: [ vlach_2022 ]
-  useExampleReferences: [ vlach_2022 ]
 domainKeywords:
   regions: 
     - Global

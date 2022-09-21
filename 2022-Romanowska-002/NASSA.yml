@@ -27,7 +27,6 @@ relatedModules: [ 2022-Romanowska-001 ]
 references:
   bibFile: references.bib
   moduleReferences: [ romanowska_agent-based_2021, young_numic_1992 ]
-  useExampleReferences: [ romanowska_agent-based_2021 ]
 domainKeywords:
   regions: 
     - Global

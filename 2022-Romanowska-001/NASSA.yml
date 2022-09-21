@@ -31,7 +31,6 @@ relatedModules: [ 2022-Romanowska-002 ]
 references:
   bibFile: references.bib
   moduleReferences: [ romanowska_agent-based_2021 ]
-  useExampleReferences: [ romanowska_agent-based_2021 ]
 modellingKeywords:
   - agent initialisation
   - grid initialisation
