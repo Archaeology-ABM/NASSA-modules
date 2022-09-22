@@ -35,12 +35,12 @@ nassa_yml <- yaml::read_yaml(nassa_yml_file)
 
 `r nassa_yml$id`, (Last updated: `r nassa_yml$lastUpdateDate`) 
 
-***
+<hr>
 
 <div class="row">
 <div class="column">
 
-#### Authors
+<h4>Authors</h4>
 
 ```{r authors, results='asis'}
 authors <- purrr::map_chr(
@@ -71,9 +71,9 @@ authors <- purrr::map_chr(
 cat(paste(authors, collapse = "<br>"))
 ```
 
----
+<hr>
 
-#### Module files
+<h4>Module files</h4>
 
 ```{r}
 dir_size <- function(path, recursive = TRUE) {
@@ -124,9 +124,10 @@ download_link <- htmltools::tags$a(
 </table>
 
 </div>
+
 <div class="column">
 
-#### Module type
+<h4>Module type</h4>
 
 `r badge_series(nassa_yml$moduleType, "badgeModuleType")`
 
@@ -136,11 +137,11 @@ languages <- purrr::map(nassa_yml$implementations, function(y) {
 })
 ```
 
-#### Languages
+<h4>Languages</h4>
 
 `r languages`
 
-#### Tags
+<h4>Tags</h4>
 
 ```{r tags}
 badge_series <- function(x, type = 'badgeLanguage') {
@@ -169,9 +170,9 @@ badge_series <- function(x, type = 'badgeLanguage') {
 </div>
 </div>
 
-***
+<hr>
 
-#### Input and output
+<h4>Input and output</h4>
 
 ```{r in_and_out, results='asis'}
 if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
@@ -249,9 +250,9 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
 } else { cat("Module in- and output not provided") }
 ```
 
-***
+<hr>
 
-#### README
+<h4>README</h4>
 
 <div class="readme">
 
@@ -277,8 +278,8 @@ if (!is.null(nassa_yml$readmeFile)) {
 
 </div>
 
-***
+<hr>
 
-#### References
+<h4>References</h4>
 
 <div id="refs"></div>
