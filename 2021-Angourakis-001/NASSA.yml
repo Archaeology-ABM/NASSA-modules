@@ -1,16 +1,16 @@
 id: 2021-Angourakis-001
 nassaVersion: 0.1.0
 moduleType: Algorithm
-title: Random walk in 2D space based on agent angle orientation
-moduleVersion: 0.1.0
+title: Random walk in 2D space based on agent angle orientation and step distance
+moduleVersion: 1.0.0
 contributors:
   - name: Angourakis, Andreas
     roles: [ "Author", "Copyright Holder", "Creator" ]
     email: andros.spica@gmail.com
     orcid: 0000-0002-9946-8142
-lastUpdateDate: 2021-11-15
+lastUpdateDate: 2022-09-22
 description: >
-  An implementation of random walk in Python, which defines an agent class `Walker` capable of several movement algorithms based on angle and movement step distance in a continuous 2D space.
+  An implementation of random walk in Python, which defines an agent class `Walker` capable of random walk movement based on random angle and movement step distance in a continuous 2D space.
 domainKeywords:
   subjects: 
     - random walk
