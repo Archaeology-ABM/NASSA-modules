@@ -23,7 +23,7 @@ domainKeywords:
     - Global
     - European
   periods: 
-    - Undiferrentiated
+    - Undifferentiated
     - Pre-modern
   subjects: 
     - demography
@@ -120,7 +120,7 @@ outputs:
     description: Count of negative disease transmission encounter of an individual (not passed to other person)
   - name: count-spread
     type: integer
-    description: Cummulative number of daily contacts
+    description: Cumulative number of daily contacts
   - name: count-daily-contact
     type: integer
     description: Sum of all daily contacts for the actual day (reset each day)
