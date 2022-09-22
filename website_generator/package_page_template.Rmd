@@ -204,22 +204,26 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
     fromCenter = data.frame(from = 1, to = outputs$id)
   )
   
-  numberOfElementsMax = 24 # an arbitrary ceiling value for adjusting label size of nodes
-  numberOfElements = min(c(length(inputs) + length(outputs), numberOfElementsMax)) 
+  maxNumberOfNodesInColumn_default = 5 # aprox. number of nodes fitting the display with zoom scale = 1
+  maxNumberOfNodesInColumn = max(c(nrow(inputs), nrow(outputs)))
   
-  labelSizeMin = 10
-  labelSizeMax = 48
-  labelSizeAdj = labelSizeMin + (labelSizeMax - labelSizeMin) * (1 - numberOfElements / numberOfElementsMax) ^ 0.6
+  labelSizeMin = 18
+  labelSizeIncreaseByNode = 1
+  labelSizeAdj = labelSizeMin + labelSizeIncreaseByNode * max(c(0, maxNumberOfNodesInColumn - maxNumberOfNodesInColumn_default))
   
-  initZoomMin = 0.3
-  initZoomMax = 1
-  initZoomAdj = initZoomMin + (initZoomMax - initZoomMin) * (1 - numberOfElements / numberOfElementsMax) ^ 3
+  initZoomMax = 0.7
+  initZoomDecreaseByNode = 0.1
+  initZoomAdj = initZoomMax - initZoomDecreaseByNode * max(c(0, maxNumberOfNodesInColumn - maxNumberOfNodesInColumn_default))
   
   visNetwork(nodes, edges, width = "100%") %>%
-    visGroups(groupname = "input", color = list(border = "black", background = "white")) %>%
+    visGroups(
+      groupname = "input", 
+      color = list(border = "black", background = "white")
+    ) %>%
     visGroups(
       shape = "diamond",
-      groupname = "output", color = list(border = "black", background = "lightgrey")
+      groupname = "output", 
+      color = list(border = "black", background = "lightgrey")
     ) %>%
     visGroups(
       shape = "hexagon",
