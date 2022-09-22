@@ -1,0 +1,98 @@
+---
+#title: NASSA modules
+---
+
+<table class='pageHeader'>
+  <tr>
+    <td>
+      <h1 class='pageTitle'>Module library</h1>
+      <i style="text-align:right; color:grey;">`r paste(libraryVersion, '- ', format(Sys.time(), '%d/%m/%y'))`</i>
+    </td>
+    <td style='text-align:right;'>
+      <img src='images/NASSA-logo.png' width='300px' alt='NASSA-logo'>
+    </td>
+  </tr>
+</table>
+
+```{r, echo=FALSE}
+nassa_table_print <- nassa_table[, c('id', 'title', 'moduleVersion', 
+                                     'Keywords', 
+                                     'View')]
+colDisplayNames <-                 c('ID', 'Title', 'Current version', 
+                                     'Keywords', 
+                                     '')
+
+options(DT.options = list(
+  pageLength = 25, 
+  language = list(search = 'Search by ID, Title or keyword:'), 
+  initComplete = DT::JS(
+    "function(settings, json) {",
+    "$(this.api().table().header()).css({'background-color': '#03989e'});",
+    "}"
+  ),
+  # Define which columns are not to be used for sorting or searching
+  columnDefs = list(
+    list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
+         orderable = FALSE), 
+    list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
+         searchable = FALSE))
+))
+
+DT::datatable(nassa_table_print, 
+              rownames = FALSE,
+              escape = FALSE,
+              colnames = colDisplayNames) %>% 
+  DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
+    DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center', columnWidth = '50px') %>% 
+      DT::formatStyle(0, target = 'row', 
+        fontStyle = DT::styleRow(1, 'italic'), 
+        color = DT::styleRow(1, 'grey'))
+
+# kable approach:
+# knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
+#              col.names =   c("ID", "Title", "Current version", ""),
+#              align =       c('l',  'l',     'c',               'c'),
+#              format = "html",
+#              table.attr = "class=\'moduleList\'"
+# ) %>% kableExtra::kable_styling() %>% kableExtra::column_spec(
+#   # style specific for the ID column
+#   column = 1, 
+#   width = '200px', 
+#   bold = TRUE,
+#   border_right = TRUE
+# ) %>% kableExtra::row_spec(
+#   # style specific for TEMPLATE module rows
+#   row = c(1), # add more row numbers when adding new templates to the library. TO-DO: possibly code an automatic filter
+#   color = 'grey',
+#   italic = TRUE
+#) %>% as.character()
+```
+
+<table class='legend'>
+  <tr>
+    <td>
+    Keyword colour-coding:
+    </td>
+    <td>
+      <span class="badge" id="badgeModuleType">Module type</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeLanguage">Programming language</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeRegions">Regions</span>
+    </td>
+    <td>
+      <span class="badge" id="badgePeriods">Periods</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeSubjects">Subjects</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeModelling">Modelling</span>
+    </td>
+    <td>
+      <span class="badge" id="badgeProgramming">Programming</span>
+    </td>
+  </tr>
+</table>

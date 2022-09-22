@@ -1,0 +1,88 @@
+body {
+  background-color: white;
+}
+
+.moduleList {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+
+.pageHeader {
+  border: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.pageTitle {
+  font-family: verdana;
+  font-style: normal;
+  font-size: 300%;
+}
+
+.badge {
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#badgeModuleType {
+  background-color: #03989E;
+}
+
+#badgeLanguage {
+  background-color: #468B77;
+}
+
+#badgeRegions {
+  background-color: #324B4C;
+}
+
+#badgePeriods {
+  background-color: #95B0B2;
+}
+
+#badgeSubjects {
+  background-color: #8284BE;
+}
+
+#badgeModelling {
+  background-color: #FF8945;
+}
+
+#badgeProgramming {
+  background-color: #AB3F69;
+}
+
+.legend {
+  border: 0;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+.row {
+  display: flex;
+  margin: auto;
+  width: 100%;
+}
+
+.column {
+  flex: 50%;
+}
+
+.readme {
+  border:1px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+
+#structGrid {
+  border: 0;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: transparent;
+}

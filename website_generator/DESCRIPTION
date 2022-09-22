@@ -1,0 +1,18 @@
+Package: placeholder
+Title: This is a placeholder.
+Version: 0.0.1
+Depends: R (>= 4.1.0)
+Imports:
+    fontawesome (>= 0.3.0),
+    git2r (>= 0.30.1),
+    htmltools (>= 0.5.2),
+    kableExtra,
+    tibble (>= 3.1.7),
+    visNetwork (>= 2.1.0),
+    dplyr (>= 1.0.9),
+    DT (>= 0.25),
+    knitr (>= 1.39),
+    magrittr (>= 2.0.3),
+    purrr (>= 0.3.4),
+    rmarkdown (>= 2.14),
+    yaml (>= 2.3.5)

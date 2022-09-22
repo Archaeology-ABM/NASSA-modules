@@ -1,0 +1,284 @@
+---
+editor_options: 
+  chunk_output_type: console
+link-citations: false
+output:
+  html_document:
+    css: styles.css #website_source/styles.css
+bibliography: "`r cur_bib <- paste0('####module_name####', '.bib'); if (file.exists(cur_bib)) { cur_bib } else { 'dummy.bib' }`"
+nocite: '@*' #add all items to the bibliography
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r dependencies}
+library(magrittr)
+library(visNetwork)
+library(fontawesome)
+library(htmltools)
+```
+
+```{r ymlfile}
+module_name <- "####module_name####" #"2022-Romanowska-002"
+module_path <- file.path("../..", module_name) #file.path("..", module_name)
+nassa_yml_file <- list.files(module_path, pattern = "NASSA.yml", full.names = TRUE)
+nassa_yml <- yaml::read_yaml(nassa_yml_file)
+```
+
+# `r nassa_yml$title`
+
+`r nassa_yml$id`, (Last updated: `r nassa_yml$lastUpdateDate`) 
+
+***
+
+<div class="row">
+<div class="column">
+
+#### Authors
+
+```{r authors, results='asis'}
+authors <- purrr::map_chr(
+  nassa_yml$contributors, \(x) {
+    author = x$name
+    roles = paste(x$roles, collapse = ", ")
+    email = x$email
+    orcid = x$orcid
+    paste(
+      strong(author),
+      paste(
+        htmltools::tags$a(
+          fontawesome::fa("envelope", fill = "#03989E"),
+          target = "_blank",
+          href = paste0("mailto:", email)
+        ),
+        htmltools::tags$a(
+          fontawesome::fa("orcid", fill = "#03989E"),
+          target = "_blank",
+          href = paste0("https://orcid.org/", orcid)
+        )
+      ),
+      paste0("(", roles, ")")
+    )
+  }
+)
+
+cat(paste(authors, collapse = "<br>"))
+```
+
+---
+
+#### Module files
+
+```{r}
+dir_size <- function(path, recursive = TRUE) {
+  stopifnot(is.character(path))
+  files <- list.files(path, full.names = T, recursive = recursive)
+  vect_size <- sapply(files, function(x) file.size(x))
+  size_files <- sum(vect_size)
+  return(round(size_files/10**6, digits = 2)) # in MB, rounded to two decimal digits
+}
+
+moduleSize <- paste(dir_size(module_path), "MB")
+```
+
+```{r}
+github_link <- htmltools::tags$a(
+  fontawesome::fa("github", fill = "#03989E", height = '100px'),
+  target = "_blank",
+  href = paste0("https://github.com/Archaeology-ABM/NASSA-modules/tree/main/", module_name)
+)
+download_link <- htmltools::tags$a(
+  fontawesome::fa("download", fill = "#03989E", height = '100px'),
+  target = "_blank",
+  href = paste0(
+    "https://minhaskamal.github.io/DownGit/#/home?url=", # using DownGit tool
+    "https://github.com/Archaeology-ABM/NASSA-modules/tree/main/", 
+    module_name)
+)
+### TO-DO: get a schematic printout of the file structure to be shown at the right side of the GiHub icon?
+```
+
+<table class="pageHeader">
+  <tr id="structGrid">
+    <td>
+    Go to repository
+    </td>
+    <td>
+    Download (`r moduleSize`)
+    </td>
+  </tr>
+  <tr id="structGrid">
+    <td>
+    `r github_link`
+    </td>
+    <td>
+    `r download_link`
+    </td>
+  </tr>
+</table>
+
+</div>
+<div class="column">
+
+#### Module type
+
+`r badge_series(nassa_yml$moduleType, "badgeModuleType")`
+
+```{r}
+languages <- purrr::map(nassa_yml$implementations, function(y) {
+  htmltools::tags$span(class = "badge", id = "badgeLanguage", y$language)
+})
+```
+
+#### Languages
+
+`r languages`
+
+#### Tags
+
+```{r tags}
+badge_series <- function(x, type = 'badgeLanguage') {
+  if (length(x) > 0) {
+    prefix <- paste0('<span class="badge" id="',  type, '">')
+    return(paste(prefix, x, '</span>', collapse = '&nbsp;'))
+  } else {
+    return('')
+  }
+}
+# ba <- function(x, type = "badgeDefault") {
+#   purrr::map(x, function(y) {
+#     htmltools::tags$span(class = "badge", id = type, y)
+#   })
+# }
+```
+
+<table>
+<tr><td>Modelling:</td><td>`r badge_series(nassa_yml$modellingKeywords, "badgeModelling")`</td></tr>
+<tr><td>Programming:</td><td>`r badge_series(nassa_yml$programmingKeywords, "badgeProgramming")`</td></tr>
+<tr><td>Regions:</td><td>`r badge_series(nassa_yml$domainKeywords$regions, "badgeRegions")`</td></tr>
+<tr><td>Periods:</td><td>`r badge_series(nassa_yml$domainKeywords$periods, "badgePeriods")`</td></tr>
+<tr><td>Subjects:</td><td>`r badge_series(nassa_yml$domainKeywords$subjects, "badgeSubjects")`</td></tr>
+</table> 
+
+</div>
+</div>
+
+***
+
+#### Input and output
+
+```{r in_and_out, results='asis'}
+if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
+  
+  inputs <- purrr::map_dfr(nassa_yml$inputs, \(x) { tibble::as_tibble(x) }) %>%
+    dplyr::transmute(
+      id = seq_len(dplyr::n()) + 1,
+      label = name,
+      group = "input",
+      title = paste0(
+        "<b>Data type:</b> ", type, "<br>",
+        "<b>Description:</b> ", description
+      )
+    )
+  outputs <- purrr::map_dfr(nassa_yml$outputs, \(x) { tibble::as_tibble(x) }) %>%
+      dplyr::transmute(
+      id = seq_len(dplyr::n()) + max(inputs$id),
+      label = name,
+      group = "output",
+      title = paste0(
+        "<b>Data type:</b> ", type, "<br>",
+        "<b>Description:</b> ", description
+      )
+    )
+  
+  nodes <- dplyr::bind_rows(inputs, outputs, tibble::tibble(id = 1, group = "module"))
+  edges <- dplyr::bind_rows(
+    toCenter   = data.frame(from = inputs$id, to = 1),
+    fromCenter = data.frame(from = 1, to = outputs$id)
+  )
+  
+  numberOfElementsMax = 24 # an arbitrary ceiling value for adjusting label size of nodes
+  numberOfElements = min(c(length(inputs) + length(outputs), numberOfElementsMax)) 
+  
+  labelSizeMin = 10
+  labelSizeMax = 48
+  labelSizeAdj = labelSizeMin + (labelSizeMax - labelSizeMin) * (1 - numberOfElements / numberOfElementsMax) ^ 0.6
+  
+  initZoomMin = 0.3
+  initZoomMax = 1
+  initZoomAdj = initZoomMin + (initZoomMax - initZoomMin) * (1 - numberOfElements / numberOfElementsMax) ^ 3
+  
+  visNetwork(nodes, edges, width = "100%") %>%
+    visGroups(groupname = "input", color = list(border = "black", background = "white")) %>%
+    visGroups(
+      shape = "diamond",
+      groupname = "output", color = list(border = "black", background = "lightgrey")
+    ) %>%
+    visGroups(
+      shape = "hexagon",
+      size = 40,
+      groupname = "module", color = list(border = "black", background = "#03989E")
+    ) %>%
+    visNodes(
+      font = list(size = labelSizeAdj),
+      shadow = TRUE
+    ) %>%
+    visEdges(
+      color = list(color = "darkgrey"),
+      arrows = list(to = list(enabled = TRUE, scaleFactor = 1))
+    ) %>%
+    # set a hierarchical layout
+    visHierarchicalLayout(direction = 'LR', sortMethod = 'directed', levelSeparation = 500) %>%
+    # initialise zoom in proportion to the number of nodes
+    visEvents(startStabilizing = paste0("function() {this.moveTo({scale:", initZoomAdj, "})}"), type = "once") %>% visPhysics(stabilization = FALSE) %>%
+    visInteraction(
+      tooltipStyle = 
+        'position: fixed;visibility:hidden;padding: 5px;
+         font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;
+         -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;
+         border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+         max-width:300px;word-break: normal'
+    )
+
+} else { cat("Module in- and output not provided") }
+```
+
+***
+
+#### README
+
+<div class="readme">
+
+```{r readme, results='asis'}
+if (!is.null(nassa_yml$readmeFile)) {
+  readme_file <- file.path(module_path, nassa_yml$readmeFile)
+  readme <- readLines(readme_file)
+  ### correct rocket emoticon (used to mark NASSA oficial member submission)
+  readme <- gsub("\\(NASSA submission \\:rocket\\:\\)", "(NASSA submission &#128640;)", readme)
+  ### correct relative paths 
+  for (aLineIndex in 1:length(readme))
+  {
+    if (!grepl("\\]\\(http", readme[aLineIndex])) # or ignore all html links by using "\\.htm"
+    {
+      # position relative path at the module root as intended in README.md
+      readme[aLineIndex] <- gsub("\\]\\(", paste0("](../../../", nassa_yml$id, "/"), readme[aLineIndex])
+    }
+  }
+  #readme <- gsub("\\]\\(", paste0("](../../../", nassa_yml$id, "/"), readme) # TO-DO: find passing regular expression that selects fragment while excluding html links
+  cat(readme, sep = "\n\n")
+}
+```
+
+</div>
+
+***
+
+#### References
+
+<div id="refs"></div>
