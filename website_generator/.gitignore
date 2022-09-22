@@ -3,6 +3,7 @@
 !/website_source/styles.css
 !/website_source/index.Rmd
 !/website_source/dummy.bib
+!/website_source/images/*
 
 # History files
 .Rhistory

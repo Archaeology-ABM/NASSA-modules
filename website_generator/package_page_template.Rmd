@@ -267,7 +267,7 @@ if (!is.null(nassa_yml$readmeFile)) {
     if (!grepl("\\]\\(http", readme[aLineIndex])) # or ignore all html links by using "\\.htm"
     {
       # position relative path at the module root as intended in README.md
-      readme[aLineIndex] <- gsub("\\]\\(", paste0("](../../../", nassa_yml$id, "/"), readme[aLineIndex])
+      readme[aLineIndex] <- gsub("\\]\\(", paste0("](https://github.com/Archaeology-ABM/NASSA-modules/tree/main/", nassa_yml$id, "/"), readme[aLineIndex])
     }
   }
   #readme <- gsub("\\]\\(", paste0("](../../../", nassa_yml$id, "/"), readme) # TO-DO: find passing regular expression that selects fragment while excluding html links
