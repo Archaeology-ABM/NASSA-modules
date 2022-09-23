@@ -11,7 +11,7 @@
 
 
 
-<title>2021-Angourakis-001.knit</title>
+<title>2022-Angourakis-001.knit</title>
 
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -278,9 +278,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="random-walk-in-2d-space-based-on-agent-angle-orientation-and-step-distance" class="section level1">
-<h1>Random walk in 2D space based on agent angle orientation and step distance</h1>
-<p>2021-Angourakis-001, (Last updated: 2022-09-22)</p>
+<div id="reference-evapotranspiration-based-on-fao-56-penman-monteith-method" class="section level1">
+<h1>Reference evapotranspiration based on FAO-56 Penman-Monteith method</h1>
+<p>2022-Angourakis-001, (Last updated: 2022-09-21)</p>
 <hr>
 <div class="row">
 <div class="column">
@@ -299,15 +299,15 @@ Module files
 Go to repository
 </td>
 <td>
-Download (0.72 MB)
+Download (0.05 MB)
 </td>
 </tr>
 <tr id="structGrid">
 <td>
-<a target="_blank" href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2021-Angourakis-001"><svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:100px;width:96.88px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a>
+<a target="_blank" href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2022-Angourakis-001"><svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:100px;width:96.88px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a>
 </td>
 <td>
-<a target="_blank" href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2021-Angourakis-001"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:100px;width:100px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z"/></svg></a>
+<a target="_blank" href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2022-Angourakis-001"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:100px;width:100px;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z"/></svg></a>
 </td>
 </tr>
 </table>
@@ -320,7 +320,7 @@ Module type
 <h4>
 Languages
 </h4>
-<p><span id="badgeLanguage" class="badge">Python</span></p>
+<p><span id="badgeLanguage" class="badge">NetLogo</span></p>
 <h4>
 Tags
 </h4>
@@ -330,7 +330,7 @@ Tags
 Modelling:
 </td>
 <td>
-<span id="badgeModelling" class="badge"> agent behaviour self </span>
+<span id="badgeModelling" class="badge"> grid cell variables </span> <span id="badgeModelling" class="badge"> grid cell behaviour self </span>
 </td>
 </tr>
 <tr>
@@ -338,7 +338,7 @@ Modelling:
 Programming:
 </td>
 <td>
-<span id="badgeProgramming" class="badge"> Object-oriented programming </span> <span id="badgeProgramming" class="badge"> Nondeterministic algorithm </span>
+<span id="badgeProgramming" class="badge"> function </span>
 </td>
 </tr>
 <tr>
@@ -360,7 +360,7 @@ Periods:
 Subjects:
 </td>
 <td>
-<span id="badgeSubjects" class="badge"> random walk </span>
+<span id="badgeSubjects" class="badge"> soil </span> <span id="badgeSubjects" class="badge"> vegetation </span> <span id="badgeSubjects" class="badge"> weather </span> <span id="badgeSubjects" class="badge"> agriculture </span>
 </td>
 </tr>
 </table>
@@ -370,32 +370,35 @@ Subjects:
 <h4>
 Input and output
 </h4>
-<div id="htmlwidget-8bb90509f6bedbddab1e" style="width:100%;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8bb90509f6bedbddab1e">{"x":{"nodes":{"id":[2,3,4,5,6,7,1],"label":["worldDimensions","angleLeftMax, angleRightMax","moveDistanceMin, moveDistanceMax","(initial) x, y","positionX, positionY","direction",null],"group":["input","input","input","input","output","output","module"],"title":["<b>Data type:<\/b> dictionary (Dict)<br><b>Description:<\/b> The 2D world dimensions or limits. Specifically, the minimum and maximum coordinates in x and y that are considered valid positions in space. It is a dictionary with 'x' and 'y' keys, each associated to a two-item tupple of floats, representing minimum and maximum coordinates; e.g. {'x':(-50,50), 'y':(-50,50)}","<b>Data type:<\/b> float<br><b>Description:<\/b> Left and right angles in relation to an agent current angular direction that mark the maximum range of stochastic variation in direction for a step in a random walks. Both values must be set within the 0-180 interval. If both are set to 180, the direction of the previous step will have no impact on the direction of the next step (i.e. angle will be sampled from a 0-360 degrees interval).","<b>Data type:<\/b> float<br><b>Description:<\/b> Minimum and maximum distance travelled after a step. When moveDistanceMin is less than moveDistanceMax, these mark the maximum range of stochastic variation in distance per step. If these are equal, distance travelled per step will be constant. MoveDistanceMin must be a positive number equal to or less than MoveDistanceMin. MoveDistanceMin must be a positive number equal to or greater than MoveDistanceMin, but less than the maximum world distance set by worldDimensions.","<b>Data type:<\/b> float<br><b>Description:<\/b> Initial x and y coordinates of the agent's position.","<b>Data type:<\/b> float<br><b>Description:<\/b> The agent's position in x and y coordinates within the 2D space set by worldDimensions.","<b>Data type:<\/b> float<br><b>Description:<\/b> The agent's angular direction in degrees.",null]},"edges":{"from":[2,3,4,5,1,1],"to":[1,1,1,1,6,7]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","font":{"size":18},"shadow":true},"manipulation":{"enabled":false},"groups":{"input":{"color":{"border":"black","background":"white"}},"output":{"shape":"diamond","color":{"border":"black","background":"lightgrey"}},"useDefaultGroups":true,"module":{"shape":"hexagon","size":40,"color":{"border":"black","background":"#03989E"}}},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":1}},"color":{"color":"darkgrey"}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR","sortMethod":"directed"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1}},"groups":["input","output","module"],"width":"100%","height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","OnceEvents":{"startStabilizing":"function() {this.moveTo({scale:0.7})}"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;\n         font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;\n         -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;\n         border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);\n         max-width:300px;word-break: normal"},"evals":["OnceEvents.startStabilizing"],"jsHooks":[]}</script>
+<div id="htmlwidget-9b3dc1c206c92c1aafe0" style="width:100%;height:480px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9b3dc1c206c92c1aafe0">{"x":{"nodes":{"id":[2,3,4,5,6,1],"label":["par_elevation","par_temperature_daily_mean","par_temperature_daily_min, par_temperature_daily_max","par_netSolarRadiation","windSpeed",null],"group":["input","output","output","output","output","module"],"title":["<b>Data type:<\/b> float<br><b>Description:<\/b> elevation above sea level of the soil where the reference evapotranspiration is to be calculated.","<b>Data type:<\/b> float<br><b>Description:<\/b> Mean daily air temperature above the ground surface where the reference evapotranspiration is to be calculated.","<b>Data type:<\/b> float<br><b>Description:<\/b> Minimum and maximum daily air temperature above the ground surface where the reference evapotranspiration is to be calculated.","<b>Data type:<\/b> float<br><b>Description:<\/b> Solar radiation energy received by the soil surface, discounting loss by albedo reflection.","<b>Data type:<\/b> float<br><b>Description:<\/b> Wind speed at 2m above the soil surface (fixed to 2 as constant in code, as per Allen et al. 1998 recommendation in absence of data).",null]},"edges":{"from":[2,1,1,1,1],"to":[1,3,4,5,6]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","font":{"size":18},"shadow":true},"manipulation":{"enabled":false},"groups":{"input":{"color":{"border":"black","background":"white"}},"output":{"shape":"diamond","color":{"border":"black","background":"lightgrey"}},"useDefaultGroups":true,"module":{"shape":"hexagon","size":40,"color":{"border":"black","background":"#03989E"}}},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":1}},"color":{"color":"darkgrey"}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR","sortMethod":"directed"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1}},"groups":["input","output","module"],"width":"100%","height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","OnceEvents":{"startStabilizing":"function() {this.moveTo({scale:0.7})}"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;\n         font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;\n         -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;\n         border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);\n         max-width:300px;word-break: normal"},"evals":["OnceEvents.startStabilizing"],"jsHooks":[]}</script>
 <hr>
 <h4>
 README
 </h4>
 <div class="readme">
-<h1 id="random-walk-in-2d-space-based-on-agent-angle-orientation">Random walk in 2D space based on agent angle orientation</h1>
-<p><em>by Andreas Angourakis</em> (NASSA submission 🚀)</p>
-<p>An implementation of random walk in Python, which defines an agent class <code>Walker</code> capable of random walk movement based on random angle and movement step distance in a continuous 2D space.</p>
-<h2 id="license">License</h2>
-<p>MIT</p>
-<h2 id="further-information">Further information</h2>
-<div class="figure">
-<img src="https://github.com/Archaeology-ABM/NASSA-modules/raw/main/2021-Angourakis-001/python_implementation\documentation\randomWalk_v01_plot.png" alt="" />
-<p class="caption">Example of output: three random walk trajectories in continuous 2D space</p>
-</div>
-<p><a href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2021-Angourakis-001/python_implementation/demonstration.ipynb"><code>demonstration.ipynb</code></a>: Jupyter Notebook using the Python implementation that sets up a workflow for executing several random walks and plotting them. It also includes a demonstration of the test methods.</p>
-<p>See full list of documentation resources in <a href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2021-Angourakis-001/documentation/tableOfContents.md"><code>documentation</code></a>.</p>
+
 </div>
 <hr>
 <h4>
 References
 </h4>
 <div id="refs">
-
+<div id="ref-Allen1998">
+<p>Allen, Richard G., Luis S. Pereira, Dirk Raes, and Martin Smith. 1998. <em>Crop Evapotranspiration - FAO Irrigation and Drainage Paper No. 56</em>. Rome: FAO. <a href="http://www.fao.org/3/X0490E/x0490e00.htm">http://www.fao.org/3/X0490E/x0490e00.htm</a>.</p>
+</div>
+<div id="ref-Guo2016">
+<p>Guo, Danlu, Seth Westra, and Holger R. Maier. 2016. “An R Package for Modelling Actual, Potential and Reference Evapotranspiration.” <em>Environmental Modelling and Software</em> 78 (April): 216–24. <a href="https://doi.org/10.1016/j.envsoft.2015.12.019">https://doi.org/10.1016/j.envsoft.2015.12.019</a>.</p>
+</div>
+<div id="ref-guo_evapotranspiration_2022">
+<p>Guo, Danlu, Seth Westra, and Tim Peterson. 2022. “Evapotranspiration: Modelling Actual, Potential and Reference Crop Evapotranspiration.” <a href="https://CRAN.R-project.org/package=Evapotranspiration">https://CRAN.R-project.org/package=Evapotranspiration</a>.</p>
+</div>
+<div id="ref-jia_comparison_2013">
+<p>Jia, Xinhua. 2013. “Comparison of Reference Evapotranspiration Calculations for Southeastern North Dakota.” <em>Irrigation &amp; Drainage Systems Engineering</em> 2 (3). <a href="https://doi.org/10.4172/2168-9768.1000112">https://doi.org/10.4172/2168-9768.1000112</a>.</p>
+</div>
+<div id="ref-Suleiman2007">
+<p>Suleiman, Ayman A., and Gerrit Hoogenboom. 2007. “Comparison of Priestley-Taylor and FAO-56 Penman-Monteith for Daily Reference Evapotranspiration Estimation in Georgia.” <em>Journal of Irrigation and Drainage Engineering</em> 133 (2): 175–82. <a href="https://doi.org/10.1061/(ASCE)0733-9437(2007)133:2(175)">https://doi.org/10.1061/(ASCE)0733-9437(2007)133:2(175)</a>.</p>
+</div>
 </div>
 </div>
 
