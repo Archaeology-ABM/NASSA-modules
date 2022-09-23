@@ -14,7 +14,7 @@ description: >
 relatedModules: [  ]
 references:
   bibFile: references.bib
-  moduleReferences: [ Allen1998 Suleiman2007 jia_comparison_2013 Guo2016a guo_evapotranspiration_2022 ]
+  moduleReferences: [ Allen1998, Suleiman2007, jia_comparison_2013, Guo2016, guo_evapotranspiration_2022 ]
   useExampleReferences: [  ]
 domainKeywords:
   subjects: 
