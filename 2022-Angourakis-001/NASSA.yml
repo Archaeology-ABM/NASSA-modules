@@ -1,0 +1,58 @@
+id: 2022-Angourakis-001
+nassaVersion: 0.1.0
+moduleType: Algorithm
+title: Reference evapotranspiration based on FAO-56 Penman-Monteith method
+moduleVersion: 1.0.0
+contributors:
+  - name: Angourakis, Andreas
+    roles: [ "Author", "Copyright Holder", "Creator" ]
+    email: andros.spica@gmail.com
+    orcid: 0000-0002-9946-8142
+lastUpdateDate: 2022-09-21
+description: >
+  Calculate a daily value of reference evapotranspiration, useful for vegetation (incl. crop) models. The module code is based on FAO-56 Penman-Monteith method. The implementation is based on several sources (see moduleReferences), but particularly useful was the Evapotranspiration R package (<a href='https://cran.r-project.org/web/packages/Evapotranspiration/index.html' target='_blank'>Guo et al. 2016, 2022 (v1.16)</a>). Note: values of `C_n` and `C_d` are fixed for using the grass cover reference (900 and 0.34); values for the alfalfa reference are 1600 and 0.38.
+relatedModules: [  ]
+references:
+  bibFile: references.bib
+  moduleReferences: [ Allen1998 Suleiman2007 jia_comparison_2013 Guo2016a guo_evapotranspiration_2022 ]
+  useExampleReferences: [  ]
+domainKeywords:
+  subjects: 
+    - soil
+    - vegetation
+    - weather
+    - agriculture
+modellingKeywords:
+  - grid cell variables
+  - grid cell behaviour self
+programmingKeywords:
+  - function
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation/
+softwareDependencies:
+  - NetLogo version 6.2.2
+inputs:
+  - name: par_elevation
+    type: float
+    unit: meters
+    description: elevation above sea level of the soil where the reference evapotranspiration is to be calculated.
+outputs:
+  - name: par_temperature_daily_mean
+    type: float
+    unit: degrees celsius
+    description: Mean daily air temperature above the ground surface where the reference evapotranspiration is to be calculated.
+  - name: par_temperature_daily_min, par_temperature_daily_max 
+    type: float
+    unit: degrees celsius
+    description: Minimum and maximum daily air temperature above the ground surface where the reference evapotranspiration is to be calculated.
+  - name: par_netSolarRadiation
+    type: float
+    unit: MJ*m^-2
+    description: Solar radiation energy received by the soil surface, discounting loss by albedo reflection.
+  - name: windSpeed
+    type: float
+    unit: m*s^-1
+    description: Wind speed at 2m above the soil surface (fixed to 2 as constant in code, as per Allen et al. 1998 recommendation in absence of data).
+docsDir: documentation/
+license: MIT
