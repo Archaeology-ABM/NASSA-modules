@@ -58,5 +58,6 @@ outputs:
     type: float
     unit: mm*day^-1
     description: The evapotranspiration in millimeters of water per day assuming a reference surface that is not short of water and covered by a hypothetical grass (or alfalfa) reference crop with specific characteristics. It is referenced in the bibliography also as ETo.
+readmeFile: README.md
 docsDir: documentation/
 license: MIT

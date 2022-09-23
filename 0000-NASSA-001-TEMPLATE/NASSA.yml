@@ -45,5 +45,6 @@ outputs:
     type: Variable/object type. Use the programming language specific type.
     unit: Variable/object unit of measurement, if applicable.
     description: Variable/object description. Meaning, data structure, or any other relevant information for data analysis and interpretation or the use of the output as input in another module.
+readmeFile: README.md
 docsDir: documentation/
 license: MIT
