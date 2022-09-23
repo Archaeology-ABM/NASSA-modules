@@ -37,7 +37,6 @@ inputs:
     type: float
     unit: meters
     description: elevation above sea level of the soil where the reference evapotranspiration is to be calculated.
-outputs:
   - name: par_temperature_daily_mean
     type: float
     unit: degrees celsius
@@ -54,5 +53,10 @@ outputs:
     type: float
     unit: m*s^-1
     description: Wind speed at 2m above the soil surface (fixed to 2 as constant in code, as per Allen et al. 1998 recommendation in absence of data).
+outputs:
+  - name: ETr
+    type: float
+    unit: mm*day^-1
+    description: The evapotranspiration in millimeters of water per day assuming a reference surface that is not short of water and covered by a hypothetical grass (or alfalfa) reference crop with specific characteristics. It is referenced in the bibliography also as ETo.
 docsDir: documentation/
 license: MIT
