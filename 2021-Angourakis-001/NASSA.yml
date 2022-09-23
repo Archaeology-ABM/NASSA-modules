@@ -42,16 +42,16 @@ inputs:
   - name: (initial) x, y
     type: float
     unit: no specific unit, but within the scale set by worldDimensions.
-    description: initial x and y coordinates of the agent's position.
+    description: Initial x and y coordinates of the agent's position.
 outputs:
   - name: positionX, positionY
     type: float
     unit: no specific unit, but within the scale set by worldDimensions
-    description: the agent's position in x and y coordinates within the 2D space set by worldDimensions.
+    description: The agent's position in x and y coordinates within the 2D space set by worldDimensions.
   - name: direction
     type: float
     unit: angular degrees
-    description: the agent's angular direction in degrees.
+    description: The agent's angular direction in degrees.
 readmeFile: README.md
 docsDir: documentation/
 license: MIT
