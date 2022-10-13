@@ -1,5 +1,5 @@
 id: 2021-Angourakis-001
-nassaVersion: 0.1.0
+nassaVersion: 0.3.0
 moduleType: Algorithm
 title: Random walk in 2D space based on agent angle orientation and step distance
 moduleVersion: 1.0.0
@@ -15,17 +15,17 @@ domainKeywords:
   subjects: 
     - random walk
 modellingKeywords:
-  - agent behaviour self
+  - agent behaviour (self)
 programmingKeywords:
-  - Object-oriented programming
-  - Nondeterministic algorithm
+  - Object-oriented
+  - Nondeterministic
 implementations:
   - language: Python
     codeDir: python_implementation/
-softwareDependencies: 
-  - Python >= v.3.9 
-  - math (Python module)
-  - random (Python module)
+    softwareDependencies: 
+      - Python >= v.3.9 
+      - math (Python module)
+      - random (Python module)
 inputs:
   - name: worldDimensions
     type: dictionary (Dict)

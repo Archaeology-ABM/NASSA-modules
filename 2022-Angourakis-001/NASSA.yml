@@ -1,5 +1,5 @@
 id: 2022-Angourakis-001
-nassaVersion: 0.1.0
+nassaVersion: 0.3.0
 moduleType: Algorithm
 title: Reference evapotranspiration based on FAO-56 Penman-Monteith method
 moduleVersion: 1.0.0
@@ -23,15 +23,15 @@ domainKeywords:
     - weather
     - agriculture
 modellingKeywords:
-  - grid cell variables
-  - grid cell behaviour self
+  - grid variables
+  - grid behaviour (self)
 programmingKeywords:
-  - function
+  - Functional
 implementations:
   - language: NetLogo
     codeDir: netlogo_implementation/
-softwareDependencies:
-  - NetLogo version 6.2.2
+    softwareDependencies:
+      - NetLogo version 6.2.2
 inputs:
   - name: par_elevation
     type: float

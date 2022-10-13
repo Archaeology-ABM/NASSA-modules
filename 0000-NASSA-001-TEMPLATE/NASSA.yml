@@ -1,5 +1,5 @@
 id: YEAR-Surname-000
-nassaVersion: 0.1.0
+nassaVersion: 0.3.0
 moduleType: Algorithm
 title: (TEMPLATE) Module name or title including a useful description of module. Max. 100 characters.
 moduleVersion: 0.1.0
@@ -28,13 +28,14 @@ modellingKeywords:
   - grid initialisation
   - time initialisation
 programmingKeywords:
-  - function
+  - Functional
+  - Point-free style
 implementations:
   - language: NetLogo
     codeDir: netlogo_implementation/
-softwareDependencies:
-  - language/software version x.x.x
-  - extension version
+    softwareDependencies:
+      - language/software version x.x.x
+      - extension version
 inputs:
   - name: Parameter/variable/file name in the module.
     type: Parameter/variable/file type. Use the programming language specific type.

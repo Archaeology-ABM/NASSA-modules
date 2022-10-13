@@ -1,5 +1,5 @@
 id: 2021-Galan-001
-nassaVersion: 0.1.0
+nassaVersion: 0.3.0
 moduleType: Algorithm
 title: Random walk in data frames
 moduleVersion: 0.1.0
@@ -19,18 +19,18 @@ domainKeywords:
   subjects: 
     - random walk
 modellingKeywords:
-  - agent behaviour self
+  - agent behaviour (self)
 programmingKeywords:
-  - Object-oriented programming
-  - Nondeterministic algorithm
+  - Functional
+  - Nondeterministic
 implementations:
   - language: R
     codeDir: r_implementation/
-softwareDependencies: 
-  - R >= v4.0 
-  - tidyverse (R package) >= 1.3.1
-  - ggplot2 (R package) >= 3.3.6
-  - ggrepel (R package) >= 0.9.1
+    softwareDependencies: 
+      - R >= v4.0 
+      - tidyverse (R package) >= 1.3.1
+      - ggplot2 (R package) >= 3.3.6
+      - ggrepel (R package) >= 0.9.1
 inputs:
   - name: initialX, initialY
     type: float (numeric)
