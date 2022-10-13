@@ -2,7 +2,7 @@ id: 2021-Romanowska-001
 nassaVersion: 0.3.0
 moduleType: Algorithm
 title: Pedestrian random walk in NetLogo (ch2.1)
-moduleVersion: 0.1.0
+moduleVersion: 1.0.0
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
