@@ -1,8 +1,8 @@
 id: 2022-Romanowska-001
-nassaVersion: 0.1.0
+nassaVersion: 0.3.0
 moduleType: Algorithm
 title: Multiple agent placement in specific geographical location
-moduleVersion: 0.1.0
+moduleVersion: 1.0.0
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -32,16 +32,14 @@ references:
   bibFile: references.bib
   moduleReferences: [ romanowska_agent-based_2021 ]
 modellingKeywords:
-  - agent initialisation
-  - grid initialisation
-  - time initialisation
+  - initialisation
 programmingKeywords:
-  - function
+  - Object-oriented
 implementations:
   - language: NetLogo
     codeDir: netlogo_implementation/
-softwareDependencies:
-  - NetLogo version x.x.x
+    softwareDependencies:
+      - NetLogo version 6.2.2
 inputs:
   - name: map (spatial input data)
     type: png/bmp (grid or raster)

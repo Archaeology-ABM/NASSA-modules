@@ -1,8 +1,8 @@
 id: 2022-Vlach-001
-nassaVersion: 0.1.0
+nassaVersion: 0.3.0
 moduleType: Submodel
 title: Epidemic Network
-moduleVersion: 0.1.0
+moduleVersion: 1.0.0
 contributors:
   - name: Vlach, Marek
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -34,12 +34,13 @@ modellingKeywords:
   - initialisation
   - run-time
 programmingKeywords:
-  - Nondeterministic algorithm
+  - Object-oriented
+  - Nondeterministic
 implementations:
   - language: NetLogo
     codeDir: netlogo_implementation/
-softwareDependencies:
-  - NetLogo version 6.2.2
+    softwareDependencies:
+      - NetLogo version 6.2.2
 inputs:
   - name: seed
     type: integer
