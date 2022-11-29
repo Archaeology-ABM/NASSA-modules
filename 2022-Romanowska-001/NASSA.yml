@@ -7,19 +7,19 @@ contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
     email: iromanowska@aias.au.dk
-    orcid: 1234-1234-1234-1234
+    orcid: 0000-0002-9487-2111
   - name: Wren, Colin D.
     roles: [ "Author", "Copyright Holder" ]
     email: my.stable@email.com
-    orcid: 1234-1234-1234-1234
+    orcid: 0000-0003-4940-3997
   - name: Cabtree, Stefani A.
     roles: [ "Author", "Copyright Holder" ]
     email: my.stable@email.com
-    orcid: 1234-1234-1234-1234
+    orcid: 0000-0001-8585-8943
   - name: Boogers, Stef
     roles: [ "Contributor" ]
     email: my.stable@email.com
-    orcid: 1234-1234-1234-1234
+    orcid: 0000-0002-9505-1147
   - name: Angourakis, Andreas
     roles: [ "Contributor" ]
     email: andros.spica@gmail.com
