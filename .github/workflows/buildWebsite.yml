@@ -28,7 +28,7 @@ jobs:
         use-public-rspm: true
       
     - name: Install Pandoc
-      uses: r-lib/actions/setup-pandoc@master
+      uses: r-lib/actions/setup-pandoc@v2
       
     - name: Install R depedencies
       uses: r-lib/actions/setup-r-dependencies@v2
