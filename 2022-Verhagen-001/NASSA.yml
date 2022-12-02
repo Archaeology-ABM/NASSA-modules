@@ -32,8 +32,8 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     codeDir: netlogo_implementation/
-    softwareDependencies:
-
+    softwareDependencies: 
+    - NetLogo 6.2.0
 inputs:
   - name: 
     type: 
