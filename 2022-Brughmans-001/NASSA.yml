@@ -11,7 +11,7 @@ contributors:
 lastUpdateDate: 2022-12-02
 description: >
   A draft model with some useful code for creating different network structures using the Netlogo NW extension: small-world, preferential attachment, circular, star, wheel, lattice, random, nearest neighbours. This model is used for the following tutorial: Brughmans, T. (2018). Network structures and assembling code in Netlogo, Tutorial, https://archaeologicalnetworks.wordpress.com/resources/#structures .
-relatedModules: [  ]
+relatedModules: [ 2022-Brughmans-001 ]
 references:
   bibFile: references.bib
   moduleReferences: [ Brughmans2018 ]

@@ -1,0 +1,58 @@
+id: 2022-Brughmans-002
+nassaVersion: 0.3.0
+moduleType: Submodel
+title: Importing a Roman Transport network
+moduleVersion: 1.0.0
+contributors:
+ - name: Brughmans, Tom (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
+   roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator"]
+   email: t.b@cas.au.dk
+   orcid: 0000-0002-1589-7768
+lastUpdateDate: 2022-12-02
+description: >
+  Use open Roman datasets via and import them into a Netlogo model, using the ORBIS dataset (http://orbis.stanford.edu/) to create a set of Roman settlements and major routes between them.
+relatedModules: [ 2022-Brughmans-001 ]
+references:
+  bibFile: references.bib
+  moduleReferences: [ Brughmans2018 ]
+  useExampleReferences: [ Brughmans2019 ]
+domainKeywords:
+  regions: 
+    - Mediterranean
+    - Europe
+    - Middle East
+    - North Africa
+  periods: 
+    - Roman Empire
+  subjects: 
+    - Networks
+    - Social networks
+    - Transport networks
+    - Movement
+    - Trade
+    - Economics
+modellingKeywords:
+  - agent initialisation
+  - world initialisation
+programmingKeywords:
+  - Object-oriented
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation/
+    softwareDependencies:
+      - NetLogo version 6.2.2
+inputs:
+  - name: orbis.graphml
+    type: file
+    description: available under netlogo_implementation/ . A .graphml file consisting of nodes representing Roman settlements and junctions, and edges representing transport routes. From ORBIS https://purl.stanford.edu/mn425tz9757
+  outputs:
+  - name: Network topology
+    type: network
+    unit: nodes and links
+    description: The set of nodes and links created using the ORBIS .graphml file, and corrected through the model's data-correction procedure.
+  - name: distance distribution to Rome
+    type: frequency distribution
+    description: The frequency distribution of the distance from all nodes to Rome
+readmeFile: README.md
+docsDir: documentation/
+license: MIT
