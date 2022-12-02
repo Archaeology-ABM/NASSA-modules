@@ -1,0 +1,53 @@
+id: 2022-DAEMS-001
+nassaVersion: 0.3.0
+moduleType: Algorithm
+title: Resource exploitation procedure
+moduleVersion: 1.0.0
+contributors:
+ - name: Daems, Dries
+   roles: [ "Author", "Copyright Holder", "Creator" ]
+   email: daems.dries@gmail.com
+   orcid: 0000-0002-6444-9013
+lastUpdateDate: 2022-12-02
+description: >
+  This module takes an agent and lets it decide which resources to target and exploit.
+  The agent moves to the patch to be harvested, takes the resources and returns home
+domainKeywords:
+  regions: 
+    - Global
+  periods: 
+    - Global
+  subjects: 
+    - resources
+    - exploitation
+    - human-environment interactions
+modellingKeywords:
+  - agent initialisation
+  - variable initialisation
+  - agent variables
+  - agent behaviour (self)
+programmingKeywords:
+  - Object-oriented
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation/
+    softwareDependencies:
+      - NetLogo version 6.2.2
+inputs:
+  - name: resource
+    type: integer
+    description: Amount of resources per patch
+  - name: stock
+    type: integer
+    description: Amount of resources carried by the agent
+  - name: storage
+    type: integer
+    description: Amount of resources stored at homebase
+outputs:
+  - name: homebase-storage
+    type: integer
+    unit: /
+    description: Amount of resources stored in the homebase. Tracked as value in a reporter and through plot on the interface
+readmeFile: README.md
+docsDir: documentation/
+license: MIT
