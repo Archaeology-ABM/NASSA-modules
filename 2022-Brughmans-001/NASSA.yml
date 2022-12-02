@@ -4,14 +4,14 @@ moduleType: Submodel
 title: Network structures
 moduleVersion: 1.0.0
 contributors:
- - name: Brughmans, Tom (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
-   roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator"]
+ - name: Brughmans, Tom
+   roles: [ "Author", "Copyright Holder", "Creator"]
    email: t.b@cas.au.dk
    orcid: 0000-0002-1589-7768
 lastUpdateDate: 2022-12-02
 description: >
   A draft model with some useful code for creating different network structures using the Netlogo NW extension: small-world, preferential attachment, circular, star, wheel, lattice, random, nearest neighbours. This model is used for the following tutorial: Brughmans, T. (2018). Network structures and assembling code in Netlogo, Tutorial, https://archaeologicalnetworks.wordpress.com/resources/#structures .
-relatedModules: [ 2022-Brughmans-001 ]
+relatedModules: [ 2022-Brughmans-002 ]
 references:
   bibFile: references.bib
   moduleReferences: [ Brughmans2018 ]

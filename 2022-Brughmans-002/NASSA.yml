@@ -4,8 +4,8 @@ moduleType: Submodel
 title: Importing a Roman Transport network
 moduleVersion: 1.0.0
 contributors:
- - name: Brughmans, Tom (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
-   roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator"]
+ - name: Brughmans, Tom
+   roles: [ "Author", "Copyright Holder", "Creator"]
    email: t.b@cas.au.dk
    orcid: 0000-0002-1589-7768
 lastUpdateDate: 2022-12-02
