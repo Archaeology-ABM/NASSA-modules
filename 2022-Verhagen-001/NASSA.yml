@@ -1,11 +1,11 @@
 id: 2022-Verhagen-001
 nassaVersion: 0.3.0
 moduleType: Algorithm
-title: Fertility_Rate.nlogo
+title: Determine fertility rates for use in a demographic simulation.
 moduleVersion: 1.0.0
 contributors:
- - name: Verhagen, Philip (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
-   roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator", "Thesis Advisor", "Translator" ]
+ - name: Verhagen, Philip
+   roles: [ "Author", "Copyright Holder", "Creator" ]
    email: j.w.h.p.verhagen@vu.nl
    orcid: 0000-0001-8166-122X
 lastUpdateDate: 2022-12-02

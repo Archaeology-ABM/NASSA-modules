@@ -1,7 +1,5 @@
 # Module name or title
 
-2022-Verhagen-001
-
 Determine fertility rates for use in a demographic simulation.
 
 ## License
