@@ -1,12 +1,43 @@
+globals [ female-fertility-rates ]
+
 breed [humans human]
-humans-own [age gender fertility]
+humans-own [
+  age gender ; input
+  fertility ; output
+]
+
+to setup
+
+  set female-fertility-rates [
+    0
+    0.411
+    0.46
+    0.431
+    0.395
+    0.322
+    0.167
+    0.024
+    0
+  ]
+;    0.0259
+;    0.1596
+;    0.2311
+;    0.2776
+;    0.2129
+;    0.1633
+;    0.1300
+;    0.0631
+;    0
+;  ]
+
+end
 
   ; for this module to work, the following tasks should be performed first:
   ; - create a population of humans
   ; - assign them a gender ("F" or "M")
   ; - assign them an age
 
-to fertility-rate
+to fertility-rate [ thisAge ]
 
   ; in this procedure, the fertility rate (probability of reproducing) of each female is determined, based on the figures given in Coale & Trussell (1978) derived from Henry's (1961) 'natural fertility rate'
   ; the Total Fertility Rate (TFR) resulting from this scheme is 11.05
@@ -20,47 +51,39 @@ to fertility-rate
   [
      if age < 15
      [
-       set fertility 0.000
-;       set fertility 0.0259
+       set fertility item 0 female-fertility-rates
      ]
      if age > 14 and age <= 19
      [
-       set fertility 0.411
-;       set fertility 0.1596
+       set fertility item 1 female-fertility-rates
      ]
      if age > 19 and age <= 24
      [
-      set fertility 0.46
-;       set fertility 0.2311
+      set fertility item 2 female-fertility-rates
      ]
      if age > 24 and age <= 29
      [
-       set fertility 0.431
-;       set fertility 0.2776
+       set fertility item 3 female-fertility-rates
      ]
      if age > 29 and age <= 34
      [
-       set fertility 0.395
-;       set fertility 0.2129
+       set fertility item 4 female-fertility-rates
      ]
      if age > 34 and age <= 39
      [
-       set fertility 0.322
-;       set fertility 0.1633
+       set fertility item 5 female-fertility-rates
      ]
      if age > 39 and age <= 44
      [
-       set fertility 0.167
-;       set fertility 0.1300
+       set fertility item 6 female-fertility-rates
      ]
      if age > 45 and age <= 49
      [
-       set fertility 0.024
-;       set fertility 0.0631
+       set fertility item 7 female-fertility-rates
      ]
      if age > 49
      [
-       set fertility 0.000
+       set fertility item 8 female-fertility-rates
      ]
   ]
 
@@ -435,7 +458,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.0
+NetLogo 6.2.2
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
