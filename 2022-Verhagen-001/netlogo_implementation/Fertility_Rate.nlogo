@@ -1,4 +1,70 @@
+breed [humans human]
+humans-own [age gender fertility]
 
+  ; for this module to work, the following tasks should be performed first:
+  ; - create a population of humans
+  ; - assign them a gender ("F" or "M")
+  ; - assign them an age
+
+to fertility-rate
+
+  ; in this procedure, the fertility rate (probability of reproducing) of each female is determined, based on the figures given in Coale & Trussell (1978) derived from Henry's (1961) 'natural fertility rate'
+  ; the Total Fertility Rate (TFR) resulting from this scheme is 11.05
+  ; note that fertility will be determined once a female has reached age 15 and does not take into account nuptiality
+
+  ; the second option (greyed out in this version) is based on Bagnall & Frier's (1994) Egypt data (TFR 6.27); this already takes into account nuptiality and possible contraceptive measures
+
+  ; the figures used here represent fertility rates per 5-year cohort, so fertility will only change when the female has lived for another 5 years (passes into the next cohort)
+
+  ask humans with [gender = "F"]
+  [
+     if age < 15
+     [
+       set fertility 0.000
+;       set fertility 0.0259
+     ]
+     if age > 14 and age <= 19
+     [
+       set fertility 0.411
+;       set fertility 0.1596
+     ]
+     if age > 19 and age <= 24
+     [
+      set fertility 0.46
+;       set fertility 0.2311
+     ]
+     if age > 24 and age <= 29
+     [
+       set fertility 0.431
+;       set fertility 0.2776
+     ]
+     if age > 29 and age <= 34
+     [
+       set fertility 0.395
+;       set fertility 0.2129
+     ]
+     if age > 34 and age <= 39
+     [
+       set fertility 0.322
+;       set fertility 0.1633
+     ]
+     if age > 39 and age <= 44
+     [
+       set fertility 0.167
+;       set fertility 0.1300
+     ]
+     if age > 45 and age <= 49
+     [
+       set fertility 0.024
+;       set fertility 0.0631
+     ]
+     if age > 49
+     [
+       set fertility 0.000
+     ]
+  ]
+
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -369,7 +435,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.2
+NetLogo 6.2.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

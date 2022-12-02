@@ -1,25 +1,21 @@
 # Module name or title
 
-*by FULLNAME* (NASSA submission :rocket:)
+2022-Verhagen-001
 
-Description of what the module does. It should expand the information already given in the name/title.
+Determine fertility rates for use in a demographic simulation.
 
 ## License
-
-Add any default short text about license here, if license recommends it or offers badges. For example, if using the MIT License, naming it directly will be enough as long as the `LICENSE` file is present:
 
 **MIT**
 
 ## References
-
-Use a print out version of the references in `references.bib` (any bibliographic convention). Supress section if there are no references. For example, using APA 7th edition style:
-
-Epstein, J. M. (2008). Why Model? Journal of Artificial Societies and Social Simulation, 11(4), 12.
-
-Romanowska, I. (2021). Agent-Based Modeling for Archaeology (Electronic). SFI Press. https://doi.org/10.37911/9781947864382
-
+Bagnall, RS and Frier, BW. 1994. The demography of Roman Egypt. Cambridge: Cambridge University Press.
+Coale, AJ and Trussell, TJ. 1974. Model Fertility Schedules: Variations in The Age Structure of Childbearing in Human Populations. Population Index 40: 185–258.
+Coale, AJ and Trussell, TJ. 1978. Technical note: Finding the Two Parameters That Specify a Model Schedule of Marital Fertility. Population Index 44: 203–213. DOI: https://doi.org/10.2307/2733910.
+Henry, L. 1961. Some Data on Natural Fertility. Eugenics Quarterly 8(2): 81-91.
+Verhagen, P. 2022. Modelling the Basics of Roman Demography: the case of the Dutch limes. In: Brughmans, T and Wilson, AI (eds.), Simulating Roman economies. Theories, methods and computational models. Oxford: Oxford University Press, pp. 270-291.
 ## Further information
 
-Add as many design details, instructions, and demonstrations as possible, particularly information that is not included in `NASSA.yml`. If the information is included as markdown or html files in the documentation folder, add links to them here (if they are absolute URLs inside the module directory, remember to update them once the module is integrated to the library).
+This NetLogo code snippet provides fertility estimates of females for use in demographic simulations. The figures used are based on two different sources, one for Roman Egypt and one for modern populations, and will be assigned per 5-year age cohort.
 
-See full list of documentation resources in [`documentation`](documentation/tableOfContents.md).
+The code snippet is a procedure that can be inserted into a NetLogo model and will not run independently.
