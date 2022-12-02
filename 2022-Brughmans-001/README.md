@@ -1,6 +1,6 @@
 # Module name or title
 
-*by FULLNAME* (NASSA submission :rocket:)
+*by Tom Brughmans* (NASSA submission :rocket:)
 
 Description of what the module does. It should expand the information already given in the name/title.
 
