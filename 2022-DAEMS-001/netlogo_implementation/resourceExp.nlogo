@@ -13,7 +13,7 @@ rangers-own [
 
 to setup
   ca
-  create-rangers 1 [
+  create-rangers num-rangers [
     set stock 0 ; give turtle empty stock
     set homebase patch-here ; agent declares current patch as its homebase
   ]
@@ -133,6 +133,21 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "plot homebase-storage"
+
+SLIDER
+19
+302
+191
+335
+num-rangers
+num-rangers
+1
+100
+1.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -32,16 +32,17 @@ implementations:
   - language: NetLogo
     codeDir: netlogo_implementation/
     softwareDependencies:
-      - language/software version 6.2.2
+      - NetLogo version 6.2.2
 inputs:
   - name: resource
     type: integer
-    unit: /
     description: Amount of resources per patch
   - name: stock
     type: integer
-    unit: /
     description: Amount of resources carried by the agent
+  - name: storage
+    type: integer
+    description: Amount of resources stored at homebase
 outputs:
   - name: homebase-storage
     type: integer
