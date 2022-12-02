@@ -12,11 +12,6 @@ lastUpdateDate: 2022-12-02
 description: >
   This module takes an agent and lets it decide which resources to target and exploit.
   The agent moves to the patch to be harvested, takes the resources and returns home
-relatedModules:
-references:
-  bibFile: 
-  moduleReferences: []
-  useExampleReferences: []
 domainKeywords:
   regions: 
     - Global
