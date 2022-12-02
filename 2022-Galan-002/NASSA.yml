@@ -1,0 +1,51 @@
+id: 2022-Galan-002
+nassaVersion: 0.3.0
+moduleType: Algorithm
+title: (TEMPLATE) Module name or title including a useful description of module. Max. 100 characters.
+moduleVersion: 1.0.0
+contributors:
+ - name: Surname, Name (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
+   roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator", "Thesis Advisor", "Translator" ]
+   email: nassa@email.org
+   orcid: 0000-0002-1825-0097
+lastUpdateDate: 1983-04-18
+description: >
+  Description of what the module does. It should expand the information already given in the name/title.
+relatedModules: [ 0000-NASSA-002-TEMPLATE ]
+references:
+  bibFile: references.bib
+  moduleReferences: [ Epstein2008 ]
+  useExampleReferences: [ romanowska_agent-based_2021 ]
+domainKeywords:
+  regions: 
+    - Global
+  periods: 
+    - Palaeolithic
+  subjects: 
+    - diffusion
+modellingKeywords:
+  - agent initialisation
+  - grid initialisation
+  - time initialisation
+programmingKeywords:
+  - Functional
+  - Point-free style
+implementations:
+  - language: NetLogo
+    codeDir: netlogo_implementation/
+    softwareDependencies:
+      - language/software version x.x.x
+      - extension version
+inputs:
+  - name: Parameter/variable/file name in the module.
+    type: Parameter/variable/file type. Use the programming language specific type.
+    unit: Parameter/variable unit of measurement, if applicable.
+    description: Parameter/variable/file description. Meaning, data structure, or any other relevant information for the procurement and preparation of the input.
+outputs:
+  - name: Variable/object name in the module.
+    type: Variable/object type. Use the programming language specific type.
+    unit: Variable/object unit of measurement, if applicable.
+    description: Variable/object description. Meaning, data structure, or any other relevant information for data analysis and interpretation or the use of the output as input in another module.
+readmeFile: README.md
+docsDir: documentation/
+license: MIT
