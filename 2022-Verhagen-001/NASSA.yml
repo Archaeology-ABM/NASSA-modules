@@ -34,16 +34,6 @@ implementations:
     codeDir: netlogo_implementation/
     softwareDependencies: 
     - NetLogo 6.2.0
-inputs:
-  - name: 
-    type: 
-    unit: 
-    description: 
-outputs:
-  - name: 
-    type: 
-    unit: 
-    description: 
 readmeFile: README.md
 docsDir: documentation/
 license: MIT
