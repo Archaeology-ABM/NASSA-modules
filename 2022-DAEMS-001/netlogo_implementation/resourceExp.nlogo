@@ -1,4 +1,59 @@
+breed [rangers ranger] ;our agents are rangers going out from their homebase to exploit resources
 
+globals [homebase]
+
+patches-own [
+  resource ; patches have a certain value of resources
+  storage ; one of the patches is turned into a homebase where the rangers keep their stock as storage
+]
+
+rangers-own [
+  stock ;rangers can carry resources from patches to their homebase as stock
+]
+
+to setup
+  ca
+  create-rangers 1 [
+    set stock 0 ; give turtle empty stock
+    set homebase patch-here ; agent declares current patch as its homebase
+  ]
+  ask patches [
+    set resource random 100 ; give patch a certain amount of resources between 0 and specified maximum value
+    set pcolor scale-color green resource 0 100 ; color patches based on resource value
+  ]
+  reset-ticks
+end
+
+to go
+  exploit-resources
+  add-stock-to-homebase
+  tick
+end
+
+to exploit-resources
+  ask rangers [
+    let target patches with-max [resource] ; agent looks for patches with highest resources
+    move-to one-of target ; agent moves to one of the patches with the highest resources
+    set stock stock + resource
+    ask patch-here [
+      set resource 0
+    ]
+    move-to homebase
+  ]
+end
+
+to add-stock-to-homebase
+  ask rangers [
+    set storage storage + stock ; ranger deposits stock at homebase
+    set stock 0 ; rangers empty their stock so value is set to 0
+  ]
+end
+
+to-report homebase-storage ; keep track of amount of resource in homebase storage for the plot on the interface
+  let value 0
+  ask homebase [set value storage]
+  report value
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -26,6 +81,58 @@ GRAPHICS-WINDOW
 1
 ticks
 30.0
+
+BUTTON
+80
+52
+143
+85
+NIL
+setup
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+79
+85
+142
+118
+NIL
+go
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+PLOT
+6
+141
+206
+291
+Homebase stock
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot homebase-storage"
 
 @#$#@#$#@
 ## WHAT IS IT?
