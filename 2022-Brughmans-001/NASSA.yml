@@ -1,51 +1,75 @@
-id: YEAR-Surname-000
+id: 2022-Brughmans-001
 nassaVersion: 0.3.0
-moduleType: Algorithm
-title: (TEMPLATE) Module name or title including a useful description of module. Max. 100 characters.
+moduleType: Submodel
+title: Network structures
 moduleVersion: 1.0.0
 contributors:
- - name: Surname, Name (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
-   roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator", "Thesis Advisor", "Translator" ]
-   email: nassa@email.org
-   orcid: 0000-0002-1825-0097
-lastUpdateDate: 1983-04-18
+ - name: Brughmans, Tom (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
+   roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator"]
+   email: t.b@cas.au.dk
+   orcid: 0000-0002-1589-7768
+lastUpdateDate: 2022-12-02
 description: >
-  Description of what the module does. It should expand the information already given in the name/title.
-relatedModules: [ 0000-NASSA-002-TEMPLATE ]
+  A draft model with some useful code for creating different network structures using the Netlogo NW extension: small-world, preferential attachment, circular, star, wheel, lattice, random, nearest neighbours. This model is used for the following tutorial:
+Brughmans, T. (2018). Network structures and assembling code in Netlogo, Tutorial, https://archaeologicalnetworks.wordpress.com/resources/#structures .
+relatedModules: [  ]
 references:
   bibFile: references.bib
-  moduleReferences: [ Epstein2008 ]
-  useExampleReferences: [ romanowska_agent-based_2021 ]
+  moduleReferences: [ Brughmans2018 ]
+  useExampleReferences: [ Brughmans2016c Brughmans2016d ]
 domainKeywords:
   regions: 
     - Global
   periods: 
-    - Palaeolithic
+    - Prehistory
+    - History
   subjects: 
-    - diffusion
+    - Networks
+    - Social networks
 modellingKeywords:
   - agent initialisation
-  - grid initialisation
-  - time initialisation
 programmingKeywords:
-  - Functional
-  - Point-free style
+  - Object-oriented
 implementations:
   - language: NetLogo
     codeDir: netlogo_implementation/
     softwareDependencies:
-      - language/software version x.x.x
-      - extension version
+      - NetLogo version 6.2.2
 inputs:
-  - name: Parameter/variable/file name in the module.
-    type: Parameter/variable/file type. Use the programming language specific type.
-    unit: Parameter/variable unit of measurement, if applicable.
-    description: Parameter/variable/file description. Meaning, data structure, or any other relevant information for the procurement and preparation of the input.
+  - name: new-network-structure
+    type: string
+    description: The type of network structure you want to create, either small-world, preferential attachment, circular, star, wheel, lattice, random, nearest neighbours
+  - name: nodes
+    type: integer
+    unit: node
+    description: The number of nodes in the network that will be created.
+  - name: probability
+    type: float
+    description: Value between 0 and 1, the probability with which a link will be created in the small-world and random network structures.
+  - name: nearest-neighbours
+    type: integer
+    unit: node
+    description: The number of nearest nodes that a node will be connected to in the "nearest neighbours" network structure
+  - name: existing-network-structure
+    type: string
+    description: When keeping the nodes but creating new links between them (same-nodes/new-links), the type of network structure you will follow to create those links. Either nearest neighbour, random, star, circular.
 outputs:
-  - name: Variable/object name in the module.
-    type: Variable/object type. Use the programming language specific type.
-    unit: Variable/object unit of measurement, if applicable.
-    description: Variable/object description. Meaning, data structure, or any other relevant information for data analysis and interpretation or the use of the output as input in another module.
+  - name: Network topology
+    type: network
+    unit: nodes and links
+    description: The set of nodes and links created using the network creation algorithm selected.
+  - name: average-degree
+    type: float
+    description: the average number of links a node has
+  - name: clustering-coefficient
+    type: float
+    description: the proportion of closed triangles over all triads in the network; the degree of local clustering in the network.
+  - name: Av. shortest path length
+    type: float
+    description: the mean path length in the network; the mean number of steps to connect one node with another node
+  - name: degree distribution
+    type: frequency distribution
+    description: The frequency distribution of the number of links a node has (its degree)
 readmeFile: README.md
 docsDir: documentation/
 license: MIT

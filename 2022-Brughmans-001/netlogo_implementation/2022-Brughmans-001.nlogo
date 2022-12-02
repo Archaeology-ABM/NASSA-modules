@@ -1,4 +1,132 @@
+extensions [nw]
 
+;;; PROCEDURES FOR CREATING A NEW NETWORK STRUCTURE WITH A NEw SET OF NODES
+
+to create-new-network
+  clear-all
+  if new-network-structure = "small world"
+  [
+    nw:generate-watts-strogatz turtles links nodes 2 probability [ set color grey set shape "circle" ]
+    circular-layout
+  ]
+  if new-network-structure = "preferential attachment"
+  [
+    nw:generate-preferential-attachment turtles links nodes 1 [ set color grey set shape "circle" ]
+    spring-layout
+  ]
+  if new-network-structure = "circular"
+  [
+    nw:generate-ring turtles links nodes [ set color grey set shape "circle" ]
+    circular-layout
+  ]
+  if new-network-structure = "star"
+  [
+    nw:generate-star turtles links nodes [ set color grey set shape "circle" ]
+    radial-layout
+  ]
+  if new-network-structure = "wheel"
+  [
+    nw:generate-wheel turtles links nodes [ set color grey set shape "circle" ]
+    circular-layout
+  ]
+  if new-network-structure = "lattice"
+  [
+    nw:generate-lattice-2d turtles links round sqrt nodes round sqrt nodes false [ set color grey set shape "circle" ]
+    spring-layout
+  ]
+  if new-network-structure = "random"
+  [
+    nw:generate-random turtles links nodes probability [ set color grey set shape "circle" ]
+    circular-layout
+  ]
+  if new-network-structure = "nearest neighbours"
+  [
+    create-turtles nodes
+    [
+      set color grey set shape "circle"
+      set xcor random-xcor set ycor random-ycor
+      create-links-with min-n-of nearest-neighbours other turtles [distance myself]
+    ]
+    spring-layout
+  ]
+  reset-ticks
+end
+
+;;; PROCEDURES FOR CREATING NEW NETWORK STRUCTURE WITH AN EXISTING SET OF NODES
+
+to same-nodes/new-links
+  if existing-network-structure = "nearest neighbour"
+  [
+    ask links [die]
+    ask turtles
+    [
+      create-links-with min-n-of nearest-neighbours other turtles [distance myself]
+    ]
+  ]
+  if existing-network-structure = "random"
+  [
+    ask links [die]
+    ask turtles
+    [
+      ask other turtles
+      [
+        if random-float 1 < probability
+        [
+           create-link-with myself
+        ]
+      ]
+    ]
+  ]
+  if existing-network-structure = "star"
+  [
+    ask links [die]
+    ask one-of turtles [ create-links-with other turtles ]
+  ]
+  if existing-network-structure = "circular"
+  [
+    ask links [die]
+    let n [who] of one-of turtles with-max [who]
+    while [n >= 0]
+    [
+      if n = 0
+      [
+        ask turtle n
+        [
+          create-link-with one-of other turtles with-max [who]
+        ]
+        stop
+      ]
+      if n != 0
+      [
+        ask turtle n
+        [
+          create-link-with one-of other turtles with [who = (n - 1)]
+          set n n - 1
+        ]
+      ]
+    ]
+  ]
+end
+
+to circular-layout
+  layout-circle sort-on [who] turtles 15
+end
+
+to radial-layout
+  layout-radial turtles links (turtle 0)
+end
+
+to spring-layout
+  repeat 1000 [ layout-spring turtles links 0.2 5 1 ]
+end
+
+to-report average-degree
+  report mean [count link-neighbors] of turtles
+end
+
+to-report clustering-coefficient
+  report mean [ nw:clustering-coefficient ] of turtles
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -14,8 +142,8 @@ GRAPHICS-WINDOW
 1
 1
 0
-1
-1
+0
+0
 1
 -16
 16
@@ -26,6 +154,207 @@ GRAPHICS-WINDOW
 1
 ticks
 30.0
+
+CHOOSER
+17
+49
+210
+94
+new-network-structure
+new-network-structure
+"small world" "preferential attachment" "circular" "star" "wheel" "lattice" "random" "nearest neighbours"
+1
+
+SLIDER
+17
+160
+180
+193
+nearest-neighbours
+nearest-neighbours
+1
+10
+0.0
+1
+1
+NIL
+HORIZONTAL
+
+BUTTON
+18
+209
+135
+242
+NIL
+circular-layout
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+SLIDER
+17
+94
+180
+127
+nodes
+nodes
+3
+50
+0.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+17
+127
+180
+160
+probability
+probability
+0
+1
+0.0
+0.05
+1
+NIL
+HORIZONTAL
+
+MONITOR
+666
+67
+794
+112
+NIL
+clustering-coefficient
+4
+1
+11
+
+MONITOR
+667
+19
+778
+64
+NIL
+average-degree
+2
+1
+11
+
+MONITOR
+666
+113
+807
+158
+Av. shortest path length
+nw:mean-path-length
+4
+1
+11
+
+BUTTON
+18
+242
+135
+275
+NIL
+radial-layout
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+18
+275
+135
+308
+NIL
+spring-layout
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+PLOT
+659
+216
+859
+366
+degree distribution
+degree
+number of nodes
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "" "set-plot-x-range 0 (max [count link-neighbors] of turtles + 1)\nhistogram [count link-neighbors] of turtles"
+
+CHOOSER
+6
+370
+201
+415
+existing-network-structure
+existing-network-structure
+"nearest neighbour" "random" "star" "circular"
+1
+
+BUTTON
+16
+10
+173
+43
+NIL
+create-new-network
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+15
+337
+190
+370
+NIL
+same-nodes/new-links
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -369,7 +698,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.2
+NetLogo 6.0.3
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
