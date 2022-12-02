@@ -14,8 +14,7 @@ description: >
 relatedModules: 
 references:
   bibFile: references.bib
-  moduleReferences: [ Epstein2008 ]
-  useExampleReferences: [ romanowska_agent-based_2021 ]
+  moduleReferences: [ Bagnall-Frier-1994, Coale-Trussell-1974, Coale-Trussell-1978, Henry-1961, Verhagen-2022 ]
 domainKeywords:
   regions: 
   periods: 
