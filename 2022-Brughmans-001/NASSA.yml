@@ -15,7 +15,7 @@ relatedModules: [  ]
 references:
   bibFile: references.bib
   moduleReferences: [ Brughmans2018 ]
-  useExampleReferences: [ Brughmans2016c Brughmans2016d ]
+  useExampleReferences: [ Brughmans2016c,Brughmans2016d ]
 domainKeywords:
   regions: 
     - Global
