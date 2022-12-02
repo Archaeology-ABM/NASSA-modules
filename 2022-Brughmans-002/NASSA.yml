@@ -45,7 +45,7 @@ inputs:
   - name: orbis.graphml
     type: file
     description: available under netlogo_implementation/ . A .graphml file consisting of nodes representing Roman settlements and junctions, and edges representing transport routes. From ORBIS https://purl.stanford.edu/mn425tz9757
-  outputs:
+outputs:
   - name: Network topology
     type: network
     unit: nodes and links
