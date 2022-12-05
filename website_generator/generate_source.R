@@ -63,7 +63,7 @@ generate_Rmd <- function(x) {
 purrr::walk(nassa_table$path, generate_Rmd)
 
 # set NASSA-modules version and current date as args when rendering site
-library_version <- names(git2r::tags(git2r::discover_repository()))[-1]
+library_version <- tail(names(git2r::tags(git2r::discover_repository())), 1)
 
 #### copy the .bib file for each package ####
 
