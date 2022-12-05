@@ -254,6 +254,10 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
 } else { cat("Module in- and output not provided") }
 ```
 
+<h4>References</h4>
+
+<div id="refs"></div>
+
 <hr>
 
 <h4>README</h4>
@@ -289,7 +293,3 @@ if (!is.null(nassa_yml$readmeFile)) {
 </div>
 
 <hr>
-
-<h4>References</h4>
-
-<div id="refs"></div>
