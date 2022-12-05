@@ -14,6 +14,10 @@ nassa_yml_paths <- list.files(
   full.names = T  
 )
 
+extract_names <- function(listOfContributorsData) {
+  return(lapply(listOfContributorsData, function(x) x$name))
+}
+
 badge_series <- function(x, type = 'badgeDefault') {
   if (length(x) > 0) {
     prefix <- paste0('<span class="badge" id="',  type, '">')
@@ -32,7 +36,7 @@ nassa_table <- purrr::map_dfr(
       id = nassa_yml$id,
       title = nassa_yml$title,
       moduleVersion = nassa_yml$moduleVersion,
-      contributors = paste(nassa_yml$contributors, collapse = ', '), # use this structure to print out nested yml fields
+      contributors = paste(extract_names(nassa_yml$contributors), collapse = "; "),
       lastUpdateDate = nassa_yml$lastUpdateDate,
       Keywords = paste(badge_series(nassa_yml$moduleType, type = 'badgeModuleType'),
                        badge_series(nassa_yml$implementations[[1]]$language, type = 'badgeLanguage'),
