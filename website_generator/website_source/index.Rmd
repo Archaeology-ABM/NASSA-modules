@@ -43,6 +43,7 @@ DT::datatable(nassa_table_print,
               escape = FALSE,
               colnames = colDisplayNames) %>% 
   #DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
+  DT::formatStyle('lastUpdateDate', width = '100px') %>% 
     DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center', columnWidth = '50px') %>% 
       DT::formatStyle(0, target = 'row', 
         fontStyle = DT::styleRow(1, 'italic'), 
