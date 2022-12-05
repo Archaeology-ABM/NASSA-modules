@@ -6,7 +6,7 @@
   <tr>
     <td>
       <h1 class='pageTitle'>NASSA Library Web App</h1>
-      <i style="text-align:right; color:grey;">`r paste(library_version, ' - ', format(Sys.time(), '%d/%m/%y'))`</i>
+      <i style="text-align:right; color:grey;">`r paste('Last update: ', format(Sys.time(), '%d/%m/%y'))`</i>
     </td>
     <td style='text-align:right;'>
       <img src='images/NASSA-logo.png' width='300px' alt='NASSA-logo'>
