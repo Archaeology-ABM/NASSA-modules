@@ -21,7 +21,6 @@ programmingKeywords:
   - Nondeterministic
 implementations:
   - language: Python
-    codeDir: python_implementation/
     softwareDependencies: 
       - Python >= v.3.9 
       - math (Python module)
@@ -52,6 +51,4 @@ outputs:
     type: float
     unit: angular degrees
     description: The agent's angular direction in degrees.
-readmeFile: README.md
-docsDir: documentation/
 license: MIT

@@ -29,7 +29,6 @@ description: >
   Set up an input number of agents (turtles) at an input location (cell or patch) in an grid holding the input spatial data (map).
 relatedModules: [ 2022-Romanowska-002 ]
 references:
-  bibFile: references.bib
   moduleReferences: [ romanowska_agent-based_2021 ]
 modellingKeywords:
   - initialisation
@@ -37,7 +36,6 @@ programmingKeywords:
   - Object-oriented
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - NetLogo version 6.2.2
 inputs:
@@ -62,6 +60,4 @@ outputs:
   - name: world
     type: object (world)
     description: world’s grid initialised with input spatial data
-readmeFile: README.md
-docsDir: documentation/
 license: MIT

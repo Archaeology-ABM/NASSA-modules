@@ -24,7 +24,6 @@ lastUpdateDate: 2022-09-07
 description: >
   A collection of methods for random walk in NetLogo, including various movement restrictions, biases, and algorithm alternatives.
 references:
-  bibFile: references.bib
   moduleReferences: [ romanowska_agent-based_2021 ]
 domainKeywords:
   subjects: 
@@ -37,7 +36,6 @@ programmingKeywords:
   - Nondeterministic
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies: 
       - NetLogo >= v6.1.1
       - Rnd (NetLogo extension)
@@ -55,6 +53,4 @@ outputs:
     type: float (absolute position) or integer (patch coordinate)
     unit: no specific unit, but within world dimensions
     description: Current position of the agent (turtle) as x and y coordinates.
-readmeFile: README.md
-docsDir: documentation/
 license: CC BY-SA 4.0

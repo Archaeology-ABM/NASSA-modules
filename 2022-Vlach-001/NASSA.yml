@@ -16,7 +16,6 @@ lastUpdateDate: 2022-09-07
 description: >
   Experimental environment for testing of large array of theoretical conditions for development epidemic event within various quantitative, spatial and connectedness (network structure) aspects.
 references:
-  bibFile: references.bib
   moduleReferences: [ vlach_2022 ]
 domainKeywords:
   regions: 
@@ -38,7 +37,6 @@ programmingKeywords:
   - Nondeterministic
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - NetLogo version 6.2.2
 inputs:
@@ -146,6 +144,4 @@ outputs:
   - name: nw-mod
     type: float
     description: Network metrics':' modularity
-readmeFile: README.md
-docsDir: documentation/
 license: CC BY-SA 4.0

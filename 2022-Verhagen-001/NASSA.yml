@@ -13,7 +13,6 @@ description: >
   This NetLogo code snippet provides fertility estimates of females for use in demographic simulations. The figures used are based on two different sources, and will be assigned per 5-year age cohort.
 relatedModules: 
 references:
-  bibFile: references.bib
   moduleReferences: [ Bagnall-Frier-1994, Coale-Trussell-1974, Coale-Trussell-1978, Henry-1961, Verhagen-2022 ]
 domainKeywords:
   regions: 
@@ -30,9 +29,6 @@ programmingKeywords:
   - Object-Oriented
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies: 
     - NetLogo 6.2.0
-readmeFile: README.md
-docsDir: documentation/
 license: MIT

@@ -30,7 +30,6 @@ programmingKeywords:
   - Object-oriented
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - NetLogo version 6.2.2
 inputs:
@@ -48,6 +47,4 @@ outputs:
     type: integer
     unit: /
     description: Amount of resources stored in the homebase. Tracked as value in a reporter and through plot on the interface
-readmeFile: README.md
-docsDir: documentation/
 license: MIT
