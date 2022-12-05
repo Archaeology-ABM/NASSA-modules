@@ -32,7 +32,8 @@ nassa_table <- purrr::map_dfr(
       id = nassa_yml$id,
       title = nassa_yml$title,
       moduleVersion = nassa_yml$moduleVersion,
-      #contributors = paste(nassa_yml$contributors, collapse = ', '), # use this structure to print out nested yml fields
+      contributors = paste(nassa_yml$contributors, collapse = ', '), # use this structure to print out nested yml fields
+      lastUpdateDate = nassa_yml$lastUpdateDate,
       Keywords = paste(badge_series(nassa_yml$moduleType, type = 'badgeModuleType'),
                        badge_series(nassa_yml$implementations[[1]]$language, type = 'badgeLanguage'),
                        '<br>',
@@ -58,7 +59,7 @@ generate_Rmd <- function(x) {
 purrr::walk(nassa_table$path, generate_Rmd)
 
 # set NASSA-modules version and current date as args when rendering site
-libraryVersion = names(git2r::tags(git2r::discover_repository()))[-1]
+library_version <- names(git2r::tags(git2r::discover_repository()))[-1]
 
 #### copy the .bib file for each package ####
 

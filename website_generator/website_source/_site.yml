@@ -1,16 +1,19 @@
 name: "nassa-modules"
 navbar:
-  title: "nassa repository"
+#  title: "NASSA Library Web User Interface"
   left:
     - text: "Module list"
       icon: fa-list
       href: index.html
-#    - text: "Package repository"
-#      icon: fa-github
-#      href: https://github.com/poseidon-framework/published_data
-#    - text: "Poseidon website"
-#      icon: fa-globe
-#      href: https://poseidon-framework.github.io
+    - text: "Repository"
+      icon: fa-github
+      href: https://github.com/Archaeology-ABM/NASSA-modules
+    - text: "About"
+      icon: fa-book
+      href: https://archaeology-abm.github.io/NASSA-hub/library
+    - text: "NASSA Hub"
+      icon: fa-home
+      href: https://archaeology-abm.github.io/NASSA-hub
 output:
   html_document:
     theme: spacelab

@@ -5,8 +5,8 @@
 <table class='pageHeader'>
   <tr>
     <td>
-      <h1 class='pageTitle'>Module library</h1>
-      <i style="text-align:right; color:grey;">`r paste(libraryVersion, '- ', format(Sys.time(), '%d/%m/%y'))`</i>
+      <h1 class='pageTitle'>NASSA Library Web App</h1>
+      <i style="text-align:right; color:grey;">`r paste(library_version, '- ', format(Sys.time(), '%d/%m/%y'))`</i>
     </td>
     <td style='text-align:right;'>
       <img src='images/NASSA-logo.png' width='300px' alt='NASSA-logo'>
@@ -15,16 +15,16 @@
 </table>
 
 ```{r, echo=FALSE}
-nassa_table_print <- nassa_table[, c('id', 'title', 'moduleVersion', 
+nassa_table_print <- nassa_table[, c('lastUpdateDate', 'contributors', 'title', 'moduleVersion', 
                                      'Keywords', 
                                      'View')]
-colDisplayNames <-                 c('ID', 'Title', 'Current version', 
+colDisplayNames <-                 c('Last update', 'Contributors', 'Title', 'Current version', 
                                      'Keywords', 
                                      '')
 
 options(DT.options = list(
   pageLength = 25, 
-  language = list(search = 'Search by ID, Title or keyword:'), 
+  language = list(search = 'Search by Last update, Contributors, Title or keyword:'), 
   initComplete = DT::JS(
     "function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#03989e'});",
@@ -34,7 +34,7 @@ options(DT.options = list(
   columnDefs = list(
     list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
          orderable = FALSE), 
-    list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
+    list(targets = c(grep('View', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
          searchable = FALSE))
 ))
 
@@ -42,7 +42,7 @@ DT::datatable(nassa_table_print,
               rownames = FALSE,
               escape = FALSE,
               colnames = colDisplayNames) %>% 
-  DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
+  #DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
     DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center', columnWidth = '50px') %>% 
       DT::formatStyle(0, target = 'row', 
         fontStyle = DT::styleRow(1, 'italic'), 
