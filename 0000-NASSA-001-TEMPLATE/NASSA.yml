@@ -15,7 +15,7 @@ relatedModules: [ 0000-NASSA-002-TEMPLATE ]
 references:
   bibFile: references.bib
   moduleReferences: [ Epstein2008 ]
-  useExampleReferences: [ romanowska_agent-based_2021 ]
+  useExampleReferences: [ romanowska_agent-based_2021, Epstein2008 ]
 domainKeywords:
   regions: 
     - Global
