@@ -32,7 +32,7 @@ options(DT.options = list(
   ),
   # Define which columns are not to be used for sorting or searching
   columnDefs = list(
-    list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
+    list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('moduleVersion', names(nassa_table_print)) - 1), 
          orderable = FALSE), 
     list(targets = c(grep('View', names(nassa_table_print)) - 1, grep('View', names(nassa_table_print)) - 1), 
          searchable = FALSE))
