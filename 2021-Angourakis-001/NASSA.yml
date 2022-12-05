@@ -1,8 +1,8 @@
 id: 2021-Angourakis-001
-nassaVersion: 0.3.0
+nassaVersion: 0.4.0
 moduleType: Algorithm
 title: Random walk in 2D space based on agent angle orientation and step distance
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
   - name: Angourakis, Andreas
     roles: [ "Author", "Copyright Holder", "Creator" ]

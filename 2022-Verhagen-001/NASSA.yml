@@ -1,8 +1,8 @@
 id: 2022-Verhagen-001
-nassaVersion: 0.3.0
+nassaVersion: 0.4.0
 moduleType: Algorithm
 title: Determine fertility rates for use in a demographic simulation.
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
  - name: Verhagen, Philip
    roles: [ "Author", "Copyright Holder", "Creator" ]
