@@ -39,6 +39,7 @@ implementations:
     softwareDependencies: 
       - NetLogo >= v6.1.1
       - Rnd (NetLogo extension)
+docsDir: documentation/
 inputs:
   - name: (initial) xcor, ycor
     type: float (absolute position) or integer (patch coordinate)

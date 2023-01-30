@@ -30,6 +30,7 @@ implementations:
   - language: NetLogo
     softwareDependencies:
       - NetLogo version 6.2.2
+docsDir: documentation/
 inputs:
   - name: par_elevation
     type: float

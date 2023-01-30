@@ -45,6 +45,7 @@ implementations:
   - language: NetLogo
     softwareDependencies:
       - NetLogo version 6.2.2
+docsDir: documentation/
 inputs:
   - name: map (input spatial data)
     type: png/bmp (grid or raster)

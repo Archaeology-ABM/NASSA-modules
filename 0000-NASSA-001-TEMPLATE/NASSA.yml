@@ -34,6 +34,7 @@ implementations:
     softwareDependencies:
       - language/software version x.x.x
       - extension version
+docsDir: documentation/
 inputs:
   - name: Parameter/variable/file name in the module.
     type: Parameter/variable/file type. Use the programming language specific type.

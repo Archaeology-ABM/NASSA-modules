@@ -25,6 +25,7 @@ implementations:
       - Python >= v.3.9 
       - math (Python module)
       - random (Python module)
+docsDir: documentation/
 inputs:
   - name: worldDimensions
     type: dictionary (Dict)

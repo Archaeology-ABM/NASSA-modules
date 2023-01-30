@@ -31,4 +31,5 @@ implementations:
   - language: NetLogo
     softwareDependencies: 
     - NetLogo 6.2.0
+docsDir: documentation/
 license: MIT
