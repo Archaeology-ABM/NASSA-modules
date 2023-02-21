@@ -1,5 +1,5 @@
 id: YEAR-Surname-000
-nassaVersion: 0.3.0
+nassaVersion: 0.5.0
 moduleType: Algorithm
 title: (TEMPLATE) Module name or title including a useful description of module. Max. 100 characters.
 moduleVersion: 1.0.0
@@ -13,7 +13,6 @@ description: >
   Description of what the module does. It should expand the information already given in the name/title.
 relatedModules: [ 0000-NASSA-002-TEMPLATE ]
 references:
-  bibFile: references.bib
   moduleReferences: [ Epstein2008 ]
   useExampleReferences: [ romanowska_agent-based_2021, Epstein2008 ]
 domainKeywords:
@@ -32,10 +31,10 @@ programmingKeywords:
   - Point-free style
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - language/software version x.x.x
       - extension version
+docsDir: documentation/
 inputs:
   - name: Parameter/variable/file name in the module.
     type: Parameter/variable/file type. Use the programming language specific type.
@@ -46,6 +45,4 @@ outputs:
     type: Variable/object type. Use the programming language specific type.
     unit: Variable/object unit of measurement, if applicable.
     description: Variable/object description. Meaning, data structure, or any other relevant information for data analysis and interpretation or the use of the output as input in another module.
-readmeFile: README.md
-docsDir: documentation/
 license: MIT

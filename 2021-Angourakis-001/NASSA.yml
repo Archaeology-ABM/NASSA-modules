@@ -1,8 +1,8 @@
 id: 2021-Angourakis-001
-nassaVersion: 0.3.0
+nassaVersion: 0.5.0
 moduleType: Algorithm
 title: Random walk in 2D space based on agent angle orientation and step distance
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
   - name: Angourakis, Andreas
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -21,11 +21,11 @@ programmingKeywords:
   - Nondeterministic
 implementations:
   - language: Python
-    codeDir: python_implementation/
     softwareDependencies: 
       - Python >= v.3.9 
       - math (Python module)
       - random (Python module)
+docsDir: documentation/
 inputs:
   - name: worldDimensions
     type: dictionary (Dict)
@@ -52,6 +52,4 @@ outputs:
     type: float
     unit: angular degrees
     description: The agent's angular direction in degrees.
-readmeFile: README.md
-docsDir: documentation/
 license: MIT

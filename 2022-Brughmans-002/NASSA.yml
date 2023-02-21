@@ -1,8 +1,8 @@
 id: 2022-Brughmans-002
-nassaVersion: 0.3.0
+nassaVersion: 0.5.0
 moduleType: Submodel
 title: Importing a Roman Transport network
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
  - name: Brughmans, Tom
    roles: [ "Author", "Copyright Holder", "Creator"]
@@ -13,7 +13,6 @@ description: >
   Use open Roman datasets via and import them into a Netlogo model, using the ORBIS dataset (http://orbis.stanford.edu/) to create a set of Roman settlements and major routes between them.
 relatedModules: [ 2022-Brughmans-001 ]
 references:
-  bibFile: references.bib
   moduleReferences: [ Brughmans2018 ]
   useExampleReferences: [ Brughmans2019 ]
 domainKeywords:
@@ -38,9 +37,9 @@ programmingKeywords:
   - Object-oriented
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - NetLogo version 6.2.2
+docsDir: documentation/
 inputs:
   - name: orbis.graphml
     type: file
@@ -53,6 +52,4 @@ outputs:
   - name: distance distribution to Rome
     type: frequency distribution
     description: The frequency distribution of the distance from all nodes to Rome
-readmeFile: README.md
-docsDir: documentation/
 license: MIT

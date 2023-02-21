@@ -1,8 +1,8 @@
 id: 2021-Romanowska-001
-nassaVersion: 0.3.0
+nassaVersion: 0.5.0
 moduleType: Algorithm
 title: Pedestrian random walk in NetLogo (ch2.1)
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -24,7 +24,6 @@ lastUpdateDate: 2022-09-07
 description: >
   A collection of methods for random walk in NetLogo, including various movement restrictions, biases, and algorithm alternatives.
 references:
-  bibFile: references.bib
   moduleReferences: [ romanowska_agent-based_2021 ]
 domainKeywords:
   subjects: 
@@ -37,10 +36,10 @@ programmingKeywords:
   - Nondeterministic
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies: 
       - NetLogo >= v6.1.1
       - Rnd (NetLogo extension)
+docsDir: documentation/
 inputs:
   - name: (initial) xcor, ycor
     type: float (absolute position) or integer (patch coordinate)
@@ -55,6 +54,4 @@ outputs:
     type: float (absolute position) or integer (patch coordinate)
     unit: no specific unit, but within world dimensions
     description: Current position of the agent (turtle) as x and y coordinates.
-readmeFile: README.md
-docsDir: documentation/
 license: CC BY-SA 4.0

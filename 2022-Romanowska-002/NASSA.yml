@@ -1,8 +1,8 @@
 id: 2022-Romanowska-002
-nassaVersion: 0.3.0
+nassaVersion: 0.5.0
 moduleType: Submodel
 title: Out of Africa dispersal - Conditional isotropic diffusion
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -25,7 +25,6 @@ description: >
   A generalisation of a demic diffusion model, where a number of agents (turtles) are initialised at a given region in a given map, and then reproduce themselves at each time step with a certain probability and only if there is a free adjacent grid cell (patch). A reimplementation of the classical study by Young and Bettinger (1992) investigating the possible drivers behind the Out of Africa dispersal of modern humans. The module code is an adaptation of the content of "ch1_Y&Bdispersal.nlogo" in the public repository associated to Romanowska, Wren, & Crabtree 2021 (https://github.com/SantaFeInstitute/ABMA/blob/master/ch1).    
 relatedModules: [ 2022-Romanowska-001 ]
 references:
-  bibFile: references.bib
   moduleReferences: [ romanowska_agent-based_2021, young_numic_1992 ]
 domainKeywords:
   regions: 
@@ -44,9 +43,9 @@ programmingKeywords:
   - Nondeterministic
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - NetLogo version 6.2.2
+docsDir: documentation/
 inputs:
   - name: map (input spatial data)
     type: png/bmp (grid or raster)
@@ -83,6 +82,4 @@ outputs:
   - name: tickcounter
     type: integer
     description: simulation time step counter
-readmeFile: README.md
-docsDir: documentation/
 license: CC BY-SA 4.0

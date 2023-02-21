@@ -1,8 +1,8 @@
 id: 2022-Angourakis-001
-nassaVersion: 0.3.0
+nassaVersion: 0.5.0
 moduleType: Algorithm
 title: Reference evapotranspiration based on FAO-56 Penman-Monteith method
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
   - name: Angourakis, Andreas
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -13,7 +13,6 @@ description: >
   Calculate a daily value of reference evapotranspiration, useful for vegetation (incl. crop) models. The module code is based on FAO-56 Penman-Monteith method. The implementation is based on several sources (see moduleReferences), but particularly useful was the Evapotranspiration R package (<a href='https://cran.r-project.org/web/packages/Evapotranspiration/index.html' target='_blank'>Guo et al. 2016, 2022 (v1.16)</a>). Note: values of `C_n` and `C_d` are fixed for using the grass cover reference (900 and 0.34); values for the alfalfa reference are 1600 and 0.38.
 relatedModules: [  ]
 references:
-  bibFile: references.bib
   moduleReferences: [ Allen1998, Suleiman2007, jia_comparison_2013, Guo2016, guo_evapotranspiration_2022 ]
   useExampleReferences: [  ]
 domainKeywords:
@@ -29,9 +28,9 @@ programmingKeywords:
   - Functional
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - NetLogo version 6.2.2
+docsDir: documentation/
 inputs:
   - name: par_elevation
     type: float
@@ -58,6 +57,4 @@ outputs:
     type: float
     unit: mm*day^-1
     description: The evapotranspiration in millimeters of water per day assuming a reference surface that is not short of water and covered by a hypothetical grass (or alfalfa) reference crop with specific characteristics. It is referenced in the bibliography also as ETo.
-readmeFile: README.md
-docsDir: documentation/
 license: MIT

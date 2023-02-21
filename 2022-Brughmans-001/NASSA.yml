@@ -1,8 +1,8 @@
 id: 2022-Brughmans-001
-nassaVersion: 0.3.0
+nassaVersion: 0.5.0
 moduleType: Submodel
 title: Network structures
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
  - name: Brughmans, Tom
    roles: [ "Author", "Copyright Holder", "Creator"]
@@ -13,7 +13,6 @@ description: >
   A draft model with some useful code for creating different network structures using the Netlogo NW extension: small-world, preferential attachment, circular, star, wheel, lattice, random, nearest neighbours. This model is used for the following tutorial: Brughmans, T. (2018). Network structures and assembling code in Netlogo, Tutorial, https://archaeologicalnetworks.wordpress.com/resources/#structures .
 relatedModules: [ 2022-Brughmans-002 ]
 references:
-  bibFile: references.bib
   moduleReferences: [ Brughmans2018 ]
   useExampleReferences: [ Brughmans2016c,Brughmans2016d ]
 domainKeywords:
@@ -31,9 +30,9 @@ programmingKeywords:
   - Object-oriented
 implementations:
   - language: NetLogo
-    codeDir: netlogo_implementation/
     softwareDependencies:
       - NetLogo version 6.2.2
+docsDir: documentation/
 inputs:
   - name: new-network-structure
     type: string
@@ -69,6 +68,4 @@ outputs:
   - name: degree distribution
     type: frequency distribution
     description: The frequency distribution of the number of links a node has (its degree)
-readmeFile: README.md
-docsDir: documentation/
 license: MIT
