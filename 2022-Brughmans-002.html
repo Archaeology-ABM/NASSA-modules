@@ -13,7 +13,7 @@
 
 <title>2022-Brughmans-002.knit</title>
 
-<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
@@ -32,7 +32,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
 <link href="site_libs/vis-9.1.0/vis-network.min.css" rel="stylesheet" />
 <script src="site_libs/vis-9.1.0/vis-network.min.js"></script>
 <script src="site_libs/visNetwork-binding-2.1.2/visNetwork.js"></script>
@@ -326,7 +326,7 @@ $(document).ready(function () {
 Authors
 </h4>
 <p><strong>Brughmans, Tom</strong>
-<a target="_blank" href="mailto:t.b@cas.au.dk"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M0 128C0 92.65 28.65 64 64 64H448C483.3 64 512 92.65 512 128V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V128zM48 128V150.1L220.5 291.7C241.1 308.7 270.9 308.7 291.5 291.7L464 150.1V127.1C464 119.2 456.8 111.1 448 111.1H64C55.16 111.1 48 119.2 48 127.1L48 128zM48 212.2V384C48 392.8 55.16 400 64 400H448C456.8 400 464 392.8 464 384V212.2L322 328.8C283.6 360.3 228.4 360.3 189.1 328.8L48 212.2z"/></svg></a>
+<a target="_blank" href="mailto:t.b@cas.au.dk"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg></a>
 <a target="_blank" href="https://orcid.org/0000-0002-1589-7768"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-80.79 360.76h-29.84v-207.5h29.84zm-14.92-231.14a19.57 19.57 0 1 1 19.57-19.57 19.64 19.64 0 0 1-19.57 19.57zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg></a>
 (Author, Copyright Holder, Creator)</p>
 <hr>
@@ -422,8 +422,8 @@ class="badge"> Economics </span>
 <h4>
 Input and output
 </h4>
-<div id="htmlwidget-45c8fdc55e81eb5127cd" style="width:100%;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-45c8fdc55e81eb5127cd">{"x":{"nodes":{"id":[2,3,4,1],"label":["orbis.graphml","Network topology","distance distribution to Rome",null],"group":["input","output","output","module"],"title":["<b>Data type:<\/b> file<br><b>Description:<\/b> available under netlogo_implementation/ . A .graphml file consisting of nodes representing Roman settlements and junctions, and edges representing transport routes. From ORBIS https://purl.stanford.edu/mn425tz9757","<b>Data type:<\/b> network<br><b>Description:<\/b> The set of nodes and links created using the ORBIS .graphml file, and corrected through the model's data-correction procedure.","<b>Data type:<\/b> frequency distribution<br><b>Description:<\/b> The frequency distribution of the distance from all nodes to Rome",null]},"edges":{"from":[2,1,1],"to":[1,3,4]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","font":{"size":18},"shadow":true},"manipulation":{"enabled":false},"groups":{"input":{"color":{"border":"black","background":"white"}},"output":{"shape":"diamond","color":{"border":"black","background":"lightgrey"}},"useDefaultGroups":true,"module":{"shape":"hexagon","size":40,"color":{"border":"black","background":"#03989E"}}},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":1}},"color":{"color":"darkgrey"}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR","sortMethod":"directed"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1}},"groups":["input","output","module"],"width":"100%","height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","OnceEvents":{"startStabilizing":"function() {this.moveTo({scale:0.7})}"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;\n         font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;\n         -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;\n         border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);\n         max-width:300px;word-break: normal"},"evals":["OnceEvents.startStabilizing"],"jsHooks":[]}</script>
+<div id="htmlwidget-99e9e4e45f4f93bc9902" style="width:100%;height:480px;" class="visNetwork html-widget "></div>
+<script type="application/json" data-for="htmlwidget-99e9e4e45f4f93bc9902">{"x":{"nodes":{"id":[2,3,4,1],"label":["orbis.graphml","Network topology","distance distribution to Rome",null],"group":["input","output","output","module"],"title":["<b>Data type:<\/b> file<br><b>Description:<\/b> available under netlogo_implementation/ . A .graphml file consisting of nodes representing Roman settlements and junctions, and edges representing transport routes. From ORBIS https://purl.stanford.edu/mn425tz9757","<b>Data type:<\/b> network<br><b>Description:<\/b> The set of nodes and links created using the ORBIS .graphml file, and corrected through the model's data-correction procedure.","<b>Data type:<\/b> frequency distribution<br><b>Description:<\/b> The frequency distribution of the distance from all nodes to Rome",null]},"edges":{"from":[2,1,1],"to":[1,3,4]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","font":{"size":18},"shadow":true},"manipulation":{"enabled":false},"groups":{"input":{"color":{"border":"black","background":"white"}},"output":{"shape":"diamond","color":{"border":"black","background":"lightgrey"}},"useDefaultGroups":true,"module":{"shape":"hexagon","size":40,"color":{"border":"black","background":"#03989E"}}},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":1}},"color":{"color":"darkgrey"}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR","sortMethod":"directed"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1}},"groups":["input","output","module"],"width":"100%","height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","OnceEvents":{"startStabilizing":"function() {this.moveTo({scale:0.7})}"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;\n         font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;\n         -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;\n         border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);\n         max-width:300px;word-break: normal"},"evals":["OnceEvents.startStabilizing"],"jsHooks":[]}</script>
 <h4>
 References
 </h4>
@@ -445,45 +445,11 @@ Roman Economy</em>, edited by Chloë Duckworth and Andrew Wilson,
 <h4>
 README
 </h4>
-</div>
-<div id="network-structures" class="section level1 readme">
-<h1>Network structures</h1>
-<p><em>by Tom Brughmans</em> (NASSA submission 🚀)</p>
-<div id="further-information" class="section level2">
-<h2>Further information</h2>
-<p>By Tom Brughmans</p>
-<p>First version: Summer 2018</p>
-<p>This version created 01/09/2018</p>
-<p>Netlogo version used: 6.0.1</p>
-<p>Extension used: nw (pre-packaged with Netlogo 6.0.1)</p>
-<p><a href="https://ccl.northwestern.edu/netlogo/6.0-BETA1/docs/nw.html"
-class="uri">https://ccl.northwestern.edu/netlogo/6.0-BETA1/docs/nw.html</a></p>
-<p>Tutorial document availabe as a PDF in the <a
-href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2022-Brughmans-002/netlogo_implementation/Netlogo_Roman-transport_v0.1.pdf">netlogo_implementtion
-folder</a></p>
-<p>Cite this tutorial as:</p>
-<p>Brughmans, T. (2018). Importing a Roman Transport network with
-Netlogo, Tutorial, <a
-href="https://archaeologicalnetworks.wordpress.com/resources/#transport"
-class="uri">https://archaeologicalnetworks.wordpress.com/resources/#transport</a>
-.</p>
-<p>This tutorial provides an introduction to finding and assembling
-pre-existing code to quickly create complex models. It uses code and
-data linked to in the <a href="https://projectmercury.eu"
-class="uri">https://projectmercury.eu</a> pages. We will create a Roman
-transport network by reusing existing code that draws on the open access
-ORBIS dataset (<a href="http://orbis.stanford.edu/"
-class="uri">http://orbis.stanford.edu/</a>), we will create alternative
-network structures by reusing existing code, and we will explore the
-impact these different network structures have in light of simple
-economic processes. This tutorial will reveal the importance of not
-reinventing the wheel, of searching for appropriate existing code and
-letting your model building be inspired by others’ previous work.</p>
-<p>See full list of documentation resources in <a
-href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2022-Brughmans-002/documentation/tableOfContents.md"><code>documentation</code></a>.</p>
-</div>
+<div class="readme">
+
 </div>
 <hr>
+</div>
 
 
 
