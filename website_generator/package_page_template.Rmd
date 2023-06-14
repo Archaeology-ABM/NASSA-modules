@@ -29,6 +29,7 @@ module_name <- "####module_name####" #"2022-Romanowska-002"
 module_path <- file.path("../..", module_name) #file.path("..", module_name)
 nassa_yml_file <- list.files(module_path, pattern = "NASSA.yml", full.names = TRUE)
 nassa_yml <- yaml::read_yaml(nassa_yml_file)
+nassa_yml$readmeFile <- 'README.md'
 ```
 
 # `r nassa_yml$title`
