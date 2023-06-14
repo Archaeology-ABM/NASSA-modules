@@ -11,4 +11,4 @@ This module takes agents (rangers) and lets them select the maximized amount of 
 
 ## References
 
-Boogers, S. and Daems, D., 2022. SAGAscape: Simulating Resource Exploitation Strategies in Iron Age to Hellenistic Communities in Southwest Anatolia. Journal of Computer Applications in Archaeology, 5(1), pp.169–187. https://doi.org/10.5334/jcaa.90.
+Boogers, S. and Daems, D., 2022. SAGAscape: Simulating Resource Exploitation Strategies in Iron Age to Hellenistic Communities in Southwest Anatolia. Journal of Computer Applications in Archaeology, 5(1), pp.169-187. https://doi.org/10.5334/jcaa.90.
