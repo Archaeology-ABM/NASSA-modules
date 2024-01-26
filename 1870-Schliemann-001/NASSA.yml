@@ -1,0 +1,68 @@
+id: 1870-Schliemann-001
+nassaVersion: 0.5.0
+moduleType: Algorithm
+title: (DUMMY EXAMPLE) TroyDestroy. Bronze Age siege and its destructive effect on settlement
+moduleVersion: 1.0.0
+contributors:
+ - name: Schliemann, Heinrich
+   roles: [ "Author", "Copyright Holder" ]
+   email: schliemann@email.org
+ - name: Angourakis, Andreas
+   roles: [ "Author", "Copyright Holder", "Creator" ]
+   email: andros.spica@gmail.com
+   orcid: 0000-0002-9946-8142
+lastUpdateDate: 1871-10-20
+description: >
+  This module takes the strength of two armies, one aggressor and another defender, and calculates the level of destruction of the defenders' city. The destructive effect over the defenders' city is proportional to the two contending strengths and a constant rate per unit of strength of the aggressor matched by the defender.
+relatedModules: [ 1874-NASSA-001 ]
+references:
+  moduleReferences: [ homers-iliad ]
+domainKeywords:
+  regions: 
+    - Global
+    - Eastern Mediterranean
+  periods: 
+    - Bronze Age
+    - Mycenaean
+  subjects: 
+    - war
+modellingKeywords:
+  - agent
+  - calculation
+programmingKeywords:
+  - Functional
+  - Object-oriented
+implementations:
+  - language: NetLogo
+    softwareDependencies:
+      - NetLogo >= v6.1.1
+      - gis (NetLogo extension)
+  - language: Python
+    softwareDependencies: 
+      - Python >= v.3.9 
+      - math (Python module)
+      - random (Python module)
+docsDir: documentation/
+inputs:
+  - name: greeks-strength, GREEKS_STRENGTH
+    type: integer
+    unit: army strength
+    description: The strength of the Greek army (attackers), measured in number of soldiers, units, etc.
+  - name: trojans-strength, TROJANS_STRENGTH
+    type: integer
+    unit: army strength
+    description: The strength of the Trojan army (defenders), measured in number of soldiers, units, etc.
+  - name: destruction-rate, DESTRUCTION_RATE
+    type: float
+    unit: city health / army strength
+    description: The rate of destruction per unit of attacker strength
+  - name: init-troy-health, TROY_HEALTH
+    type: float
+    unit: city health
+    description: The general state of the defenders city, measured in population, structures, etc.
+outputs:
+  - name: troy-health, health, City.health
+    type: float
+    unit: city health
+    description: The general state of the defenders city, measured in population, structures, etc.
+license: MIT
