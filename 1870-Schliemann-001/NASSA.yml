@@ -18,6 +18,7 @@ description: >
 relatedModules: [ 1874-Schliemann-001 ]
 references:
   moduleReferences: [ homers-iliad ]
+  useExampleReferences: [ nassa_guide_submissions ]
 domainKeywords:
   regions: 
     - Global
