@@ -17,7 +17,7 @@ description: >
   This module takes the strength of two armies, one aggressor and another defender, and calculates the level of destruction of the defenders' city. The destructive effect over the defenders' city is proportional to the two contending strengths and a constant rate per unit of strength of the aggressor matched by the defender.
 relatedModules: [ 1874-Schliemann-001 ]
 references:
-  moduleReferences: [ homers-iliad ]
+  moduleReferences: [ homer_iliad_1865 ]
   useExampleReferences: [ nassa_guide_submissions ]
 domainKeywords:
   regions: 
