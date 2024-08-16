@@ -175,6 +175,8 @@ badge_series <- function(x, type = 'badgeLanguage') {
 
 <h4>Input and output</h4>
 
+<p><small><i style="color: darkgrey;">Click on nodes for details</i></small></p>
+
 ```{r in_and_out, results='asis'}
 if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
   
@@ -244,6 +246,10 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
     # initialise zoom in proportion to the number of nodes
     visEvents(startStabilizing = paste0("function() {this.moveTo({scale:", initZoomAdj, "})}"), type = "once") %>% visPhysics(stabilization = FALSE) %>%
     visInteraction(
+      zoomView = TRUE,
+      navigationButtons = TRUE, # Optional: adds zoom in/out buttons
+      keyboard = TRUE, # Optional: allows keyboard control
+      zoomSpeed = 0.5, # Adjust this value to control the zoom speed
       tooltipStyle = 
         'position: fixed;visibility:hidden;padding: 5px;
          font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;
