@@ -4,6 +4,7 @@
 !/website_source/index.Rmd
 !/website_source/dummy.bib
 !/website_source/images/*
+!/website_source/js/*
 
 # History files
 .Rhistory
