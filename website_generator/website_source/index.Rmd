@@ -14,6 +14,7 @@
   </tr>
 </table>
 
+<div id="nassa_table_container">
 ```{r, echo=FALSE}
 nassa_table_print <- nassa_table[, c('lastUpdateDate', 'contributors', 'title', 'moduleVersion', 
                                      'Keywords', 
@@ -44,30 +45,15 @@ DT::datatable(nassa_table_print,
               colnames = colDisplayNames) %>% 
   #DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
   DT::formatStyle('lastUpdateDate', width = '150px') %>% 
-    DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center', columnWidth = '50px') %>% 
-      DT::formatStyle(0, target = 'row', 
-        fontStyle = DT::styleRow(1, 'italic'), 
-        color = DT::styleRow(1, 'grey'))
-
-# kable approach:
-# knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
-#              col.names =   c("ID", "Title", "Current version", ""),
-#              align =       c('l',  'l',     'c',               'c'),
-#              format = "html",
-#              table.attr = "class=\'moduleList\'"
-# ) %>% kableExtra::kable_styling() %>% kableExtra::column_spec(
-#   # style specific for the ID column
-#   column = 1, 
-#   width = '200px', 
-#   bold = TRUE,
-#   border_right = TRUE
-# ) %>% kableExtra::row_spec(
-#   # style specific for TEMPLATE module rows
-#   row = c(1), # add more row numbers when adding new templates to the library. TO-DO: possibly code an automatic filter
-#   color = 'grey',
-#   italic = TRUE
-#) %>% as.character()
+    DT::formatStyle('moduleVersion', textAlign = 'center', columnWidth = '50px') %>% 
+      DT::formatStyle('View', textAlign = 'center', verticalAlign = 'middle', columnWidth = '50px', fontSize = '200%') %>% 
+        DT::formatStyle(0, target = 'row', 
+          fontStyle = DT::styleRow(1, 'italic'), 
+          color = DT::styleRow(1, 'grey'))
 ```
+</div>
+
+<script src='js/selectKeyword.js'></script>
 
 <table class='legend'>
   <tr>
@@ -95,5 +81,8 @@ DT::datatable(nassa_table_print,
     <td>
       <span class="badge" id="badgeProgramming">Programming</span>
     </td>
+    <td>
+      | <button id="resetFilter" style="margin-left: 20px;">Show All</button>
+    <td>
   </tr>
 </table>
