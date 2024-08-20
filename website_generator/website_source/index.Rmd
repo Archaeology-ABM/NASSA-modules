@@ -53,7 +53,7 @@ DT::datatable(nassa_table_print,
 ```
 </div>
 
-<script src='selectKeyword.js'></script>
+<script src='js/selectKeyword.js'></script>
 
 <table class='legend'>
   <tr>
