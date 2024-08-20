@@ -2,11 +2,6 @@ body {
   background-color: white;
 }
 
-.moduleList {
-  margin: auto;
-  border-top: 1px solid #666;
-  border-bottom: 1px solid #666;
-}
 table thead th { border-bottom: 1px solid #ddd; }
 th, td { padding: 5px; }
 thead, tfoot, tr:nth-child(even) { background: #eee; }
@@ -28,10 +23,16 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   padding: 4px 8px;
   text-align: center;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.badge:hover {
+  background-color: #e0e0e0; /* Light gray background on hover */
+  color: #000; /* Darken text color on hover */
 }
 
 #badgeModuleType {
-  background-color: #03989E;
+  background-color: #03989e;
 }
 
 #badgeLanguage {
@@ -86,3 +87,8 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   text-align: center;
   background-color: transparent;
 }
+
+a {
+  color: #03989e;
+  word-break: break-word;
+} 
