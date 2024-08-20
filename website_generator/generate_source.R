@@ -18,22 +18,6 @@ extract_names <- function(listOfContributorsData) {
   return(lapply(listOfContributorsData, function(x) x$name))
 }
 
-# badge_series <- function(x, type = 'badgeDefault') {
-#   if (length(x) > 0) {
-#     prefix <- paste0('<span class="badge" id="',  type, '">')
-#     return(paste(prefix, x, '</span>', collapse = '&nbsp;'))
-#   } else {
-#     return('')
-#   }
-# }
-# badge_series <- function(x, type = 'badgeDefault') {
-#   if (length(x) > 0) {
-#     prefix <- paste0('<span class="badge" id="', type, '" onclick="filterByKeyword(\'', x, '\')">')
-#     return(paste(prefix, x, '</span>', collapse = '&nbsp;'))
-#   } else {
-#     return('')
-#   }
-# }
 badge_series <- function(x, type = 'badgeDefault') {
   if (length(x) > 0) {
     prefix <- paste0('<span class="badge" id="', type, '" data-keyword="', x, '">')
