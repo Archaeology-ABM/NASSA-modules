@@ -53,36 +53,21 @@ DT::datatable(nassa_table_print,
 ```
 </div>
 
+<div id="customsidebar">
+  <button id="resetFilter">Clear</button>
+  <br>
+  <h4>Keyword types</h4>
+  <p>
+    <span class="badge" id="badgeModuleType">Module type</span>
+    <span class="badge" id="badgeLanguage">Programming language</span>
+    <span class="badge" id="badgeRegions">Regions</span>
+    <span class="badge" id="badgePeriods">Periods</span>
+    <span class="badge" id="badgeSubjects">Subjects</span>
+    <span class="badge" id="badgeModelling">Modelling</span>
+    <span class="badge" id="badgeProgramming">Programming</span>
+  </p>
+</div>
+
 <script src='js/selectKeyword.js'></script>
 
-<table class='legend'>
-  <tr>
-    <td>
-    Keyword colour-coding:
-    </td>
-    <td>
-      <span class="badge" id="badgeModuleType">Module type</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeLanguage">Programming language</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeRegions">Regions</span>
-    </td>
-    <td>
-      <span class="badge" id="badgePeriods">Periods</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeSubjects">Subjects</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeModelling">Modelling</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeProgramming">Programming</span>
-    </td>
-    <td>
-      | <button id="resetFilter" style="margin-left: 20px;">Show All</button>
-    <td>
-  </tr>
-</table>
+
