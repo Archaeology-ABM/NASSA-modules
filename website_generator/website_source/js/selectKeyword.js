@@ -30,7 +30,14 @@ $(document).ready(function() {
         // Check if the search input exists
         if (searchInput) {
           // Set the value to your desired string
-          searchInput.value = keyword;
+          if (searchInput.value.length > 0)
+          {
+            searchInput.value = searchInput.value + ' ' + keyword;
+          }
+          else
+          {
+            searchInput.value = keyword;
+          }
           
           // Apply a custom search to the "Keywords" column
           table.column(keywordColumnIndex).search(function(data, type) {
@@ -48,8 +55,6 @@ $(document).ready(function() {
         } else {
           //console.error('❗ Search input not found within the specified container.');
         }
-          
-          searchInput.value = ''
       }
     });
 
