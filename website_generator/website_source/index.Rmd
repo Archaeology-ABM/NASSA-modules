@@ -16,10 +16,10 @@
 
 <div id="nassa_table_container">
 ```{r, echo=FALSE}
-nassa_table_print <- nassa_table[, c('lastUpdateDate', 'contributors', 'title', 'moduleVersion', 
+nassa_table_print <- nassa_table[, c('title', 'contributors', 'moduleVersion', 'lastUpdateDate', 
                                      'Keywords', 
                                      'View')]
-colDisplayNames <-                 c('Last update', 'Contributors', 'Title', 'Current version', 
+colDisplayNames <-                 c('Title', 'Contributors', 'Version', 'Last update', 
                                      'Keywords', 
                                      '')
 
@@ -31,6 +31,7 @@ options(DT.options = list(
     "$(this.api().table().header()).css({'background-color': '#03989e'});",
     "}"
   ),
+  fixedHeader = list(header = TRUE),
   # Define which columns are not to be used for sorting or searching
   columnDefs = list(
     list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('moduleVersion', names(nassa_table_print)) - 1), 
@@ -44,7 +45,7 @@ DT::datatable(nassa_table_print,
               escape = FALSE,
               colnames = colDisplayNames) %>% 
   #DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
-  DT::formatStyle('lastUpdateDate', width = '150px') %>% 
+  DT::formatStyle('lastUpdateDate', width = '100px') %>% 
     DT::formatStyle('moduleVersion', textAlign = 'center', columnWidth = '50px') %>% 
       DT::formatStyle('View', textAlign = 'center', verticalAlign = 'middle', columnWidth = '50px', fontSize = '200%') %>% 
         DT::formatStyle(0, target = 'row', 
