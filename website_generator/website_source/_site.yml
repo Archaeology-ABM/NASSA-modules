@@ -5,18 +5,19 @@ navbar:
     - text: "Module list"
       icon: fa-list
       href: index.html
-    - text: "Repository"
-      icon: fa-github
-      href: https://github.com/Archaeology-ABM/NASSA-modules
     - text: "About"
       icon: fa-book
       href: https://archaeology-abm.github.io/NASSA-hub/library
     - text: "NASSA Hub"
       icon: fa-home
       href: https://archaeology-abm.github.io/NASSA-hub
+  right:
+    - text: "Repository"
+      icon: fa-github
+      href: https://github.com/Archaeology-ABM/NASSA-modules
 output:
   html_document:
     theme: spacelab
     highlight: textmate
-    css: styles.css
+    css: css/styles.css
     
