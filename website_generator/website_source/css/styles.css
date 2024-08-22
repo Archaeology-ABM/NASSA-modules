@@ -2,6 +2,10 @@ body .main-container {
   max-width: 1000px;
 }
 
+#header {
+    display: none;
+}
+
 #nassa_table_container {
   width: 90%;
   float: left;
