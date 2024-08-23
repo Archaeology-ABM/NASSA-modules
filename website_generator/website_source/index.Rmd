@@ -1,5 +1,5 @@
 ---
-#title: NASSA modules
+title: NASSA Library
 ---
 
 <table class='pageHeader'>
@@ -16,16 +16,17 @@
 
 <div id="nassa_table_container">
 ```{r, echo=FALSE}
-nassa_table_print <- nassa_table[, c('title', 'contributors', 'moduleVersion', 'lastUpdateDate', 
-                                     'Keywords', 
-                                     'View')]
-colDisplayNames <-                 c('Title', 'Contributors', 'Version', 'Last update', 
-                                     'Keywords', 
-                                     '')
+nassa_table_print <- nassa_table[, c('View',
+                                     'title', 'contributors', 'moduleVersion', 'lastUpdateDate', 
+                                     'Keywords')]
+colDisplayNames <-                 c('',
+                                     'Title', 'Contributors', 'Version', 'Last update', 
+                                     'Keywords')
 
 options(DT.options = list(
   pageLength = 25, 
   language = list(search = 'Search by Last update, Contributors, Title or keyword:'), 
+  search = list(regex = TRUE),
   initComplete = DT::JS(
     "function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#03989e'});",
@@ -54,18 +55,59 @@ DT::datatable(nassa_table_print,
 ```
 </div>
 
+```{r, echo=FALSE}
+keywords <- unlist(lapply(stringr::str_match_all(nassa_table$Keywords, "<span[^>]*>(.*?)</span>"), function(x) x[,1]))
+
+getTopKeywordBadgesPerID <- function(keywordList, htmlID, curtailThreshold)
+{
+  keywordsOfID <- keywords[stringr::str_detect(keywordList, htmlID)]
+  keywordNumberLevels <- length(unique(keywordsOfID))
+  keywordsOfIDFreq <- sort(table(keywordsOfID), decreasing = TRUE)[1:(min(curtailThreshold, keywordNumberLevels))]
+  names(keywordsOfIDFreq) <- mapply(function(html, insert) {
+    sub("</", paste0(" <i style='font-size: 50%'>(", insert, ")</i></"), html)
+  }, names(keywordsOfIDFreq), keywordsOfIDFreq)
+  return(keywordsOfIDFreq)
+}
+
+moduleTypeKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeModuleType", 5)
+languageKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeLanguage", 5)
+modellingKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeModelling", 5)
+programmingKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeProgramming", 5)
+regionsKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeRegions", 5)
+periodsKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgePeriods", 5)
+subjectsKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeSubjects", 5)
+```
+
 <div id="customsidebar">
   <button id="resetFilter">Clear</button>
   <br>
-  <h4>Keyword types</h4>
+  <h4>Module type</h4>
   <p>
-    <span class="badge" id="badgeModuleType">Module type</span>
-    <span class="badge" id="badgeLanguage">Programming language</span>
-    <span class="badge" id="badgeRegions">Regions</span>
-    <span class="badge" id="badgePeriods">Periods</span>
-    <span class="badge" id="badgeSubjects">Subjects</span>
-    <span class="badge" id="badgeModelling">Modelling</span>
-    <span class="badge" id="badgeProgramming">Programming</span>
+    `r paste0(names(moduleTypeKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Language</h4>
+  <p>
+    `r paste0(names(languageKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Modelling</h4>
+  <p>
+    `r paste0(names(modellingKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Programming</h4>
+  <p>
+    `r paste0(names(programmingKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Regions</h4>
+  <p>
+    `r paste0(names(regionsKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Periods</h4>
+  <p>
+    `r paste0(names(periodsKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Subjects</h4>
+  <p>
+    `r paste0(names(subjectsKeywordsFreq), collapse = "<br>" )`
   </p>
 </div>
 

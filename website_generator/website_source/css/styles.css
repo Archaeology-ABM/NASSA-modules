@@ -1,14 +1,19 @@
 body .main-container {
-  max-width: 1000px;
+  max-width: 1100px;
+  min-width: 850px;
+}
+
+#header {
+    display: none;
 }
 
 #nassa_table_container {
-  width: 90%;
+  width: 87%;
   float: left;
   z-index: -10;
 }
 #customsidebar {
-  width: 9%;
+  width: 12%;
   float: right;
   z-index: -10;
   padding: 0px;
