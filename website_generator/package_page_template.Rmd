@@ -2,9 +2,6 @@
 editor_options: 
   chunk_output_type: console
 link-citations: false
-output:
-  html_document:
-    css: styles.css #website_source/styles.css
 bibliography: "`r cur_bib <- paste0('####module_name####', '.bib'); if (file.exists(cur_bib)) { cur_bib } else { 'dummy.bib' }`"
 nocite: '@*' #add all items to the bibliography
 ---
@@ -128,22 +125,6 @@ download_link <- htmltools::tags$a(
 
 <div class="column">
 
-<h4>Module type</h4>
-
-`r badge_series(nassa_yml$moduleType, "badgeModuleType")`
-
-```{r}
-languages <- purrr::map(nassa_yml$implementations, function(y) {
-  htmltools::tags$span(class = "badge", id = "badgeLanguage", y$language)
-})
-```
-
-<h4>Languages</h4>
-
-`r languages`
-
-<h4>Tags</h4>
-
 ```{r tags}
 badge_series <- function(x, type = 'badgeLanguage') {
   if (length(x) > 0) {
@@ -153,12 +134,24 @@ badge_series <- function(x, type = 'badgeLanguage') {
     return('')
   }
 }
-# ba <- function(x, type = "badgeDefault") {
-#   purrr::map(x, function(y) {
-#     htmltools::tags$span(class = "badge", id = type, y)
-#   })
-# }
 ```
+
+<h4>Module type</h4>
+
+`r badge_series(nassa_yml$moduleType, "badgeModuleType")`
+
+```{r}
+languages <- purrr::map(nassa_yml$implementations, function(y) {
+  htmltools::tags$span(class = "badge", id = "badgeLanguage", y$language)
+})
+languages <- htmltools::tagList(languages)
+```
+
+<h4>Implementation languages</h4>
+
+`r languages`
+
+<h4>Keywords</h4>
 
 <table>
 <tr><td>Modelling:</td><td>`r badge_series(nassa_yml$modellingKeywords, "badgeModelling")`</td></tr>
@@ -249,7 +242,7 @@ if (!is.null(nassa_yml$inputs) & !is.null(nassa_yml$outputs)) {
       zoomView = TRUE,
       navigationButtons = TRUE, # Optional: adds zoom in/out buttons
       keyboard = TRUE, # Optional: allows keyboard control
-      zoomSpeed = 0.5, # Adjust this value to control the zoom speed
+      zoomSpeed = 0.1, # Adjust this value to control the zoom speed
       tooltipStyle = 
         'position: fixed;visibility:hidden;padding: 5px;
          font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;
