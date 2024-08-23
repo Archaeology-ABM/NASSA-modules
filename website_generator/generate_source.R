@@ -2,6 +2,7 @@ library(magrittr)
 #library(kableExtra)
 library(DT)
 library(git2r)
+library(stringr)
 
 repo_path <- ".."
 
@@ -47,7 +48,7 @@ nassa_table <- purrr::map_dfr(
                        badge_series(nassa_yml$modellingKeywords, type = 'badgeModelling'),
                        badge_series(nassa_yml$programmingKeywords, type = 'badgeProgramming'),
                        collapse = '&nbsp;'),
-      `View` = paste0("<a href=\"", path, ".html\"><i class='fa fa-external-link'></i></a>"),
+      `View` = paste0("<a href=\"", path, ".html\"><i class='fa fa-right-to-bracket'></i></a>"),
     )
   }
 )
