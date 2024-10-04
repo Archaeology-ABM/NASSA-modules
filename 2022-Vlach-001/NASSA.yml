@@ -145,4 +145,4 @@ outputs:
   - name: nw-mod
     type: float
     description: Network metrics':' modularity
-license: CC BY-SA 4.0
+license: CC-BY-SA-4.0
