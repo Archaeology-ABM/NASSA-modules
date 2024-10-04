@@ -82,4 +82,4 @@ outputs:
   - name: tickcounter
     type: integer
     description: simulation time step counter
-license: CC BY-SA 4.0
+license: CC-BY-SA-4.0

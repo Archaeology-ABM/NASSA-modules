@@ -1,12 +1,24 @@
-body {
-  background-color: white;
+body .main-container {
+  max-width: 1100px;
+  min-width: 850px;
 }
 
-.moduleList {
-  margin: auto;
-  border-top: 1px solid #666;
-  border-bottom: 1px solid #666;
+#header {
+    display: none;
 }
+
+#nassa_table_container {
+  width: 87%;
+  float: left;
+  z-index: -10;
+}
+#customsidebar {
+  width: 12%;
+  float: right;
+  z-index: -10;
+  padding: 0px;
+}
+
 table thead th { border-bottom: 1px solid #ddd; }
 th, td { padding: 5px; }
 thead, tfoot, tr:nth-child(even) { background: #eee; }
@@ -28,10 +40,16 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   padding: 4px 8px;
   text-align: center;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.badge:hover {
+  background-color: #e0e0e0; /* Light gray background on hover */
+  color: #000; /* Darken text color on hover */
 }
 
 #badgeModuleType {
-  background-color: #03989E;
+  background-color: #03989e;
 }
 
 #badgeLanguage {
@@ -85,4 +103,13 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
   border-collapse: collapse;
   text-align: center;
   background-color: transparent;
+}
+
+a {
+  color: #03989e;
+  word-break: break-word;
+}
+
+button {
+  min-height: 30px;
 }

@@ -2,15 +2,19 @@ name: "nassa-modules"
 navbar:
 #  title: "NASSA Library Web User Interface"
   left:
-    - text: "Module list"
+    - text: "Main"
       icon: fa-list
       href: index.html
-    - text: "Repository"
-      icon: fa-github
-      href: https://github.com/Archaeology-ABM/NASSA-modules
     - text: "About"
       icon: fa-book
       href: https://archaeology-abm.github.io/NASSA-hub/library
+    - text: "Guide for submissions"
+      icon: fa-map
+      href: https://archaeology-abm.github.io/NASSA-hub/guide
+    - text: "Repository"
+      icon: fa-github
+      href: https://github.com/Archaeology-ABM/NASSA-modules
+  right:
     - text: "NASSA Hub"
       icon: fa-home
       href: https://archaeology-abm.github.io/NASSA-hub
@@ -18,5 +22,5 @@ output:
   html_document:
     theme: spacelab
     highlight: textmate
-    css: styles.css
+    css: css/styles.css
     

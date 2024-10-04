@@ -15,4 +15,5 @@ Imports:
     magrittr (>= 2.0.3),
     purrr (>= 0.3.4),
     rmarkdown (>= 2.14),
-    yaml (>= 2.3.5)
+    yaml (>= 2.3.5),
+    stringr (>= 1.5.1)

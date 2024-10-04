@@ -54,4 +54,4 @@ outputs:
     type: float (absolute position) or integer (patch coordinate)
     unit: no specific unit, but within world dimensions
     description: Current position of the agent (turtle) as x and y coordinates.
-license: CC BY-SA 4.0
+license: CC-BY-SA-4.0

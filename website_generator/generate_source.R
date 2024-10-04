@@ -2,6 +2,7 @@ library(magrittr)
 #library(kableExtra)
 library(DT)
 library(git2r)
+library(stringr)
 
 repo_path <- ".."
 
@@ -20,7 +21,7 @@ extract_names <- function(listOfContributorsData) {
 
 badge_series <- function(x, type = 'badgeDefault') {
   if (length(x) > 0) {
-    prefix <- paste0('<span class="badge" id="',  type, '">')
+    prefix <- paste0('<span class="badge" id="', type, '" data-keyword="', x, '">')
     return(paste(prefix, x, '</span>', collapse = '&nbsp;'))
   } else {
     return('')
@@ -47,7 +48,7 @@ nassa_table <- purrr::map_dfr(
                        badge_series(nassa_yml$modellingKeywords, type = 'badgeModelling'),
                        badge_series(nassa_yml$programmingKeywords, type = 'badgeProgramming'),
                        collapse = '&nbsp;'),
-      `View` = paste0("<a href=\"", path, ".html\">View</a>"),
+      `View` = paste0("<a href=\"", path, ".html\"><i class='fa fa-right-to-bracket'></i></a>"),
     )
   }
 )

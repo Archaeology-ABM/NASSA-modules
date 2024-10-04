@@ -1,5 +1,5 @@
 ---
-#title: NASSA modules
+title: NASSA Library
 ---
 
 <table class='pageHeader'>
@@ -14,22 +14,25 @@
   </tr>
 </table>
 
+<div id="nassa_table_container">
 ```{r, echo=FALSE}
-nassa_table_print <- nassa_table[, c('lastUpdateDate', 'contributors', 'title', 'moduleVersion', 
-                                     'Keywords', 
-                                     'View')]
-colDisplayNames <-                 c('Last update', 'Contributors', 'Title', 'Current version', 
-                                     'Keywords', 
-                                     '')
+nassa_table_print <- nassa_table[, c('View',
+                                     'title', 'contributors', 'moduleVersion', 'lastUpdateDate', 
+                                     'Keywords')]
+colDisplayNames <-                 c('',
+                                     'Title', 'Contributors', 'Version', 'Last update', 
+                                     'Keywords')
 
 options(DT.options = list(
   pageLength = 25, 
   language = list(search = 'Search by Last update, Contributors, Title or keyword:'), 
+  search = list(regex = TRUE),
   initComplete = DT::JS(
     "function(settings, json) {",
     "$(this.api().table().header()).css({'background-color': '#03989e'});",
     "}"
   ),
+  fixedHeader = list(header = TRUE),
   # Define which columns are not to be used for sorting or searching
   columnDefs = list(
     list(targets = c(grep('moduleVersion', names(nassa_table_print)) - 1, grep('moduleVersion', names(nassa_table_print)) - 1), 
@@ -43,57 +46,71 @@ DT::datatable(nassa_table_print,
               escape = FALSE,
               colnames = colDisplayNames) %>% 
   #DT::formatStyle('id', fontWeight = 'bold', width = '200px') %>% 
-  DT::formatStyle('lastUpdateDate', width = '150px') %>% 
-    DT::formatStyle(c('moduleVersion', 'View'), textAlign = 'center', columnWidth = '50px') %>% 
-      DT::formatStyle(0, target = 'row', 
-        fontStyle = DT::styleRow(1, 'italic'), 
-        color = DT::styleRow(1, 'grey'))
+  DT::formatStyle('lastUpdateDate', width = '100px') %>% 
+    DT::formatStyle('moduleVersion', textAlign = 'center', columnWidth = '50px') %>% 
+      DT::formatStyle('View', textAlign = 'center', verticalAlign = 'middle', columnWidth = '50px', fontSize = '200%') %>% 
+        DT::formatStyle(0, target = 'row', 
+          fontStyle = DT::styleRow(1, 'italic'), 
+          color = DT::styleRow(1, 'grey'))
+```
+</div>
 
-# kable approach:
-# knitr::kable(nassa_table[, c("id", "title", "moduleVersion",   "View")],
-#              col.names =   c("ID", "Title", "Current version", ""),
-#              align =       c('l',  'l',     'c',               'c'),
-#              format = "html",
-#              table.attr = "class=\'moduleList\'"
-# ) %>% kableExtra::kable_styling() %>% kableExtra::column_spec(
-#   # style specific for the ID column
-#   column = 1, 
-#   width = '200px', 
-#   bold = TRUE,
-#   border_right = TRUE
-# ) %>% kableExtra::row_spec(
-#   # style specific for TEMPLATE module rows
-#   row = c(1), # add more row numbers when adding new templates to the library. TO-DO: possibly code an automatic filter
-#   color = 'grey',
-#   italic = TRUE
-#) %>% as.character()
+```{r, echo=FALSE}
+keywords <- unlist(lapply(stringr::str_match_all(nassa_table$Keywords, "<span[^>]*>(.*?)</span>"), function(x) x[,1]))
+
+getTopKeywordBadgesPerID <- function(keywordList, htmlID, curtailThreshold)
+{
+  keywordsOfID <- keywords[stringr::str_detect(keywordList, htmlID)]
+  keywordNumberLevels <- length(unique(keywordsOfID))
+  keywordsOfIDFreq <- sort(table(keywordsOfID), decreasing = TRUE)[1:(min(curtailThreshold, keywordNumberLevels))]
+  names(keywordsOfIDFreq) <- mapply(function(html, insert) {
+    sub("</", paste0(" <i style='font-size: 50%'>(", insert, ")</i></"), html)
+  }, names(keywordsOfIDFreq), keywordsOfIDFreq)
+  return(keywordsOfIDFreq)
+}
+
+moduleTypeKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeModuleType", 5)
+languageKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeLanguage", 5)
+modellingKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeModelling", 5)
+programmingKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeProgramming", 5)
+regionsKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeRegions", 5)
+periodsKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgePeriods", 5)
+subjectsKeywordsFreq <- getTopKeywordBadgesPerID(keywords, "badgeSubjects", 5)
 ```
 
-<table class='legend'>
-  <tr>
-    <td>
-    Keyword colour-coding:
-    </td>
-    <td>
-      <span class="badge" id="badgeModuleType">Module type</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeLanguage">Programming language</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeRegions">Regions</span>
-    </td>
-    <td>
-      <span class="badge" id="badgePeriods">Periods</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeSubjects">Subjects</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeModelling">Modelling</span>
-    </td>
-    <td>
-      <span class="badge" id="badgeProgramming">Programming</span>
-    </td>
-  </tr>
-</table>
+<div id="customsidebar">
+  <button id="resetFilter">Clear</button>
+  <br>
+  <h4>Module type</h4>
+  <p>
+    `r paste0(names(moduleTypeKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Language</h4>
+  <p>
+    `r paste0(names(languageKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Modelling</h4>
+  <p>
+    `r paste0(names(modellingKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Programming</h4>
+  <p>
+    `r paste0(names(programmingKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Regions</h4>
+  <p>
+    `r paste0(names(regionsKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Periods</h4>
+  <p>
+    `r paste0(names(periodsKeywordsFreq), collapse = "<br>" )`
+  </p>
+  <h4>Subjects</h4>
+  <p>
+    `r paste0(names(subjectsKeywordsFreq), collapse = "<br>" )`
+  </p>
+</div>
+
+<script src='js/selectKeyword.js'></script>
+
+
