@@ -10,7 +10,7 @@ contributors:
     orcid: 0000-0002-9946-8142
 lastUpdateDate: 2022-09-21
 description: >
-  Calculate a daily value of reference evapotranspiration, useful for vegetation (incl. crop) models. The module code is based on FAO-56 Penman-Monteith method. The implementation is based on several sources (see moduleReferences), but particularly useful was the Evapotranspiration R package (<a href='https://cran.r-project.org/web/packages/Evapotranspiration/index.html' target='_blank'>Guo et al. 2016, 2022 (v1.16)</a>). Note: values of `C_n` and `C_d` are fixed for using the grass cover reference (900 and 0.34); values for the alfalfa reference are 1600 and 0.38.
+  Calculate a daily value of reference evapotranspiration, useful for vegetation (incl. crop) models. The module code is based on FAO-56 Penman-Monteith method. The implementation is based on several sources (see moduleReferences), but particularly useful was the Evapotranspiration R package (Guo et al. 2016, 2022 (v1.16), https://cran.r-project.org/web/packages/Evapotranspiration/index.html). Note: values of `C_n` and `C_d` are fixed for using the grass cover reference (900 and 0.34); values for the alfalfa reference are 1600 and 0.38.
 relatedModules: [  ]
 references:
   moduleReferences: [ Allen1998, Suleiman2007, jia_comparison_2013, Guo2016, guo_evapotranspiration_2022 ]
