@@ -35,7 +35,7 @@ to distribute-states
   ask nodes [ set state 0 ]
 
   ;; Randomly select a proportion of nodes to initialize with state 1
-  ;; For this section of code to work a slider 'percent-state-1' 
+  ;; For this section of code to work, create a slider with variable 'percent-state-1' 
   ask n-of ((percent-state-1 / 100) * num-nodes) nodes
     [ set state 1.0 ]
   ask nodes [
