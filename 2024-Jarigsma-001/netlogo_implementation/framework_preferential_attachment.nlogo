@@ -1,24 +1,7 @@
-breed [nodes node]
-
-nodes-own [
-  state            ;; current state (ranges from 0 to 1)
-]
-
-
-;; DISTRIBUTE STATES IN THE SETUP PROCEDURE
-  ;; For this section of code to work:
-  ;; (1) create a slider with variable 'percent-state-1'
-  ;; (2) create a slider with variable 'num-nodes' OR replace 'num-nodes' in the code with the number of nodes in your network
-
-to distribute-states
-  ask nodes [ set state 0 ]
-  ask n-of ((percent-state-1 / 100) * num-nodes) nodes
-    [ set state 1.0 ]
-end
+breed [nodes node]   ;; Define a new breed of agents called 'nodes'
 
 
 ;; CREATE NETWORK IN SETUP PROCEDURE
-
 
 to create-network
   ;; make the initial network of two nodes and an edge
@@ -52,6 +35,7 @@ to-report find-partner
   report partner
 end
 
-to layout
-  layout-spring (turtles with [any? link-neighbors]) links 0.4 6 1
-end
+;; THIS PART IS NOT NECESSARY BUT VERY HELPFUL
+;to layout
+;  layout-spring (turtles with [any? link-neighbors]) links 0.4 6 1
+;end
