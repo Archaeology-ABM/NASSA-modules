@@ -1,4 +1,4 @@
-breed [nodes node]
+breed [nodes node] ;; Define a breed of agents called 'nodes'
 
 nodes-own [
   state            ;; current state (ranges from 0 to 1)
@@ -8,12 +8,15 @@ nodes-own [
 
 ;;;
 ;;; SETUP PROCEDURES
-;;;
+;;; For this section of code to work:
+;;; (1) create a slider with variable 'num-nodes' to represent the number of nodes in your network,
+;;;     or replace 'num-nodes' in the code with the number of nodes in your network
+;;; (2) create a slider with variable 'percent-state-1' to represent the percentage of nodes that are initialised with state 1
 
 to setup
   clear-all
   set-default-shape nodes "circle"
-  repeat num-nodes [ make-node ]   ;; create a slider with the variable 'num-nodes'
+  repeat num-nodes [ make-node ]
   create-network
   distribute-states
   ask patches [ set pcolor gray ]
@@ -35,7 +38,6 @@ to distribute-states
   ask nodes [ set state 0 ]
 
   ;; Randomly select a proportion of nodes to initialize with state 1
-  ;; For this section of code to work a slider 'percent-state-1'
   ask n-of ((percent-state-1 / 100) * num-nodes) nodes
     [ set state 1.0 ]
   ask nodes [
@@ -50,7 +52,6 @@ to update-color
 end
 
 to create-network
-
   ;; make the initial network of two nodes and an edge
   let partner nobody
   let first-node one-of nodes
