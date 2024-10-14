@@ -15,7 +15,7 @@ to create-network
   while [new-node != nobody] [
     set partner find-partner
     ask new-node [ create-link-with partner [ set color white ] ]
-    layout
+    ;layout
     set new-node one-of nodes with [not any? link-neighbors]
   ]
 end
@@ -35,7 +35,7 @@ to-report find-partner
   report partner
 end
 
-;; THIS PART IS NOT NECESSARY BUT VERY HELPFUL
+;; THIS PART IS NOT NECESSARY BUT VERY HELPFUL. If used, make sure to remove the semi-colon before 'layout' in the 'to create-network' function
 ;to layout
 ;  layout-spring (turtles with [any? link-neighbors]) links 0.4 6 1
 ;end
