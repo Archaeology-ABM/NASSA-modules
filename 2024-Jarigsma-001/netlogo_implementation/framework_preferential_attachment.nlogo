@@ -36,7 +36,7 @@ to-report find-partner
 end
 
 ;; THE FOLLOWING PROCEDURE IS NOT NECESSARY BUT VERY HELPFUL
-;; If used, make sure to remove the semi-colon before 'layout' in the 'to create-network' function
+;; If used, make sure to remove the semi-colon before 'layout' in the 'to create-network' procedure
 
 ;to layout
 ;  layout-spring (turtles with [any? link-neighbors]) links 0.4 6 1
