@@ -33,7 +33,6 @@ to make-node
   ]
 end
 
-
 to distribute-states
   ask nodes [ set state 0 ]
 
@@ -68,6 +67,7 @@ to create-network
   ]
 end
 
+;; nodes with more connections (link-neighbors) are more likely to be chosen
 to-report find-partner
   let pick random-float sum [count link-neighbors] of (nodes with [any? link-neighbors])
   let partner nobody
