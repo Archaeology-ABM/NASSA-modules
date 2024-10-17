@@ -35,7 +35,7 @@ to-report find-partner
   report partner
 end
 
-;; THE FOLLOWING PROCEDURE IS NOT NECESSARY BUT VERY HELPFUL
+;; THE FOLLOWING PROCEDURE IS NOT NECESSARY BUT VERY HELPFUL FOR VISUALISATION
 ;; If used, make sure to remove the semi-colon before 'layout' in the 'to create-network' procedure
 
 ;to layout
