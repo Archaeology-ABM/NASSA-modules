@@ -8,6 +8,7 @@ This submodel implements a preferential attachment algorithm to generate network
 
 ## References
 Troutman, C. and Wilensky, U. (2007). NetLogo Language Change model. http://ccl.northwestern.edu/netlogo/models/LanguageChange. Center for   Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL.
+
 Wilensky, U. (1999). NetLogo. http://ccl.northwestern.edu/netlogo/. Center for Connected Learning and Computer-Based Modeling, Northwestern   University, Evanston, IL.
 
 ## Further information
