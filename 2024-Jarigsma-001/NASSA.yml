@@ -5,62 +5,37 @@ title: Preferential Attachment Network
 moduleVersion: 1.0.0
 contributors:
  - name: Jarigsma, Amber Esha
-   roles: [ "Compiler" ]
+   roles: [ "Author", "Creator", "Compiler" ]
    email: a.e.jarigsma@student.vu.nl
-   orcid: 0000-0002-1825-0097
+   orcid: 0009-0008-9842-7913
+ - name: Wilensky, Uri
+   roles: [ "Author", "Copyright Holder" ]
+   email: uri@northwestern.edu 
+   orcid: 0000-0001-9591-3109
+ - name: Troutman, Celina
+   roles: [ "Author" ]
 lastUpdateDate: 2024-10-17
 description: >
   This submodel implements a preferential attachment algorithm to generate networks where nodes (agents) are connected based on their existing number of links, simulating the "rich-get-richer" effect. It uses a lottery-style partner selection method to form links between nodes, favoring those with more existing connections. This structure can model social networks, citation graphs, or other real-world systems where growth follows a preferential attachment pattern.
 relatedModules: 
 references:
-  moduleReferences: [ homer_iliad_1865 ]
-  useExampleReferences: [ nassa_guide_submissions ]
+  moduleReferences: [ Troutman-Wilensky-2007, Wilensky-1999 ]
 domainKeywords:
   regions: 
-    - Global
-    - Eastern Mediterranean
+    - global
   periods: 
-    - Bronze Age
-    - Mycenaean
+    - contemporary
   subjects: 
-    - war
+    - social networks
 modellingKeywords:
-  - agent
-  - calculation
+  - network creation
+  - preferential attachment
 programmingKeywords:
   - Functional
   - Object-oriented
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo >= v6.1.1
-      - gis (NetLogo extension)
-  - language: Python
-    softwareDependencies: 
-      - Python >= v.3.9 
-      - math (Python module)
-      - random (Python module)
+      - NetLogo >= v6.4.0
 docsDir: documentation/
-inputs:
-  - name: greeks-strength, GREEKS_STRENGTH
-    type: integer
-    unit: army strength
-    description: The strength of the Greek army (attackers), measured in number of soldiers, units, etc.
-  - name: trojans-strength, TROJANS_STRENGTH
-    type: integer
-    unit: army strength
-    description: The strength of the Trojan army (defenders), measured in number of soldiers, units, etc.
-  - name: destruction-rate, DESTRUCTION_RATE
-    type: float
-    unit: city health / army strength
-    description: The rate of destruction per unit of attacker strength
-  - name: init-troy-health, TROY_HEALTH
-    type: float
-    unit: city health
-    description: The general state of the defenders city, measured in population, structures, etc.
-outputs:
-  - name: troy-health, health, City.health
-    type: float
-    unit: city health
-    description: The general state of the defenders city, measured in population, structures, etc.
 license: MIT
