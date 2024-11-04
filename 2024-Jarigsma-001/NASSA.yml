@@ -1,22 +1,15 @@
 id: 2024-Jarigsma-001
 nassaVersion: 0.5.0
-moduleType: Submodel
+moduleType: Algorithm
 title: Preferential Attachment Network
 moduleVersion: 1.0.0
 contributors:
  - name: Jarigsma, Amber Esha
-   roles: [ "Author", "Creator", "Compiler" ]
+   roles: [ "Author", "Creator"]
    email: a.e.jarigsma@student.vu.nl
    orcid: 0009-0008-9842-7913
- - name: Wilensky, Uri
-   roles: [ "Author", "Copyright Holder" ]
-   email: uri@northwestern.edu 
-   orcid: 0000-0001-9591-3109
- - name: Troutman, Celina
-   roles: [ "Author" ]
-lastUpdateDate: 2024-10-17
 description: >
-  This submodel implements a preferential attachment algorithm to generate networks where nodes (agents) are connected based on their existing number of links, simulating the "rich-get-richer" effect. It uses a lottery-style partner selection method to form links between nodes, favoring those with more existing connections. This structure can model social networks, citation graphs, or other real-world systems where growth follows a preferential attachment pattern.
+This NetLogo algorithm simulates network formation using preferential attachment. New nodes are more likely to connect to existing nodes with higher degrees, reflecting a "lottery" system where popular nodes attract more links. 
 relatedModules: 
 references:
   moduleReferences: [ Troutman-Wilensky-2007, Wilensky-1999 ]
@@ -28,11 +21,12 @@ domainKeywords:
   subjects: 
     - social networks
 modellingKeywords:
-  - network creation
+  - agent interaction
   - preferential attachment
+  - network dynamics
 programmingKeywords:
-  - Functional
-  - Object-oriented
+  - network simulation
+  - stochastic
 implementations:
   - language: NetLogo
     softwareDependencies:
