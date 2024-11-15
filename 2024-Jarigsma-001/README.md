@@ -7,11 +7,11 @@ This submodel implements a preferential attachment algorithm to generate network
 **MIT** 
 
 ## References
-Troutman, C. and Wilensky, U. (2007). NetLogo Language Change model. http://ccl.northwestern.edu/netlogo/models/LanguageChange. Center for   Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL.
-
-Wilensky, U. (1999). NetLogo. http://ccl.northwestern.edu/netlogo/. Center for Connected Learning and Computer-Based Modeling, Northwestern   University, Evanston, IL.
+Wilensky, U. (2005). NetLogo Preferential Attachment model. http://ccl.northwestern.edu/netlogo/models/PreferentialAttachment. Center for Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL.
 
 ## Further information
-Consult Troutman and Wilensky (2007) for an example of how this submodel can be implemented in a model for Language Change.
+This model is an algorithm implemented in NetLogo. 
+Users can choose how many (unattached) nodes to begin the algorithm with. 
+Node size is proportional to the number of links the node has.
 
-<img width="658" alt="Screenshot 2024-10-21 at 10 49 53" src="https://github.com/user-attachments/assets/5aac8410-fab1-47dd-aca6-4aac1882f1fa">
+<img width="622" alt="Screenshot 2024-11-15 at 22 28 25" src="https://github.com/user-attachments/assets/b7b7b9fa-aeb2-49ce-bd3d-ea9482c05f2f">
