@@ -1,4 +1,4 @@
-breed [nodes node]
+breed [nodes node] 
 nodes-own [degree new-node] ; the degree attribute will store the number of links each node has, while the new-node attribute will only be 'true' if the node is new
 
 ;;
