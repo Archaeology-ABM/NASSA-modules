@@ -1,7 +1,7 @@
 # Preferential Attachment Network
 *by Amber Esha Jarigsma*  
 
-This (sub)model implements a preferential attachment algorithm to generate networks where nodes (agents) are connected based on their existing number of links, simulating the "rich-get-richer" effect. It uses a lottery-style partner selection method to form links between nodes, favoring those with more existing connections. This structure can model social networks, citation graphs, or other real-world systems where growth follows a preferential attachment pattern.  
+This (sub)model implements a preferential attachment algorithm to generate networks where nodes (agents) are connected based on their existing number of links, simulating the "rich-get-richer" effect. It uses a lottery-style partner selection method to form links between nodes, favoring those with more existing connections. This structure can model social networks, trade networks in ancient societies, settlement hierarchies, or other real-world systems where growth follows a preferential attachment pattern.  
 
 ## License
 **MIT** 
