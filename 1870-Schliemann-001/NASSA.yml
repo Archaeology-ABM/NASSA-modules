@@ -1,8 +1,8 @@
 id: 1870-Schliemann-001
-nassaVersion: 0.5.0
+nassaVersion: 0.5.1
 moduleType: Algorithm
 title: (DUMMY EXAMPLE) TroyDestroy. Bronze Age siege and its destructive effect on settlement
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
  - name: Schliemann, Heinrich
    roles: [ "Author", "Copyright Holder" ]
