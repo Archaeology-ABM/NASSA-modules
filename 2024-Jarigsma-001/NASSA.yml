@@ -8,6 +8,7 @@ contributors:
    roles: [ "Copyright Holder", "Author", "Creator"]
    email: a.e.jarigsma@student.vu.nl
    orcid: 0009-0008-9842-7913
+lastUpdateDate: 2024-11-28
 description: >
  This NetLogo algorithm simulates network formation using preferential attachment. New nodes are more likely to connect to existing nodes with higher degrees, reflecting a "lottery" system where popular nodes attract more links. 
 references:
