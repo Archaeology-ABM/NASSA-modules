@@ -8,7 +8,7 @@ to setup
   clear-all
   set-default-shape nodes "circle"
 
-  create-nodes number-of-nodes [
+  create-nodes initial-number-nodes [
     setxy random-xcor random-ycor
     set color red
     set degree 0
@@ -161,8 +161,8 @@ SLIDER
 119
 192
 152
-number-of-nodes
-number-of-nodes
+initial-number-nodes
+initial-number-nodes
 1
 100
 4.0
