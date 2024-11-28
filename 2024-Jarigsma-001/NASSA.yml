@@ -10,14 +10,11 @@ contributors:
    orcid: 0009-0008-9842-7913
 description: >
 This NetLogo algorithm simulates network formation using preferential attachment. New nodes are more likely to connect to existing nodes with higher degrees, reflecting a "lottery" system where popular nodes attract more links. 
-relatedModules: 
 references:
   moduleReferences: [ Wilensky-2005 ]
 domainKeywords:
   regions: 
     - global
-  periods: 
-    
   subjects: 
     - social networks
 modellingKeywords:
