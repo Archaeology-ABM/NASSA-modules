@@ -1,5 +1,5 @@
 breed [nodes node] 
-nodes-own [degree new-node] ; the degree attribute will store the number of links each node has, while the new-node attribute will only be 'true' if the node is new
+nodes-own [degree] ; the degree attribute will store the number of links each node has, while the new-node attribute will only be 'true' if the node is new
 
 ;;
 ;; SETUP PROCEDURE
@@ -22,7 +22,6 @@ end
 ;;
 to go
   make-node
-  create-edge
   layout
   tick
 end
@@ -31,19 +30,18 @@ to make-node
     create-nodes 1 [
     set degree 0
     set color red
-    set new-node true
+
+    create-preferential-attachment
   ]
 end
 
-to create-edge
-  let added-node nodes with [new-node = true]
-
-  let partner find-preferential-partner
-  ask added-node [
-    create-link-with partner
-    set degree degree + 1
-    set new-node false
-  ]
+;; Add an edge using the preferential attachment mechanism
+to create-preferential-attachment
+  let partner preferential-partner
+  
+  ;; Create the link and update degrees
+  create-link-with partner
+  set degree degree + 1
 
   ask partner [
     set degree degree + 1
@@ -55,19 +53,18 @@ end
 ;; Nodes are entered into a "lottery" where the number of 'connections' each node has
 ;; is proportional to its number of links. This creates a mechanism where nodes
 ;; with more links have a higher probability of being randomly selected.
-to-report find-preferential-partner
+to-report preferential-partner
   let connections []
-
-  ask nodes [
-    if new-node != true [
+  
+  ;; Build a weighted list based on degree
+  ask other nodes [
     let connections-count degree + 1
     repeat connections-count [
       set connections lput self connections
     ]
   ]
-  ]
-
-  report one-of connections
+  
+  report one-of connections ;; return one randomly chosen partner
 end
 
 ;;
