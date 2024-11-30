@@ -13,6 +13,15 @@ description: >
  This NetLogo algorithm simulates network formation using preferential attachment. New nodes are more likely to connect to existing nodes with higher degrees, reflecting a "lottery" system where popular nodes attract more links. 
 references:
   moduleReferences: [ Wilensky-2005 ]
+inputs:
+  - name: initial-number-nodes
+    type: integer
+    unit: nodes
+    description: the number of unconnected nodes existing before preferential attachment is applied.
+outputs:
+  - name: network
+    type: object (agent and link sets)
+    description: nodes (turtles, breed nodes) and edges (links) between nodes, formed with iterations of preferential attachment.
 domainKeywords:
   regions: 
     - global
