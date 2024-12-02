@@ -1,0 +1,41 @@
+id: 2024-Jarigsma-001
+nassaVersion: 0.5.1
+moduleType: Algorithm
+title: Preferential Attachment Network
+moduleVersion: 1.0.0
+contributors:
+ - name: Jarigsma, Amber Esha
+   roles: [ "Copyright Holder", "Author", "Creator"]
+   email: a.e.jarigsma@student.vu.nl
+   orcid: 0009-0008-9842-7913
+lastUpdateDate: 2024-11-28
+description: >
+ This NetLogo algorithm simulates network formation using preferential attachment. New nodes are more likely to connect to existing nodes with higher degrees, reflecting a "lottery" system where popular nodes attract more links. 
+references:
+  moduleReferences: [ Wilensky-2005 ]
+inputs:
+  - name: initial-number-nodes
+    type: integer
+    unit: nodes
+    description: the number of unconnected nodes existing before preferential attachment is applied.
+outputs:
+  - name: network
+    type: object (agent and link sets)
+    description: nodes (turtles, breed nodes) and edges (links) between nodes, formed with iterations of preferential attachment.
+domainKeywords:
+  regions: 
+    - global
+  subjects: 
+    - social networks
+modellingKeywords:
+  - agent interaction
+  - preferential attachment
+  - network dynamics
+programmingKeywords:
+  - network simulation
+  - stochastic
+implementations:
+  - language: NetLogo
+    softwareDependencies:
+      - NetLogo >= v6.4.0
+license: MIT
