@@ -11,7 +11,7 @@ contributors:
 lastUpdateDate: 1983-04-18
 description: >
   A concise but informative description of what the module does (max. 300 characters).
-coverImage: https://avatars.githubusercontent.com/u/79940681?s=200&v=4
+coverImage: Logo_noText.png
 relatedModules: [ 0000-NASSA-002-TEMPLATE ]
 references:
   moduleReferences: [ Epstein2008 ]

@@ -13,6 +13,8 @@ Romanowska, I., Wren, C., Crabtree, S. 2021. Agent-Based Modeling for Archaeolog
 
 ## Further information
 
+A generalisation of a demic diffusion model, where a number of agents (turtles) are initialised at a given region in a given map, and then reproduce themselves at each time step with a certain probability and only if there is a free adjacent grid cell (patch). A reimplementation of the classical study by Young and Bettinger (1992) investigating the possible drivers behind the Out of Africa dispersal of modern humans. The module code is an adaptation of the content of "ch1_Y&Bdispersal.nlogo" in the public repository associated to Romanowska, Wren, & Crabtree 2021 (https://github.com/SantaFeInstitute/ABMA/blob/master/ch1).
+
 ![Interface screenshot](netlogo_implementation/documentation/Out%20of%20Africa%20dispersal%20-%20Conditional%20isotropic%20diffusion%20interface.png)
 
 See full list of documentation resources in [`documentation`](documentation/tableOfContents.md).

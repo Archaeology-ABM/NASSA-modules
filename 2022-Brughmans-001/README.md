@@ -2,7 +2,13 @@
 
 *by Tom Brughmans* (NASSA submission :rocket:)
 
+## License
+
+MIT
+
 ## Further information
+
+A draft model with some useful code for creating different network structures using the Netlogo NW extension: small-world, preferential attachment, circular, star, wheel, lattice, random, nearest neighbours. This model is used for the following tutorial: Brughmans, T. (2018). Network structures and assembling code in NetLogo, Tutorial, https://archaeologicalnetworks.wordpress.com/resources/#structures .
 
 By Tom Brughmans
 First version: Summer 2018
@@ -11,7 +17,7 @@ Netlogo version used: 6.0.1
 Extension used: nw (pre-packaged with Netlogo 6.0.1)
 https://ccl.northwestern.edu/netlogo/6.0-BETA1/docs/nw.html 
 
-Tutorial document availabe as a PDF in the [netlogo_implementtion folder](netlogo_implementation/Netlogo_network-structures_v0.1.pdf)
+Tutorial document available as a PDF in the [netlogo_implementation folder](netlogo_implementation/Netlogo_network-structures_v0.1.pdf)
 
 Cite this tutorial as:
 Brughmans, T. (2018). Network structures and assembling code in Netlogo, Tutorial, https://archaeologicalnetworks.wordpress.com/resources/#structures  .
