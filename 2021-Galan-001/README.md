@@ -1,4 +1,4 @@
-# Random Walk in R
+# Random Walk in data frames
 *by Jose M Galan* (NASSA submission :rocket:)
 
 Collection of methods for producing random walks in two-dimensional space in R, including alternatives for grid and non-grid space. Uses tidyverse "tibble" to keep track of trajectories.

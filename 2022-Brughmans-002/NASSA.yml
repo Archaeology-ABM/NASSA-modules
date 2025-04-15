@@ -1,8 +1,8 @@
 id: 2022-Brughmans-002
-nassaVersion: 0.5.1
+nassaVersion: 1.0.0
 moduleType: Submodel
 title: Importing a Roman Transport network
-moduleVersion: 1.0.2
+moduleVersion: 1.1.0
 contributors:
  - name: Brughmans, Tom
    roles: [ "Author", "Copyright Holder", "Creator"]
@@ -10,7 +10,7 @@ contributors:
    orcid: 0000-0002-1589-7768
 lastUpdateDate: 2022-12-02
 description: >
-  Use open Roman datasets via and import them into a Netlogo model, using the ORBIS dataset (http://orbis.stanford.edu/) to create a set of Roman settlements and major routes between them.
+  Use open Roman datasets via and import them into a NetLogo model, using the ORBIS dataset (http://orbis.stanford.edu/) to create a set of Roman settlements and major routes between them.
 relatedModules: [ 2022-Brughmans-001 ]
 references:
   moduleReferences: [ Brughmans2018 ]

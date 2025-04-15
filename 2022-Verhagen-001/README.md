@@ -1,4 +1,4 @@
-# Module name or title
+# Get fertility rates (females, 5-year cohort)
 
 Determine fertility rates for use in a demographic simulation.
 

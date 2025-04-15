@@ -1,4 +1,4 @@
-# Reference evapotranspiration based on FAO-56 Penman-Monteith method
+# Reference evapotranspiration (FAO-56)
 
 *by Andreas Angourakis* (NASSA submission :rocket:)
 

@@ -1,8 +1,8 @@
-# (DUMMY EXAMPLE) TroyDestroy. Bronze Age siege and its destructive effect on settlement
+# TroyDestroy (DUMMY EXAMPLE) 
 
 *by Heinrich "Dummy" Schliemann* (NASSA submission :rocket:)
 
-This module takes the strength of two armies, one aggressor and another defender, and calculates the level of destruction of the defenders' city. The destructive effect over the defenders' city is proportional to the two contending strengths and a constant rate per unit of strength of the aggressor matched by the defender.
+This module represents a Bronze Age siege and its destructive effect on a settlement. It takes the strength of two armies, one aggressor and another defender, and calculates the level of destruction of the defenders' city. The destructive effect over the defenders' city is proportional to the two contending strengths and a constant rate per unit of strength of the aggressor matched by the defender.
 
 ## License
 
@@ -23,3 +23,7 @@ Overview of the algorithm:
 $$warEffect=-destructionRate*\frac{(attackerStrength)^2}{defenderStrength} $$
 
 See full list of documentation resources in [`documentation`](documentation/tableOfContents.md).
+
+### Acknowledgements
+
+The "crossed swords" emoticon (⚔️) used as cover image was sourced at [Twitter Emoji (Twemoji) v14.0](https://github.com/twitter/twemoji) under CC BY 4.0.

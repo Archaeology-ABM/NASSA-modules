@@ -1,4 +1,4 @@
-# Out of Africa dispersal - Conditional isotropic diffusion
+# Out of Africa - Conditional isotropic diffusion
 *by Iza Romanowska, Colin D Wren, and Stefani A Cabtree* (NASSA submission :rocket:)
 
 A reimplementation of the classical study by Young and Bettinger (1992) investigating the possible drivers behind the Out of Africa dispersal of modern humans.

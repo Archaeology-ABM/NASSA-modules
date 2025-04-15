@@ -1,8 +1,8 @@
 id: 2022-Brughmans-001
-nassaVersion: 0.5.1
+nassaVersion: 1.0.0
 moduleType: Submodel
 title: Network structures
-moduleVersion: 1.0.2
+moduleVersion: 1.1.0
 contributors:
  - name: Brughmans, Tom
    roles: [ "Author", "Copyright Holder", "Creator"]

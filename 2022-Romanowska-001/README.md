@@ -1,7 +1,7 @@
-# Multiple agent placement in specific geographical location
+# Place them on the map
 *by Iza Romanowska, Colin D Wren, and Stefani A Cabtree (original authors), and Stef Boogers and Andreas Angourakis as contributors* (NASSA submission :rocket:)
 
-Set up an input number of agents at an input location in an input world. Restart time (tickcounter).
+Multiple agent placement in specific geographical location. Set up an input number of agents at an input location in an input world. Restart time (tickcounter).
 
 ## License
 

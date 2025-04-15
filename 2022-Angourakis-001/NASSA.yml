@@ -1,8 +1,8 @@
 id: 2022-Angourakis-001
-nassaVersion: 0.5.1
+nassaVersion: 1.0.0
 moduleType: Algorithm
-title: Reference evapotranspiration based on FAO-56 Penman-Monteith method
-moduleVersion: 1.0.2
+title: Reference evapotranspiration (FAO-56)
+moduleVersion: 1.1.0
 contributors:
   - name: Angourakis, Andreas
     roles: [ "Author", "Copyright Holder", "Creator" ]
