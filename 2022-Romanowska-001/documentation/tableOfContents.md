@@ -1,4 +1,4 @@
-Multiple agent placement in specific geographical location
+Place them on the map
 # General documentation
 ## Table of contents
 

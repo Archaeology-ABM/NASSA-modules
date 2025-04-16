@@ -1,4 +1,4 @@
-Multiple agent placement in specific geographical location
+Place them on the map
 # Documentation - NetLogo implementation
 ## Table of contents
 
