@@ -1,8 +1,8 @@
 id: 2022-Romanowska-001
-nassaVersion: 0.5.1
+nassaVersion: 1.0.0
 moduleType: Algorithm
-title: Multiple agent placement in specific geographical location
-moduleVersion: 1.0.2
+title: Place them on the map
+moduleVersion: 1.1.0
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -26,7 +26,7 @@ contributors:
     orcid: 0000-0002-9946-8142
 lastUpdateDate: 2022-02-01
 description: >
-  Set up an input number of agents (turtles) at an input location (cell or patch) in an grid holding the input spatial data (map).
+  Multiple agent placement in specific geographical location. Set up an input number of agents (turtles) at an input location (cell or patch) in an grid holding the input spatial data (map).
 relatedModules: [ 2022-Romanowska-002 ]
 references:
   moduleReferences: [ romanowska_agent-based_2021 ]

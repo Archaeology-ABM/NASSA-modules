@@ -1,11 +1,5 @@
-Module name or title
+Get fertility rates (females, 5-year cohort)
 # General documentation
 ## Table of contents
 
-- [`designDetails.md`](designDetails.md) : free format document describing the module process, beyond the level of implementation.
-  
-- ... (other general documentation files)
-  
 - [NetLogo implementation](../netlogo_implementation/documentation/tableOfContents.md) : documentation specific to the NetLogo implementation.
-  
-- ... (other implementations)

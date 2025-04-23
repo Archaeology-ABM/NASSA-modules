@@ -1,4 +1,4 @@
-Module name or title
+Network structures
 # Documentation - NetLogo implementation
 ## Table of contents
 
@@ -6,8 +6,4 @@ Module name or title
 
 ![`moduleTitle interface.png`](moduleTitle%20interface.png)
 
-- [`instructions.md`](instructions.md) : free format document describing any instruction on how to install or use the module.
-  
-- [`<anyName>.md`](anyName.md) : free format document describing the module implementation.
-  
-- ...
+- [`instructions.md`](instructions.md) : TO-DO

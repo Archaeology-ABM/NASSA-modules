@@ -1,4 +1,4 @@
-Out of Africa dispersal - Conditional isotropic diffusion
+Out of Africa - Conditional isotropic diffusion
 # Documentation - NetLogo implementation
 ## Table of contents
 

@@ -1,7 +1,7 @@
-# Random walk in 2D space based on agent angle orientation
+# Angle-and-step random walk
 *by Andreas Angourakis* (NASSA submission :rocket:)
 
-An implementation of random walk in Python, which defines an agent class `Walker` capable of random walk movement based on random angle and movement step distance in a continuous 2D space.
+An Python implementation of random walk in 2D space based on agent angle orientation and step distance. It defines an agent class `Walker` capable of random walk movement based on random angle and movement step distance in a continuous 2D space.
 
 ## License
 

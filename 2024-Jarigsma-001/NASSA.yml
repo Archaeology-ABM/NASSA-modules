@@ -1,8 +1,8 @@
 id: 2024-Jarigsma-001
-nassaVersion: 0.5.1
+nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Preferential Attachment Network
-moduleVersion: 1.0.0
+moduleVersion: 1.1.0
 contributors:
  - name: Jarigsma, Amber Esha
    roles: [ "Copyright Holder", "Author", "Creator"]

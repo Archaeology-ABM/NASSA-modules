@@ -1,8 +1,8 @@
 id: YEAR-Surname-000
-nassaVersion: 0.5.1
+nassaVersion: 1.0.0
 moduleType: Algorithm
-title: (TEMPLATE) Module name or title including a useful description of module. Max. 100 characters.
-moduleVersion: 1.0.0
+title: TEMPLATE-basic (max. 50 characters)
+moduleVersion: 1.1.0
 contributors:
  - name: Surname, Name (with no accent marks, first upper-case letters, and surname matching the id and root directory name)
    roles: [ "Author", "Compiler", "Contributor", "Copyright Holder", "Creator", "Thesis Advisor", "Translator" ]
@@ -10,7 +10,8 @@ contributors:
    orcid: 0000-0002-1825-0097
 lastUpdateDate: 1983-04-18
 description: >
-  Description of what the module does. It should expand the information already given in the name/title.
+  A concise but informative description of what the module does (max. 300 characters).
+coverImage: Logo_noText.png
 relatedModules: [ 0000-NASSA-002-TEMPLATE ]
 references:
   moduleReferences: [ Epstein2008 ]

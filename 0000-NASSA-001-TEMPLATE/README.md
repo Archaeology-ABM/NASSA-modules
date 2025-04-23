@@ -1,4 +1,4 @@
-# Module name or title
+# TEMPLATE-basic (Module title)
 
 *by FULLNAME* (NASSA submission :rocket:)
 
@@ -19,6 +19,8 @@ Epstein, J. M. (2008). Why Model? Journal of Artificial Societies and Social Sim
 Romanowska, I. (2021). Agent-Based Modeling for Archaeology (Electronic). SFI Press. https://doi.org/10.37911/9781947864382
 
 ## Further information
+
+(MANDATORY SECTION, even if left empty)
 
 Add as many design details, instructions, and demonstrations as possible, particularly information that is not included in `NASSA.yml`. If the information is included as markdown or html files in the documentation folder, add links to them here (if they are absolute URLs inside the module directory, remember to update them once the module is integrated to the library).
 

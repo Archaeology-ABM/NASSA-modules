@@ -1,4 +1,4 @@
-Module name or title
+Network structures
 # General documentation
 ## Table of contents
 
