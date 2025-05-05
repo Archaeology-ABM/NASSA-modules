@@ -13,4 +13,4 @@ Romanowska, I., Wren, C., Crabtree, S. 2021. Agent-Based Modeling for Archaeolog
 
 A population of barters with initial amount of goods A and good B exchange each time step one unit of their most abundant good with a random partner in the opposite situation.
 
-![Interface of the Barter module](ch5_simple_barter%20interface.png)
+![Interface of the Barter module](netlogo-implementation/documentation/ch5_simple_barter%20interface.png)
