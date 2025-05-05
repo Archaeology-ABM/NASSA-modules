@@ -1,11 +1,18 @@
+globals
+[
+  num-barters
+  max-initial-goods
+]
 turtles-own [ goods goodsA goodsB]
 
 to setup
   ca
-  crt 500 [
-    set goods 100                       ; goods in the simple scenario
-    set goodsA random 100               ; goods A & B in the barter scenario
-    set goodsB random 100
+  set num-barters 500
+  set max-initial-goods 100
+  crt num-barters [
+    set goods max-initial-goods                       ; goods in the simple scenario
+    set goodsA random max-initial-goods               ; goods A & B in the barter scenario
+    set goodsB random max-initial-goods
   ]
   reset-ticks
 end
