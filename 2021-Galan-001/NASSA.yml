@@ -1,8 +1,8 @@
 id: 2021-Galan-001
-nassaVersion: 0.5.0
+nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Random walk in data frames
-moduleVersion: 1.0.1
+moduleVersion: 1.1.0
 contributors:
   - name: Galan, Jose M.
     roles: [ "Author", "Copyright Holder", "Creator" ]

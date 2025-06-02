@@ -1,8 +1,8 @@
 id: 1870-Schliemann-001
-nassaVersion: 0.5.0
+nassaVersion: 1.0.0
 moduleType: Algorithm
-title: (DUMMY EXAMPLE) TroyDestroy. Bronze Age siege and its destructive effect on settlement
-moduleVersion: 1.0.0
+title: TroyDestroy (DUMMY EXAMPLE) 
+moduleVersion: 1.1.0
 contributors:
  - name: Schliemann, Heinrich
    roles: [ "Author", "Copyright Holder" ]
@@ -14,7 +14,8 @@ contributors:
    orcid: 0000-0002-9946-8142
 lastUpdateDate: 1871-10-20
 description: >
-  This module takes the strength of two armies, one aggressor and another defender, and calculates the level of destruction of the defenders' city. The destructive effect over the defenders' city is proportional to the two contending strengths and a constant rate per unit of strength of the aggressor matched by the defender.
+  This module simulates a Bronze Age siege, calculating city destruction based on the relative strengths of attacker and defender, scaled by a constant rate per unit of matched aggressor strength.
+coverImage: crossSwords.svg
 relatedModules: [ 1874-Schliemann-001 ]
 references:
   moduleReferences: [ homer_iliad_1865 ]

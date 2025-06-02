@@ -1,8 +1,8 @@
 id: 2022-DAEMS-001
-nassaVersion: 0.5.0
+nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Resource exploitation procedure
-moduleVersion: 1.0.1
+moduleVersion: 1.1.0
 contributors:
  - name: Daems, Dries
    roles: [ "Author", "Copyright Holder", "Creator" ]

@@ -1,8 +1,8 @@
 id: 2022-Romanowska-002
-nassaVersion: 0.5.0
+nassaVersion: 1.0.0
 moduleType: Submodel
-title: Out of Africa dispersal - Conditional isotropic diffusion
-moduleVersion: 1.0.1
+title: Out of Africa - Conditional isotropic diffusion
+moduleVersion: 1.1.0
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -22,7 +22,7 @@ contributors:
     orcid: 0000-0002-9946-8142
 lastUpdateDate: 2022-02-01
 description: >
-  A generalisation of a demic diffusion model, where a number of agents (turtles) are initialised at a given region in a given map, and then reproduce themselves at each time step with a certain probability and only if there is a free adjacent grid cell (patch). A reimplementation of the classical study by Young and Bettinger (1992) investigating the possible drivers behind the Out of Africa dispersal of modern humans. The module code is an adaptation of the content of "ch1_Y&Bdispersal.nlogo" in the public repository associated to Romanowska, Wren, & Crabtree 2021 (https://github.com/SantaFeInstitute/ABMA/blob/master/ch1).    
+  A reimplementation of the classical study by Young and Bettinger (1992) investigating the possible drivers behind the Out of Africa dispersal of modern humans.    
 relatedModules: [ 2022-Romanowska-001 ]
 references:
   moduleReferences: [ romanowska_agent-based_2021, young_numic_1992 ]

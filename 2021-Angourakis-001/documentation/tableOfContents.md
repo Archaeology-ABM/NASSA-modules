@@ -1,4 +1,4 @@
-Random walk in 2D space based on agent angle orientation
+Angle-and-step random walk
 # General documentation
 ## Table of contents
 

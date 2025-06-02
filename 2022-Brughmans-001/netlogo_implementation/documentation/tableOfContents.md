@@ -1,13 +1,7 @@
-Module name or title
+Network structures
 # Documentation - NetLogo implementation
 ## Table of contents
 
-- [`moduleTitle interface.png`](moduleTitle%20interface.png) : screenshot of the interface (in NetLogo, using "File" -> "Export" -> "Export Interface ...").
+![`moduleTitle interface.png`](2022-Brughmans-001-interface.png)
 
-![`moduleTitle interface.png`](moduleTitle%20interface.png)
-
-- [`instructions.md`](instructions.md) : free format document describing any instruction on how to install or use the module.
-  
-- [`<anyName>.md`](anyName.md) : free format document describing the module implementation.
-  
-- ...
+- [`instructions.md`](instructions.md) : TO-DO
