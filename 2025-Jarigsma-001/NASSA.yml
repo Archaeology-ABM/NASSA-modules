@@ -1,0 +1,44 @@
+id: 2025-Jarigsma-001
+nassaVersion: 1.0.0
+moduleType: Algorithm
+title: Landscape and Land Cover Allocation with Contiguous Growth
+moduleVersion: 1.0.0
+contributors:
+ - name: Jarigsma, Amber Esha
+   roles: [ "Copyright Holder", "Author", "Creator"]
+   email: a.e.jarigsma@student.vu.nl
+   orcid: 0009-0008-9842-7913
+lastUpdateDate: 2025-06-02
+description: >
+    This NetLogo algorithm generates a landscape composed of user-defined landscape types arranged in concentric rings. 
+  It can optionally place settlements on landscape types deemed suitable by the user. 
+  The algorithm also assigns land cover types to patches either randomly or via a contiguous growth process. 
+references:
+references:
+  moduleReferences: [ Joyce-2019, Verhagen-Joyce-Groenhuijzen-2019 ]
+inputs:
+  - name: 
+    type: 
+    unit: 
+    description: 
+outputs:
+  - name: 
+    type: 
+    description: 
+domainKeywords:
+  regions: 
+    - global
+  subjects: 
+    - 
+modellingKeywords:
+  - 
+  - 
+  - 
+programmingKeywords:
+  - 
+  - 
+implementations:
+  - language: NetLogo
+    softwareDependencies:
+      - NetLogo >= v6.4.0
+license: MIT
