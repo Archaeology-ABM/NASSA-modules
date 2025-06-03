@@ -17,10 +17,17 @@ references:
 references:
   moduleReferences: [ Joyce-2019, Verhagen-Joyce-Groenhuijzen-2019 ]
 inputs:
-  - name: 
-    type: 
-    unit: 
-    description: 
+  - name: min-patch-xcor, min-patch-ycor, max-patch-xcor, max-patch-ycor
+    type: integers
+    unit: no specific unit
+    description: Represents the numeric boundaries of the NetLogo world in terms of patch coordinates (i.e., the lower-left and upper-right corners of the grid).
+  - name: patch-pixel-size
+    type: integer
+    unit: no specific unit
+    description: Controls the visual resolution of the NetLogo view. A larger patch-pixel-size makes each patch look bigger on screen but does not change the underlying model resolution or patch count.
+  - name: max-settlements
+    type: integer
+    unit: no specific unit
 outputs:
   - name: 
     type: 
