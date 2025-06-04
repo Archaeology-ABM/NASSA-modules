@@ -10,7 +10,7 @@ contributors:
    orcid: 0009-0008-9842-7913
 lastUpdateDate: 2025-06-02
 description: >
-This model simulates a simplified settlement-landscape interaction where users can define different landscape types, land covers, and rules for settlement placement. 
+This algorithm simulates a simplified settlement-landscape interaction where users can define different landscape types, land covers, and rules for settlement placement. 
 It is designed to allow flexible configuration of environmental and social parameters. Landscapes are arranged in contiguous zones.
 references:
 references:
