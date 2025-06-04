@@ -20,14 +20,44 @@ inputs:
   - name: min-patch-xcor, min-patch-ycor, max-patch-xcor, max-patch-ycor
     type: integers
     unit: no specific unit
-    description: Represents the numeric boundaries of the NetLogo world in terms of patch coordinates (i.e., the lower-left and upper-right corners of the grid).
+    description: >
+     Represents the numeric boundaries of the NetLogo world in terms of patch coordinates (i.e., the lower-left and upper-right corners of the grid).
   - name: patch-pixel-size
     type: integer
     unit: no specific unit
-    description: Controls the visual resolution of the NetLogo view. A larger patch-pixel-size makes each patch look bigger on screen but does not change the underlying model resolution or patch count.
+    description: >
+    Controls the visual resolution of the NetLogo view. A larger patch-pixel-size makes each patch look bigger on screen but does not change the underlying model resolution or patch count.
   - name: max-settlements
     type: integer
     unit: no specific unit
+    description: >
+    Maximum number of settlements to be placed on the landscape.
+  - name: max-households-per-settlement
+    type: integer 
+    unit: no specific unit
+    description: >
+    Maximum number of households that can be assigned to each individual settlement.
+  - name: landscape-types
+    type: list of lists (integer, string, float, string)
+    unit: no specific unit
+    description: >
+     List of landscape types defined as nested lists. Each list contains: 
+      an ID (integer), landscape name (string), proportion of total land (float between 0–1), and color (string or integer).
+      Landscape types should be ordered from central to outermost.
+  - name: valid-landscape-types
+    type: list of strings
+    unit: no specific unit
+    description: >
+    List of landscape type names (strings) where settlements are allowed to be placed. 
+      These must match the names defined in `landscape-types`.
+  - name: land-covers
+    type: 
+    unit: 
+    description: 
+  - name: biomass-density
+    type:
+    unit:
+    description: 
 outputs:
   - name: 
     type: 
