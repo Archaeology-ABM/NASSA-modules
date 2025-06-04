@@ -48,27 +48,42 @@ inputs:
     type: list of strings
     unit: no specific unit
     description: >
-    List of landscape type names (strings) where settlements are allowed to be placed. 
-      These must match the names defined in `landscape-types`.
+    List of landscape type names where settlements are allowed to be placed. These must match the names defined in `landscape-types`.
   - name: land-covers
-    type: list of lists (integer, string, string, float, integer/float, integer/float)
-    unit: no specific unit, except m3/ha
+    type: list of lists (integer, string, string, float, number, number)
+    unit: no specific units, except m3/ha for biomass volumes
     description: >
-     List of land cover definitions. Each cover is a nested list containing:
-      an ID (integer), cover name (string), a target landscape type (string), 
-      proportion of that cover on the landscape type (float between 0–1), 
-      minimum biomass volume (integer or float, m³/ha), and maximum biomass volume (integer or float, m³/ha).
-      Use "undefined" if the target landscape type is not explicitly defined.
+    List of land cover definitions. Each cover is a nested list containing
+     an ID (integer), cover name (string), a target landscape type (string), 
+     proportion of that cover on the landscape type (float between 0–1), 
+     minimum biomass volume (number, m³/ha), and maximum biomass volume (number, m³/ha).
+     Use "undefined" if the target landscape type is not explicitly defined.
   - name: biomass-density
-    type: integer or float
+    type: number
     unit: kg/m3
     description: >
-      Density of biomass used in calculations (e.g. wood = 439 kg/m³). 
-      This is used to convert volume-based biomass availability to mass.
+    Density of biomass used in calculations (e.g. wood = 439 kg/m³). This is used to convert volume-based biomass availability to mass.
 outputs:
-  - name: 
+  - name: landscape-type
+    type: string
+    unit: no specific unit
+    description: The name of the landscape category assigned to a patch.
+  - name: landscape-id
+    type: integer
+    unit: no specific unit
+    description: A numerical identifier for the type of landscape a patch belongs to.
+  - name: use
+    type: string
+    unit: no specific unit
+    description: The functional use of a patch based on landcover classification.
+  - name: biomass
     type: 
-    description: 
+    unit:
+    description:
+  - name: no-households
+    type:
+    unit:
+    description:
 domainKeywords:
   regions: 
     - global
