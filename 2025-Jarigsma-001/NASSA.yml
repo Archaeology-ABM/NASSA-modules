@@ -51,13 +51,20 @@ inputs:
     List of landscape type names (strings) where settlements are allowed to be placed. 
       These must match the names defined in `landscape-types`.
   - name: land-covers
-    type: 
-    unit: 
-    description: 
+    type: list of lists (integer, string, string, float, integer/float, integer/float)
+    unit: no specific unit, except m3/ha
+    description: >
+     List of land cover definitions. Each cover is a nested list containing:
+      an ID (integer), cover name (string), a target landscape type (string), 
+      proportion of that cover on the landscape type (float between 0–1), 
+      minimum biomass volume (integer or float, m³/ha), and maximum biomass volume (integer or float, m³/ha).
+      Use "undefined" if the target landscape type is not explicitly defined.
   - name: biomass-density
-    type:
-    unit:
-    description: 
+    type: integer or float
+    unit: kg/m3
+    description: >
+      Density of biomass used in calculations (e.g. wood = 439 kg/m³). 
+      This is used to convert volume-based biomass availability to mass.
 outputs:
   - name: 
     type: 
