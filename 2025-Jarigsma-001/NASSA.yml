@@ -1,7 +1,7 @@
 id: 2025-Jarigsma-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
-title: Landscape and Land Cover Allocation with Contiguous Growth
+title: Landscape and Land Cover Generation with Contiguous Growth
 moduleVersion: 1.0.0
 contributors:
  - name: Jarigsma, Amber Esha
