@@ -10,9 +10,8 @@ contributors:
    orcid: 0009-0008-9842-7913
 lastUpdateDate: 2025-06-02
 description: >
-    This NetLogo algorithm generates a landscape composed of user-defined landscape types arranged in concentric rings. 
-  It can optionally place settlements on landscape types deemed suitable by the user. 
-  The algorithm also assigns land cover types to patches either randomly or via a contiguous growth process. 
+This model simulates a simplified settlement-landscape interaction where users can define different landscape types, land covers, and rules for settlement placement. 
+It is designed to allow flexible configuration of environmental and social parameters. Landscapes are arranged in contiguous zones.
 references:
 references:
   moduleReferences: [ Joyce-2019, Verhagen-Joyce-Groenhuijzen-2019 ]
@@ -21,12 +20,13 @@ inputs:
     type: integers
     unit: no specific unit
     description: >
-     Represents the numeric boundaries of the NetLogo world in terms of patch coordinates (i.e., the lower-left and upper-right corners of the grid).
+    Represents the numeric boundaries of the NetLogo world in terms of patch coordinates (i.e., the lower-left and upper-right corners of the grid).
   - name: patch-pixel-size
     type: integer
     unit: no specific unit
     description: >
-    Controls the visual resolution of the NetLogo view. A larger patch-pixel-size makes each patch look bigger on screen but does not change the underlying model resolution or patch count.
+    Controls the visual resolution of the NetLogo view. 
+    A larger patch-pixel-size makes each patch look bigger on screen but does not change the underlying model resolution or patch count.
   - name: max-settlements
     type: integer
     unit: no specific unit
@@ -41,9 +41,9 @@ inputs:
     type: list of lists (integer, string, float, string)
     unit: no specific unit
     description: >
-     List of landscape types defined as nested lists. Each list contains: 
-      an ID (integer), landscape name (string), proportion of total land (float between 0–1), and color (string or integer).
-      Landscape types should be ordered from central to outermost.
+    List of landscape types defined as nested lists. Each list contains 
+    an ID (integer), landscape name (string), proportion of total land (float between 0–1), and color (string or integer).
+    Landscape types should be ordered from central to outermost.
   - name: valid-landscape-types
     type: list of strings
     unit: no specific unit
@@ -54,10 +54,10 @@ inputs:
     unit: no specific units, except m3/ha for biomass volumes
     description: >
     List of land cover definitions. Each cover is a nested list containing
-     an ID (integer), cover name (string), a target landscape type (string), 
-     proportion of that cover on the landscape type (float between 0–1), 
-     minimum biomass volume (number, m³/ha), and maximum biomass volume (number, m³/ha).
-     Use "undefined" if the target landscape type is not explicitly defined.
+    an ID (integer), cover name (string), a target landscape type (string), 
+    proportion of that cover on the landscape type (float between 0–1), 
+    minimum biomass volume (number, m³/ha), and maximum biomass volume (number, m³/ha).
+    Use "undefined" if the target landscape type is not explicitly defined.
   - name: biomass-density
     type: number
     unit: kg/m3
@@ -77,25 +77,29 @@ outputs:
     unit: no specific unit
     description: The functional use of a patch based on landcover classification.
   - name: biomass
-    type: 
-    unit:
-    description:
+    type: number
+    unit: kilograms
+    description: The total amount of biomass assigned to a patch based on its landcover.
   - name: no-households
-    type:
-    unit:
-    description:
+    type: integer
+    unit: no specific unit
+    description: Number of households in a settlement.
 domainKeywords:
   regions: 
     - global
   subjects: 
     - 
 modellingKeywords:
-  - 
-  - 
-  - 
+  - grid initialisation
+  - grid variables
+  - grid behaviour (self)
+  - calculation
+  - interface
+  - parameter exploration
 programmingKeywords:
-  - 
-  - 
+  - procedural
+  - block-structured
+  - dynamic/scripting
 implementations:
   - language: NetLogo
     softwareDependencies:
