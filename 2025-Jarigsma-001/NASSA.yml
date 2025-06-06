@@ -4,65 +4,80 @@ moduleType: Algorithm
 title: Landscape and Land Cover Generation with Contiguous Growth
 moduleVersion: 1.0.0
 contributors:
- - name: Jarigsma, Amber Esha
-   roles: [ "Copyright Holder", "Author", "Creator"]
-   email: a.e.jarigsma@student.vu.nl
-   orcid: 0009-0008-9842-7913
+  - name: Jarigsma, Amber Esha
+    roles:
+      - Copyright Holder
+      - Author
+      - Creator
+    email: a.e.jarigsma@student.vu.nl
+    orcid: 0009-0008-9842-7913
 lastUpdateDate: 2025-06-02
 description: >
-This algorithm simulates a simplified settlement-landscape interaction where users can define different landscape types, land covers, and rules for settlement placement in the setup procedure. 
-It is designed to allow flexible configuration of environmental and social parameters. Landscapes are arranged in contiguous zones.
+  This algorithm simulates a simplified settlement-landscape
+  interaction where users can define different landscape types, land covers, and
+  rules for settlement placement in the setup procedure.  It is designed to
+  allow flexible configuration of environmental and social parameters.
+  Landscapes are arranged in contiguous zones.
 references:
-references:
-  moduleReferences: [ Joyce-2019, Verhagen-Joyce-Groenhuijzen-2019 ]
+  moduleReferences:
+    - Joyce-2019
+    - Verhagen-Joyce-Groenhuijzen-2019
 inputs:
   - name: min-patch-xcor, min-patch-ycor, max-patch-xcor, max-patch-ycor
     type: integers
     unit: no specific unit
     description: >
-    Represents the numeric boundaries of the NetLogo world in terms of patch coordinates (i.e., the lower-left and upper-right corners of the grid).
+      Represents the numeric boundaries of the NetLogo world in terms of
+      patch coordinates (i.e., the lower-left and upper-right corners of the
+      grid).
   - name: patch-pixel-size
     type: integer
     unit: no specific unit
     description: >
-    Controls the visual resolution of the NetLogo view. 
-    A larger patch-pixel-size makes each patch look bigger on screen but does not change the underlying model resolution or patch count.
+      Controls the visual resolution of the NetLogo view.  A larger
+      patch-pixel-size makes each patch look bigger on screen but does not
+      change the underlying model resolution or patch count.
   - name: max-settlements
     type: integer
     unit: no specific unit
     description: >
-    Maximum number of settlements to be placed on the landscape.
+      Maximum number of settlements to be placed on the landscape.
   - name: max-households-per-settlement
-    type: integer 
+    type: integer
     unit: no specific unit
     description: >
-    Maximum number of households that can be assigned to each individual settlement.
+      Maximum number of households that can be assigned to each
+      individual settlement.
   - name: landscape-types
     type: list of lists (integer, string, float, string)
     unit: no specific unit
     description: >
-    List of landscape types defined as nested lists. Each list contains 
-    an ID (integer), landscape name (string), proportion of total land (float between 0–1), and color (string or integer).
-    Landscape types should be ordered from central to outermost.
+      List of landscape types defined as nested lists. Each list
+      contains  an ID (integer), landscape name (string), proportion of total
+      land (float between 0–1), and color (string or integer). Landscape types
+      should be ordered from central to outermost.
   - name: valid-landscape-types
     type: list of strings
     unit: no specific unit
     description: >
-    List of landscape type names where settlements are allowed to be placed. These must match the names defined in `landscape-types`.
+      List of landscape type names where settlements are allowed to be
+      placed. These must match the names defined in `landscape-types`.
   - name: land-covers
     type: list of lists (integer, string, string, float, number, number)
     unit: no specific units, except m3/ha for biomass volumes
     description: >
-    List of land cover definitions. Each cover is a nested list containing
-    an ID (integer), cover name (string), a target landscape type (string), 
-    proportion of that cover on the landscape type (float between 0–1), 
-    minimum biomass volume (number, m³/ha), and maximum biomass volume (number, m³/ha).
-    Use "undefined" if the target landscape type is not explicitly defined.
+      List of land cover definitions. Each cover is a nested list
+      containing an ID (integer), cover name (string), a target landscape type
+      (string),  proportion of that cover on the landscape type (float between
+      0–1),  minimum biomass volume (number, m³/ha), and maximum biomass volume
+      (number, m³/ha). Use "undefined" if the target landscape type is not
+      explicitly defined.
   - name: biomass-density
     type: number
     unit: kg/m3
     description: >
-    Density of biomass used in calculations (e.g. wood = 439 kg/m³). This is used to convert volume-based biomass availability to mass.
+      Density of biomass used in calculations (e.g. wood = 439 kg/m³).
+      This is used to convert volume-based biomass availability to mass.
 outputs:
   - name: landscape-type
     type: string
@@ -85,9 +100,9 @@ outputs:
     unit: no specific unit
     description: Number of households in a settlement.
 domainKeywords:
-  regions: 
+  regions:
     - global
-  subjects: 
+  subjects:
     - landscape generation
 modellingKeywords:
   - grid initialisation
