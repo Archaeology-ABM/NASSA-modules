@@ -1,7 +1,7 @@
 id: 2025-Jarigsma-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
-title: Landscape and Land Cover Generation with Contiguous Growth
+title: Landscape and Land Cover Generation
 moduleVersion: 1.0.0
 contributors:
   - name: Jarigsma, Amber Esha
@@ -13,11 +13,9 @@ contributors:
     orcid: 0009-0008-9842-7913
 lastUpdateDate: 2025-06-02
 description: >
-  This algorithm simulates a simplified settlement-landscape
-  interaction where users can define different landscape types, land covers, and
-  rules for settlement placement in the setup procedure.  It is designed to
-  allow flexible configuration of environmental and social parameters.
-  Landscapes are arranged in contiguous zones.
+  This algorithm generates landscapes and landcovers in contiguous zones.
+  Users can define different landscape types, landcovers and rules for settlement placement in the setup procedure.
+  It is designed to allow flexible configuration of environmental and social parameters.
 references:
   moduleReferences:
     - Joyce-2019
