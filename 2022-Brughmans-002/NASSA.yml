@@ -2,12 +2,16 @@ id: 2022-Brughmans-002
 nassaVersion: 1.0.0
 moduleType: Submodel
 title: Importing a Roman Transport network
-moduleVersion: 1.1.0
+moduleVersion: 1.2.0
 contributors:
  - name: Brughmans, Tom
    roles: [ "Author", "Copyright Holder", "Creator"]
    email: t.b@cas.au.dk
    orcid: 0000-0002-1589-7768
+ - name: Silva, João Messias Sousa da
+   roles: [ "Author" ]
+   email: joao_messiah@hotmail.com
+   orcid: 0009-0007-4716-3957
 lastUpdateDate: 2022-12-02
 description: >
   Use open Roman datasets via and import them into a NetLogo model, using the ORBIS dataset (http://orbis.stanford.edu/) to create a set of Roman settlements and major routes between them.
@@ -39,11 +43,17 @@ implementations:
   - language: NetLogo
     softwareDependencies:
       - NetLogo version 6.2.2
+  - language: Python
+    softwareDependencies:
+      - Python >= 3.9
+      - networkx >= 2.0
+      - matplotlib >= 3.0
+      - numpy >= 1.20
 docsDir: documentation/
 inputs:
   - name: orbis.graphml
     type: file
-    description: available under netlogo_implementation/ . A .graphml file consisting of nodes representing Roman settlements and junctions, and edges representing transport routes. From ORBIS https://purl.stanford.edu/mn425tz9757
+    description: A .graphml file available for each implementation, consisting of nodes representing Roman settlements and junctions, and edges representing transport routes. From ORBIS https://purl.stanford.edu/mn425tz9757
 outputs:
   - name: Network topology
     type: network
