@@ -1,3 +1,5 @@
+## 1.2.0
+- Addition of Python implementation (`epidemicNetwork_v01.py`).
 ## 1.1.0
 - Adaptation to schema v1.0.0.
 ## 1.0.2

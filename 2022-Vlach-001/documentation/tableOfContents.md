@@ -3,3 +3,4 @@ Epidemic Network
 ## Table of contents
 
 - [NetLogo implementation](../netlogo_implementation/documentation/tableOfContents.md): documentation specific to the NetLogo implementation.
+- [Python implementation](../python_implementation/documentation/tableOfContents.md): documentation specific to the Python implementation.
