@@ -37,7 +37,7 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo >= v6.1.1
+      - NetLogo 7.0.2
       - gis (NetLogo extension)
   - language: Python
     softwareDependencies: 

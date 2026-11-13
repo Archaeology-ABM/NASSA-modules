@@ -2,7 +2,7 @@ id: 2025-Jarigsma-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Landscape and Land Cover Generation
-moduleVersion: 1.0.0
+moduleVersion: 1.0.1
 contributors:
   - name: Jarigsma, Amber Esha
     roles:
@@ -116,5 +116,5 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo >= v6.4.0
+      - NetLogo 7.0.2
 license: MIT

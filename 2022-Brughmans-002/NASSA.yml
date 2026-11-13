@@ -2,7 +2,7 @@ id: 2022-Brughmans-002
 nassaVersion: 1.0.0
 moduleType: Submodel
 title: Importing a Roman Transport network
-moduleVersion: 1.2.0
+moduleVersion: 1.2.1
 contributors:
  - name: Brughmans, Tom
    roles: [ "Author", "Copyright Holder", "Creator"]
@@ -42,7 +42,7 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo version 6.2.2
+      - NetLogo 7.0.2
   - language: Python
     softwareDependencies:
       - Python >= 3.9

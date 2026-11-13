@@ -2,7 +2,7 @@ id: 2022-Verhagen-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Get fertility rates (females, 5-year cohort)
-moduleVersion: 1.1.0
+moduleVersion: 1.1.1
 contributors:
  - name: Verhagen, Philip
    roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -30,6 +30,6 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies: 
-    - NetLogo 6.2.0
+    - NetLogo 7.0.2
 docsDir: documentation/
 license: MIT

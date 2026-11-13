@@ -2,7 +2,7 @@ id: 2024-Jarigsma-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Preferential Attachment Network
-moduleVersion: 1.1.0
+moduleVersion: 1.1.1
 contributors:
  - name: Jarigsma, Amber Esha
    roles: [ "Copyright Holder", "Author", "Creator"]
@@ -37,5 +37,5 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo >= v6.4.0
+      - NetLogo 7.0.2
 license: MIT
