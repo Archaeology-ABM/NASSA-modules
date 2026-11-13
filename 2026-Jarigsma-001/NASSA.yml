@@ -2,7 +2,7 @@ id: 2026-Jarigsma-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Visualising GIS Rasters and Vector Data in NetLogo
-moduleVersion: 1.0.0
+moduleVersion: 1.1.0
 contributors:
   - name: Jarigsma, Amber Esha
     roles:
@@ -11,7 +11,12 @@ contributors:
       - Creator
     email: a.e.jarigsma@student.vu.nl
     orcid: 0009-0008-9842-7913
-lastUpdateDate: 2026-03-02
+  - name: Silva, João Messias Sousa da
+    roles:
+      - Author
+    email: joao_messiah@hotmail.com
+    orcid: 0009-0007-4716-3957
+lastUpdateDate: 2026-05-12
 description: >
  This module provides a framework for importing and visualising GIS data in NetLogo. 
   It supports continuous raster data visualised using colour gradients, 
@@ -129,4 +134,12 @@ implementations:
   - language: NetLogo
     softwareDependencies:
       - NetLogo >= v6.4.0
+  - language: Python
+    softwareDependencies:
+      - Python >= 3.9
+      - geopandas >= 0.12
+      - matplotlib >= 3.5
+      - numpy >= 1.20
+      - rasterio >= 1.3
+docsDir: documentation
 license: MIT
