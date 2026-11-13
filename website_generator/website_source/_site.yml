@@ -5,17 +5,14 @@ navbar:
     - text: "Main"
       icon: fa-list
       href: index.html
-    - text: "About"
-      icon: fa-book
-      href: https://archaeology-abm.github.io/NASSA-hub/library
     - text: "Guide for submissions"
-      icon: fa-map
+      icon: fa-book-open
       href: https://archaeology-abm.github.io/NASSA-hub/guide
     - text: "Repository"
       icon: fa-github
       href: https://github.com/Archaeology-ABM/NASSA-modules
   right:
-    - text: "NASSA Hub"
+    - text: "NASSA Home"
       icon: fa-home
       href: https://archaeology-abm.github.io/NASSA-hub
 output:
