@@ -1,0 +1,94 @@
+id: 2026-VERHAGEN-001
+nassaVersion: 1.0.0
+moduleType: Algorithm
+title: DijkstraLCP
+moduleVersion: 1.0.0
+contributors:
+  - roles:
+      - Author
+      - Creator
+    name: Verhagen, Philip
+    email: j.w.h.p.verhagen@vu.nl
+    orcid: 0000-0001-8166-122X
+license: MIT
+lastUpdateDate: 2026-11-13
+description: >-
+  Least-cost paths and cost-distance surfaces over a raster with Dijkstra's
+  algorithm in NetLogo, implemented twice: directly on patches (binary-heap
+  search) and with the nw extension on a graph built from the raster. Both
+  methods return the same accumulated costs.
+coverImage: coverImage.png
+relatedModules: []
+references:
+  moduleReferences:
+    - dijkstra1959
+  useExampleReferences: []
+domainKeywords:
+  subjects:
+    - movement
+    - land transport
+    - least cost paths
+    - accumulated cost surfaces
+    - path finding
+    - dispersal
+  regions: []
+  periods: []
+modellingKeywords:
+  - grid initialisation
+  - spatial data input
+  - calculation
+programmingKeywords:
+  - Imperative
+  - Procedural
+  - Agent-oriented
+implementations:
+  - language: NetLogo
+    softwareDependencies:
+      - NetLogo 6.4.0
+      - NW extension (bundled with NetLogo)
+      - GIS extension (bundled with NetLogo)
+      - Array extension (bundled with NetLogo)
+docsDir: documentation
+inputs:
+  - name: cost
+    type: patch variable (number)
+    unit: cost per unit distance (user-defined)
+    default: ""
+    description: >-
+      Cost surface loaded from input/elevation.asc with gis:apply-raster.
+      Negative values and NoData (NaN) cells are treated as barriers.
+  - name: method
+    type: chooser (string)
+    unit: ""
+    default: "nw extension"
+    description: >-
+      "patch only" runs a heap-based Dijkstra directly on patches; "nw
+      extension" builds a graph once and uses the nw weighted-path primitives.
+  - name: src, dst
+    type: global variable (patch)
+    unit: ""
+    default: "patch -3 4 / patch 14 -8"
+    description: Source and destination patches, set in the go procedure.
+outputs:
+  - name: acc-cost
+    type: patch variable (number)
+    unit: same as cost, accumulated over the path
+    description: >-
+      Accumulated cost from src to each patch (cost-distance surface).
+      Unreachable patches have the value 1e30.
+  - name: lcp
+    type: global variable (list of patches)
+    unit: ""
+    description: >-
+      Ordered list of patches from src to dst along the least-cost path.
+      Empty list if dst is unreachable.
+  - name: prev
+    type: patch variable (patch)
+    unit: ""
+    description: >-
+      Predecessor of each patch on its least-cost path from src (patch-only
+      method).
+  - name: least-cost-nw
+    type: reporter (number or false)
+    unit: same as acc-cost
+    description: Total cost of the least-cost path from src to dst (nw method).
