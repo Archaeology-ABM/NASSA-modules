@@ -13,7 +13,7 @@
 
 <title>2026-Jarigsma-001.knit</title>
 
-<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.32/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
@@ -324,7 +324,7 @@ $(document).ready(function () {
 <div id="visualising-gis-rasters-and-vector-data-in-netlogo"
 class="section level1">
 <h1>Visualising GIS Rasters and Vector Data in NetLogo</h1>
-<p>2026-Jarigsma-001, (Last updated: 2026-03-02)</p>
+<p>2026-Jarigsma-001, (Last updated: 2026-05-12)</p>
 <hr>
 <div class="row">
 <div class="column">
@@ -334,7 +334,11 @@ Authors
 <p><strong>Jarigsma, Amber Esha</strong>
 <a target="_blank" href="mailto:a.e.jarigsma@student.vu.nl"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg></a>
 <a target="_blank" href="https://orcid.org/0009-0008-9842-7913"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-80.79 360.76h-29.84v-207.5h29.84zm-14.92-231.14a19.57 19.57 0 1 1 19.57-19.57 19.64 19.64 0 0 1-19.57 19.57zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg></a>
-(Copyright Holder, Author, Creator)</p>
+(Copyright Holder, Author, Creator)<br><strong>Silva, João Messias Sousa
+da</strong>
+<a target="_blank" href="mailto:joao_messiah@hotmail.com"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg></a>
+<a target="_blank" href="https://orcid.org/0009-0007-4716-3957"><svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#03989E;overflow:visible;position:relative;"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-80.79 360.76h-29.84v-207.5h29.84zm-14.92-231.14a19.57 19.57 0 1 1 19.57-19.57 19.64 19.64 0 0 1-19.57 19.57zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg></a>
+(Author)</p>
 <hr>
 <h4>
 Module files
@@ -345,7 +349,7 @@ Module files
 Go to repository
 </td>
 <td>
-Download (0.03 MB)
+Download (4.05 MB)
 </td>
 </tr>
 <tr id="structGrid">
@@ -366,7 +370,7 @@ Module type
 <h4>
 Implementation languages
 </h4>
-<p><span class="badge" id="badgeLanguage">NetLogo</span></p>
+<p><span class="badge" id="badgeLanguage">NetLogo</span> <span class="badge" id="badgeLanguage">Python</span></p>
 <h4>
 Keywords
 </h4>
@@ -430,8 +434,8 @@ Input and output
 <small><i style="color: darkgrey;">Click on nodes for
 details</i></small>
 </p>
-<div id="htmlwidget-e09fcabef046e3204541" style="width:100%;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e09fcabef046e3204541">{"x":{"nodes":{"id":[2,3,4,5,6,7,8,9,10,11,12,13,14,1],"label":["Coordinate system filepath (.prj)","Continuous raster filepath (.asc)","Continuous raster colour gradient","Binary raster filepath (.asc)","Binary raster colours","Categorical raster filepath (.asc)","Categorical colour map","Point vector filepath (.shp)","point-size","continuous-value","binary-value","categorical-value","points",null],"group":["input","input","input","input","input","input","input","input","input","output","output","output","output","module"],"title":["<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a coordinate reference system file loaded using the NetLogo GIS extension. This ensures that raster and vector datasets share a common spatial reference.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a raster dataset containing continuous numeric values (e.g. elevation or cost surfaces). Raster values are sampled per patch and visualised using a colour gradient.\n","<b>Data type:<\/b> list of RGB colour values (integers)<br><b>Description:<\/b> The module includes a predefined list of RGB colours in the `display-continuous-raster` procedure as a demonstration. Users are expected to modify or replace these RGB values directly in the code to match their own data or visual preferences.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a raster dataset containing binary values (e.g. 0 and 1). Values are sampled per patch and displayed using two discrete colours.\n","<b>Data type:<\/b> string(s) or integer(s)<br><b>Description:<\/b> Colour assignments for binary raster values (currently predefined at value 0 = white, value 1 = black). Users are expected to modify or replace these values directly in the code to match their own data or visual preferences.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a raster dataset containing categorical integer values representing classes (e.g. land-use or land-cover types). \n","<b>Data type:<\/b> string(s) or integer(s)<br><b>Description:<\/b> User-defined mapping between categorical raster values and display colours. Users must manually align categories and colours with their dataset.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> File path to a vector dataset containing point features (e.g. site locations). Each point is visualised as a turtle agent.\n","<b>Data type:<\/b> integer<br><b>Description:<\/b> Size of turtle agents used to represent point vector features in the NetLogo interface.\n","<b>Data type:<\/b> number<br><b>Description:<\/b> Numeric value sampled from a continuous raster dataset and assigned to each patch.\n","<b>Data type:<\/b> integer<br><b>Description:<\/b> Value sampled from a binary raster dataset and assigned to each patch.\n","<b>Data type:<\/b> integer(s) or string(s)<br><b>Description:<\/b> Categorical class value sampled from a categorical raster dataset and assigned to each patch.\n","<b>Data type:<\/b> turtle agents<br><b>Description:<\/b> Agents created from point-based vector features and positioned according to GIS coordinates.\n",null]},"edges":{"from":[2,3,4,5,6,7,8,9,10,1,1,1,1],"to":[1,1,1,1,1,1,1,1,1,11,12,13,14]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","font":{"size":22},"shadow":true},"manipulation":{"enabled":false},"groups":{"input":{"color":{"border":"black","background":"white"}},"output":{"shape":"diamond","color":{"border":"black","background":"lightgrey"}},"useDefaultGroups":true,"module":{"shape":"hexagon","size":40,"color":{"border":"black","background":"#03989E"}}},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":1}},"color":{"color":"darkgrey"}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR","sortMethod":"directed"}},"physics":{"stabilization":false},"interaction":{"keyboard":true,"navigationButtons":true,"zoomView":true,"zoomSpeed":0.1}},"groups":["input","output","module"],"width":"100%","height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","OnceEvents":{"startStabilizing":"function() {this.moveTo({scale:0.3})}"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;\n         font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;\n         -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;\n         border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);\n         max-width:300px;word-break: normal"},"evals":["OnceEvents.startStabilizing"],"jsHooks":[]}</script>
+<div id="htmlwidget-84186203d0bd5808e18d" style="width:100%;height:480px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-84186203d0bd5808e18d">{"x":{"nodes":{"id":[2,3,4,5,6,7,8,9,10,11,12,13,14,1],"label":["Coordinate system filepath (.prj)","Continuous raster filepath (.asc)","Continuous raster colour gradient","Binary raster filepath (.asc)","Binary raster colours","Categorical raster filepath (.asc)","Categorical colour map","Point vector filepath (.shp)","point-size","continuous-value","binary-value","categorical-value","points",null],"group":["input","input","input","input","input","input","input","input","input","output","output","output","output","module"],"title":["<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a coordinate reference system file loaded using the NetLogo GIS extension. This ensures that raster and vector datasets share a common spatial reference.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a raster dataset containing continuous numeric values (e.g. elevation or cost surfaces). Raster values are sampled per patch and visualised using a colour gradient.\n","<b>Data type:<\/b> list of RGB colour values (integers)<br><b>Description:<\/b> The module includes a predefined list of RGB colours in the `display-continuous-raster` procedure as a demonstration. Users are expected to modify or replace these RGB values directly in the code to match their own data or visual preferences.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a raster dataset containing binary values (e.g. 0 and 1). Values are sampled per patch and displayed using two discrete colours.\n","<b>Data type:<\/b> string(s) or integer(s)<br><b>Description:<\/b> Colour assignments for binary raster values (currently predefined at value 0 = white, value 1 = black). Users are expected to modify or replace these values directly in the code to match their own data or visual preferences.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> Filepath to a raster dataset containing categorical integer values representing classes (e.g. land-use or land-cover types). \n","<b>Data type:<\/b> string(s) or integer(s)<br><b>Description:<\/b> User-defined mapping between categorical raster values and display colours. Users must manually align categories and colours with their dataset.\n","<b>Data type:<\/b> string<br><b>Description:<\/b> File path to a vector dataset containing point features (e.g. site locations). Each point is visualised as a turtle agent.\n","<b>Data type:<\/b> integer<br><b>Description:<\/b> Size of turtle agents used to represent point vector features in the NetLogo interface.\n","<b>Data type:<\/b> number<br><b>Description:<\/b> Numeric value sampled from a continuous raster dataset and assigned to each patch.\n","<b>Data type:<\/b> integer<br><b>Description:<\/b> Value sampled from a binary raster dataset and assigned to each patch.\n","<b>Data type:<\/b> integer(s) or string(s)<br><b>Description:<\/b> Categorical class value sampled from a categorical raster dataset and assigned to each patch.\n","<b>Data type:<\/b> turtle agents<br><b>Description:<\/b> Agents created from point-based vector features and positioned according to GIS coordinates.\n",null]},"edges":{"from":[2,3,4,5,6,7,8,9,10,1,1,1,1],"to":[1,1,1,1,1,1,1,1,1,11,12,13,14]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","font":{"size":22},"shadow":true},"manipulation":{"enabled":false},"groups":{"input":{"color":{"border":"black","background":"white"}},"output":{"shape":"diamond","color":{"border":"black","background":"lightgrey"}},"useDefaultGroups":true,"module":{"shape":"hexagon","size":40,"color":{"border":"black","background":"#03989E"}}},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":1}},"color":{"color":"darkgrey"}},"layout":{"hierarchical":{"enabled":true,"levelSeparation":500,"direction":"LR","sortMethod":"directed"}},"physics":{"stabilization":false},"interaction":{"keyboard":true,"navigationButtons":true,"zoomView":true,"zoomSpeed":0.1}},"groups":["input","output","module"],"width":"100%","height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","OnceEvents":{"startStabilizing":"function() {this.moveTo({scale:0.3})}"},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;\n         font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;\n         -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;\n         border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);\n         max-width:300px;word-break: normal"},"evals":["OnceEvents.startStabilizing"],"jsHooks":[]}</script>
 <h4>
 References
 </h4>
@@ -451,7 +455,8 @@ README
 <div id="visualising-gis-rasters-and-vector-data-in-netlogo-1"
 class="section level1 readme">
 <h1>Visualising GIS Rasters and Vector Data in NetLogo</h1>
-<p><em>by Amber Esha Jarigsma</em></p>
+<p><em>by Amber Esha Jarigsma; Python implementation by João Messias
+Sousa da Silva</em></p>
 <p>This module provides a generic and reusable framework for importing
 and visualising GIS data in NetLogo. It is designed to illustrate how
 different types of spatial data can be loaded, interpreted and displayed
@@ -467,6 +472,20 @@ classes), visualised using category-specific colours</p></li>
 <li><p><strong>Point vector data</strong> (e.g. site locations),
 visualised as turtle agents positioned from GIS coordinates</p></li>
 </ul>
+<div id="python-implementation" class="section level2">
+<h2>Python implementation</h2>
+<p>The Python reimplementation provides a
+<code>GISDataVisualisation</code> class that replicates all import and
+display procedures from the original NetLogo model using
+<code>rasterio</code>, <code>geopandas</code>, and
+<code>matplotlib</code>.</p>
+<p><strong>Dependencies:</strong> Python &gt;= 3.9, geopandas &gt;=
+0.12, matplotlib &gt;= 3.5, numpy &gt;= 1.20, rasterio &gt;= 1.3</p>
+<p><strong>Demonstration notebook:</strong> <a
+href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2026-Jarigsma-001/python_implementation/demonstration.ipynb">python_implementation/demonstration.ipynb</a></p>
+<p><strong>Implementation documentation:</strong> <a
+href="https://github.com/Archaeology-ABM/NASSA-modules/tree/main/2026-Jarigsma-001/python_implementation/documentation/tableOfContents.md">python_implementation/documentation/tableOfContents.md</a></p>
+</div>
 <div id="license" class="section level2">
 <h2>License</h2>
 <p><strong>MIT</strong></p>
@@ -481,7 +500,7 @@ class="uri">https://doi.org/10.5334/jcaa.90</a></p>
 </div>
 <div id="further-information" class="section level2">
 <h2>Further information</h2>
-<p>This module is implemented in NetLogo and is intended as a
+<p>This module is implemented in NetLogo and Python and is intended as a
 general-purpose example of GIS raster and vector visualisation for
 agent-based modelling. Users are expected to replace placeholder file
 paths with their own GIS datasets and to adapt colour schemes and
