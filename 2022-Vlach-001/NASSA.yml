@@ -2,7 +2,7 @@ id: 2022-Vlach-001
 nassaVersion: 1.0.0
 moduleType: Submodel
 title: Epidemic Network
-moduleVersion: 1.1.0
+moduleVersion: 1.2.0
 contributors:
   - name: Vlach, Marek
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -12,7 +12,11 @@ contributors:
     roles: [ "Contributor" ]
     email: andros.spica@gmail.com
     orcid: 0000-0002-9946-8142
-lastUpdateDate: 2022-09-07
+  - name: Silva, João Messias Sousa da
+    roles: [ "Author" ]
+    email: joao_messiah@hotmail.com
+    orcid: 0009-0007-4716-3957
+lastUpdateDate: 2026-05-13
 description: >
   Experimental environment for testing of large array of theoretical conditions for development epidemic event within various quantitative, spatial and connectedness (network structure) aspects.
 references:
@@ -39,6 +43,12 @@ implementations:
   - language: NetLogo
     softwareDependencies:
       - NetLogo version 6.2.2
+  - language: Python
+    softwareDependencies:
+      - Python >= 3.9
+      - numpy >= 1.20
+      - networkx >= 2.0
+      - matplotlib >= 3.0
 docsDir: documentation/
 inputs:
   - name: seed
