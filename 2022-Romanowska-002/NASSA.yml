@@ -2,7 +2,7 @@ id: 2022-Romanowska-002
 nassaVersion: 1.0.0
 moduleType: Submodel
 title: Out of Africa - Conditional isotropic diffusion
-moduleVersion: 1.1.0
+moduleVersion: 1.2.0
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -20,6 +20,10 @@ contributors:
     roles: [ "Contributor" ]
     email: andros.spica@gmail.com
     orcid: 0000-0002-9946-8142
+  - name: Sousa da Silva, João Messias
+    roles: [ "Author" ]
+    email: j.m.sousadasilva@vu.nl
+    orcid: 0009-0007-4716-3957
 lastUpdateDate: 2022-02-01
 description: >
   A reimplementation of the classical study by Young and Bettinger (1992) investigating the possible drivers behind the Out of Africa dispersal of modern humans.    
@@ -45,6 +49,12 @@ implementations:
   - language: NetLogo
     softwareDependencies:
       - NetLogo version 6.2.2
+  - language: Python
+    softwareDependencies:
+      - Python >= 3.9
+      - numpy
+      - matplotlib
+      - Pillow
 docsDir: documentation/
 inputs:
   - name: map (input spatial data)
