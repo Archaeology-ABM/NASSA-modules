@@ -2,7 +2,7 @@ id: 1870-Schliemann-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: TroyDestroy (DUMMY EXAMPLE) 
-moduleVersion: 1.1.0
+moduleVersion: 1.1.1
 contributors:
  - name: Schliemann, Heinrich
    roles: [ "Author", "Copyright Holder" ]
@@ -37,7 +37,7 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo >= v6.1.1
+      - NetLogo 7.0.2
       - gis (NetLogo extension)
   - language: Python
     softwareDependencies: 

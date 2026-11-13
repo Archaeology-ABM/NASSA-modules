@@ -2,7 +2,7 @@ id: 2022-Romanowska-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Place them on the map
-moduleVersion: 1.1.0
+moduleVersion: 1.1.1
 contributors:
   - name: Romanowska, Iza
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -37,7 +37,7 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo version 6.2.2
+      - NetLogo 7.0.2
 docsDir: documentation/
 inputs:
   - name: map (spatial input data)

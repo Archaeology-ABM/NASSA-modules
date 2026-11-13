@@ -2,7 +2,7 @@ id: 2022-DAEMS-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Resource exploitation procedure
-moduleVersion: 1.1.0
+moduleVersion: 1.1.1
 contributors:
  - name: Daems, Dries
    roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -31,7 +31,7 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo version 6.2.2
+      - NetLogo 7.0.2
 docsDir: documentation/
 inputs:
   - name: resource

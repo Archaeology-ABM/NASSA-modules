@@ -2,7 +2,7 @@ id: 2022-Angourakis-001
 nassaVersion: 1.0.0
 moduleType: Algorithm
 title: Reference evapotranspiration (FAO-56)
-moduleVersion: 1.1.0
+moduleVersion: 1.1.1
 contributors:
   - name: Angourakis, Andreas
     roles: [ "Author", "Copyright Holder", "Creator" ]
@@ -29,7 +29,7 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo version 6.2.2
+      - NetLogo version 7.0.2
 docsDir: documentation/
 inputs:
   - name: par_elevation

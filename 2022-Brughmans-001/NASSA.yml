@@ -2,7 +2,7 @@ id: 2022-Brughmans-001
 nassaVersion: 1.0.0
 moduleType: Submodel
 title: Network structures
-moduleVersion: 1.1.0
+moduleVersion: 1.1.1
 contributors:
  - name: Brughmans, Tom
    roles: [ "Author", "Copyright Holder", "Creator"]
@@ -31,7 +31,7 @@ programmingKeywords:
 implementations:
   - language: NetLogo
     softwareDependencies:
-      - NetLogo version 6.2.2
+      - NetLogo version 7.0.2
 docsDir: documentation/
 inputs:
   - name: new-network-structure

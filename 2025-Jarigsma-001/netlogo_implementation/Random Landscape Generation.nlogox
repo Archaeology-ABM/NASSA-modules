@@ -1,0 +1,1149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model version="NetLogo 7.0.2" snapToGrid="false">
+  <code><![CDATA[breed [ settlements settlement ]
+
+globals [
+  landscape-types ;; the set of landscape types
+  valid-landscape-types ;; valid landscape types for settlement placement
+  land-covers ;; the set of landcover types
+]
+
+patches-own [
+  landscape-type
+  landscape-id
+
+  use
+  biomass
+]
+
+settlements-own [
+  no-households ; counts how many households are in a settlement
+]
+
+to setup
+  clear-all
+
+  ask patches [set landscape-id 0] ;;  with landscape-id = 0, patches have an undefined landscape type
+  ask patches with [landscape-id = 0] [
+    set landscape-type "undefined"
+    set use "undefined"
+  ]
+
+; INPUT LANDSCAPE AND LANDCOVER PARAMETERS HERE
+;--------------------------------------------------------------------------------------------------------------------------------------
+  ;; Landscape types, their proportion of the land, and their color should be set here.
+  ;; NOTE: the landscape types should be set in order from central landscape to outermost landscape type. ID number must always start with 1.
+  ;; Format: [1 "swamp" 0.5 blue]
+  set landscape-types [
+    [1 "levee" 0.2 brown] ; ID, landscape name, proportion of world the landscape should cover, colour
+    [2 "floodbasin" 0.2 green]
+  ]
+
+ ;; Users need to define valid landscape types for settlement placement
+  ;; Format: ["levee" "floodbasin" "swamp"]
+  set valid-landscape-types ["levee"]
+
+
+ ;; Users need to define cover types for different landscape types
+  ;; [cover-id, cover-type, target-landscape-type, %cover, min. volume biomass per ha (m3), max. volume of biomass per ha (m3)]
+  ;; Format: [1 "forest" "levee" 0.5 70 150]
+  ;; NOTE: if the target-landscape is not a defined landscape type, please input "undefined" as the target-landscape
+  set land-covers [
+    [1 "forest" "levee" 0.2 80 120]
+    [2 "fen" "undefined" 0.2 70 130]
+  ]
+;--------------------------------------------------------------------------------------------------------------------------------------
+
+
+    ;; Checking that the sum of the proportion of landscape-types does not exceed 1 (100%)
+  let total-proportion-types sum map [type-info -> item 2 type-info] landscape-types
+  if total-proportion-types > 1 [
+    user-message (word "WARNING: The combined proportion of landscape types exceeds 100% (" (total-proportion-types * 100) "%). Please reduce the proportions so they sum to 100% or less.")
+    stop
+  ]
+
+  ;; Checking that the sum of the proportion of landcover does not exceed 1 (100%), for each landscape-type
+  let cover-target-types remove-duplicates map [cover-info -> item 2 cover-info] land-covers
+  foreach cover-target-types [ target-type ->
+  let total-cover-proportion sum map [cover-info -> cover-proportion-if-target cover-info target-type] land-covers
+
+  if total-cover-proportion > 1 [
+    user-message (word "WARNING: The total land-cover proportion for landscape-type '" target-type "' exceeds 100% (" (total-cover-proportion * 100) "%). Please reduce the proportions so they sum to 100% or less.")
+    stop
+  ]
+]
+
+  setup-landscape
+end
+
+;; this is a helper reporter for checking landcover proportions do not exceed 1
+to-report cover-proportion-if-target [cover-info target-type]
+  if item 2 cover-info = target-type [
+    report item 3 cover-info
+  ]
+  report 0
+end
+
+to setup-landscape
+
+    resize-world min-patch-xcor max-patch-xcor min-patch-ycor max-patch-ycor
+    set-patch-size patch-pixel-size
+
+  let previous-type-id 0 ;; this is temporarily created so that landscape types will always be setup in concentric rings around the previous landscape type
+
+  ;; looping through each landscape type
+  foreach landscape-types [ type-info ->
+    let type-id first type-info
+    let type-name item 1 type-info
+    let type-proportion item 2 type-info
+    let type-color last type-info
+
+ ;; randomly choosing a patch to be the centre of the concentric rings for the first landscape type
+    if type-id = 1 [
+    while [all? patches [landscape-id = 0]] [
+      ask one-of patches [
+          set pcolor type-color
+          set landscape-type type-name
+          set landscape-id type-id
+        ]
+    ]
+    ]
+
+      while [count patches with [landscape-id = type-id] < (count patches * type-proportion)] [
+        ask patches with [(landscape-id > 0)] [
+          let target one-of neighbors with [landscape-id = 0]
+          if target != nobody [
+            ask target [
+            set pcolor type-color
+            set landscape-type type-name
+            set landscape-id type-id
+          ]
+          ]
+        ]
+      ]
+      set previous-type-id type-id
+  ]
+  setup-landcover
+
+  if include-settlements [setup-agents] ;; checks if the user wants to include settlements in their landscape
+end
+
+
+to setup-landcover
+  ;; loop through all landcover definitions in the landcovers list
+  foreach land-covers [cover-info ->
+    let cover-id item 0 cover-info
+    let cover-type item 1 cover-info
+    let target-type item 2 cover-info
+    let cover-percent item 3 cover-info
+    let min-biomass item 4 cover-info
+    let max-biomass item 5 cover-info
+    let biomass-diff (max-biomass - min-biomass)
+
+    ;; calculating how many patches should be assigned the cover type
+    let eligible-patches patches with [landscape-type = target-type]
+    let target-count round (count eligible-patches * cover-percent)
+
+    ;; if the user chooses to turn on the option for contiguous landcover, we start with one seed. Otherwise, landcover is assigned randomly on eligible patches
+    ifelse contiguous-landcover [
+      ask one-of eligible-patches [
+      grow-contiguous-cover eligible-patches cover-type target-count min-biomass biomass-diff
+    ]
+    ] [
+      let selected-patches n-of target-count eligible-patches
+      ask selected-patches [
+        let biomass-volume (random biomass-diff) + min-biomass
+        set use cover-type
+        set biomass biomass + (biomass-volume * biomass-density)
+      ]
+    ]
+  ]
+
+  ;; colouring patches with biomass
+     ask patches with [ biomass > 0 ] [
+      set pcolor scale-color green biomass 100000 1000 ;; patches are shaded according to biomass values
+    ]
+end
+
+to grow-contiguous-cover [eligible cover-type target-count min-biomass biomass-diff]
+ ;; picking one random eligible patch to act as the initial seed
+  let seed one-of eligible
+  let grown-patches (patch-set seed)
+
+  ;; assign cover type to the seed
+   ask seed [
+    let biomass-volume (random biomass-diff) + min-biomass
+    set use cover-type
+    set biomass biomass + (biomass-volume * biomass-density)
+  ]
+
+  ;; creating the frontier with eligible patches neighbouring the seed
+  let frontier no-patches
+  ask seed [
+    set frontier neighbors with [
+    member? self eligible and not member? self grown-patches
+  ]
+  ]
+
+  ;; keep growing until we hit the target number of patches
+  while [count grown-patches < target-count and any? frontier] [
+    ifelse any? frontier [
+    let new-patch one-of frontier
+
+    ask new-patch [
+      let biomass-volume (random biomass-diff) + min-biomass
+      set use cover-type
+      set biomass biomass + (biomass-volume * biomass-density)
+    ]
+
+    set grown-patches (patch-set grown-patches new-patch)
+
+    ;; updating the frontier
+    ask new-patch [
+      set frontier (patch-set frontier neighbors with [
+      member? self eligible and
+      not member? self grown-patches
+      ])
+      ]
+    set frontier frontier with [not member? self grown-patches]
+  ] [
+      ;; fallback: if the set of frontier patches is empty but the target-count has not yet been reached, another seed is generated on an eligible patch
+      if count grown-patches < target-count [
+      let fallback-seed one-of eligible with [not member? self grown-patches]
+      if fallback-seed != nobody [
+      ask fallback-seed [
+        let biomass-volume (random biomass-diff) + min-biomass
+        set use cover-type
+        set biomass biomass + (biomass-volume * biomass-density)
+      ]
+        set grown-patches (patch-set grown-patches fallback-seed)
+
+       ;; updating the frontier to include neighbours of the fallback-seed
+       ask fallback-seed [
+            set frontier neighbors with [
+          member? self eligible and
+          not member? self grown-patches
+        ]
+      ]
+    ]
+  ]
+  ]
+  ]
+end
+
+to setup-agents
+  set-default-shape settlements "house"
+  let num-settlements 0 ;; creating a counter for the number of settlements
+
+  while [num-settlements < max-settlements] [
+    let household-count (random max-households-per-settlement) + 1 ; ensures that there is at least one household in each settlement
+
+    ; find valid patches for settlements
+    let valid-patch one-of patches with [
+      member? landscape-type valid-landscape-types and not any? settlements-here
+    ]
+
+    if valid-patch != nobody [
+      ask valid-patch [
+        sprout-settlements 1 [
+          set no-households household-count
+        ]
+      ]
+    ]
+
+    set num-settlements num-settlements + 1
+  ]
+end]]></code>
+  <widgets>
+    <view x="284" wrappingAllowedX="false" y="10" frameRate="30.0" minPycor="-16" height="433" showTickCounter="true" patchSize="13.0" fontSize="10" wrappingAllowedY="false" width="433" tickCounterLabel="ticks" maxPycor="16" updateMode="0" maxPxcor="16" minPxcor="-16"></view>
+    <button x="22" y="26" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="66">setup</button>
+    <input x="855" multiline="false" y="94" height="60" variable="max-patch-ycor" type="number" width="100">16.0</input>
+    <input x="852" multiline="false" y="24" height="60" variable="max-patch-xcor" type="number" width="100">16.0</input>
+    <input x="741" multiline="false" y="23" height="60" variable="min-patch-xcor" type="number" width="100">-16.0</input>
+    <input x="740" multiline="false" y="93" height="60" variable="min-patch-ycor" type="number" width="100">-16.0</input>
+    <input x="970" multiline="false" y="66" height="60" variable="patch-pixel-size" type="number" width="100">13.0</input>
+    <switch x="21" y="77" height="40" on="true" variable="include-settlements" width="181" display="include-settlements"></switch>
+    <input x="21" multiline="false" y="199" height="60" variable="max-settlements" type="number" width="149">10.0</input>
+    <input x="19" multiline="false" y="274" height="60" variable="max-households-per-settlement" type="number" width="196">5.0</input>
+    <switch x="23" y="136" height="40" on="true" variable="contiguous-landcover" width="174" display="contiguous-landcover"></switch>
+    <input x="737" multiline="false" y="253" height="74" variable="biomass-density" type="number" width="123">439.0</input>
+    <note x="873" y="254" backgroundDark="0" fontSize="11" width="150" markdown="false" height="70" textColorDark="-1" textColorLight="-11053225" backgroundLight="0">Density of biomass used in calculations (e.g. wood = 439 kg/m³). This is used to convert volume-based biomass availability to mass.</note>
+  </widgets>
+  <info><![CDATA[## WHAT IS IT?
+
+This model simulates a simplified settlement-landscape interaction where users can define different landscape types, land covers, and rules for settlement placement. It is designed to allow flexible configuration of environmental and social parameters. Landscapes are arranged in contiguous zones.
+
+## HOW IT WORKS
+
+The model generates the landscape in concentric rings, starting from a randomly chosen central patch. Each landscape type is defined by the user in the landscape-types list in the setup procedure, including its name (e.g. flood-basin, levee), proportion of total land, and display color. Land covers (e.g., forest, fen) are added on top of these landscape types. Land covers are also defined by the user in the cover-types list. Users specify where and how much they occur, and how much biomass they contain.
+
+Settlements are placed only on landscape types listed in valid-landscape-types, and only if no other settlement exists on the target patch. The number of settlements and the number of households per settlement are also user-defined in the interface.
+
+## HOW TO USE IT
+
+(how to use the model, including a description of each of the items in the Interface tab)
+
+## THINGS TO NOTICE
+
+Landscapes are generated in concentric patterns, with each type expanding outward from the previous one.
+
+## THINGS TO TRY
+
+Change the landscape-types list to add more types or change the proportions and colors.
+
+Modify land-covers to simulate different ecological scenarios (e.g., denser forests, larger fen areas).
+
+## EXTENDING THE MODEL
+
+(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
+
+## NETLOGO FEATURES
+
+(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
+
+## RELATED MODELS
+
+1. Joyce, J. A. (2019). Farming along the limes: Using agent-based modelling to investigate possibilities for subsistence and surplus-based agricultural production in the Lower Rhine delta between 12BCE and 270CE. [PhD-Thesis - Research and graduation internal, Vrije Universiteit Amsterdam].
+
+2. Verhagen, P., Joyce, J., & Groenhuijzen, M. R. (Eds.). (2019). Finding the limits of the limes: Modelling demography, economy and transport on the edge of the Roman Empire (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-04576-0
+
+## CREDITS AND REFERENCES
+
+1. Joyce, J. A. (2019). Farming along the limes: Using agent-based modelling to investigate possibilities for subsistence and surplus-based agricultural production in the Lower Rhine delta between 12BCE and 270CE. [PhD-Thesis - Research and graduation internal, Vrije Universiteit Amsterdam].
+
+2. Verhagen, P., Joyce, J., & Groenhuijzen, M. R. (Eds.). (2019). Finding the limits of the limes: Modelling demography, economy and transport on the edge of the Roman Empire (1st ed.). Springer Cham. https://doi.org/10.1007/978-3-030-04576-0]]></info>
+  <turtleShapes>
+    <shape name="default" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="5"></point>
+        <point x="40" y="250"></point>
+        <point x="150" y="205"></point>
+        <point x="260" y="250"></point>
+      </polygon>
+    </shape>
+    <shape name="airplane" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="0"></point>
+        <point x="135" y="15"></point>
+        <point x="120" y="60"></point>
+        <point x="120" y="105"></point>
+        <point x="15" y="165"></point>
+        <point x="15" y="195"></point>
+        <point x="120" y="180"></point>
+        <point x="135" y="240"></point>
+        <point x="105" y="270"></point>
+        <point x="120" y="285"></point>
+        <point x="150" y="270"></point>
+        <point x="180" y="285"></point>
+        <point x="210" y="270"></point>
+        <point x="165" y="240"></point>
+        <point x="180" y="180"></point>
+        <point x="285" y="195"></point>
+        <point x="285" y="165"></point>
+        <point x="180" y="105"></point>
+        <point x="180" y="60"></point>
+        <point x="165" y="15"></point>
+      </polygon>
+    </shape>
+    <shape name="arrow" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="0"></point>
+        <point x="0" y="150"></point>
+        <point x="105" y="150"></point>
+        <point x="105" y="293"></point>
+        <point x="195" y="293"></point>
+        <point x="195" y="150"></point>
+        <point x="300" y="150"></point>
+      </polygon>
+    </shape>
+    <shape name="box" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="285"></point>
+        <point x="285" y="225"></point>
+        <point x="285" y="75"></point>
+        <point x="150" y="135"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="135"></point>
+        <point x="15" y="75"></point>
+        <point x="150" y="15"></point>
+        <point x="285" y="75"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="15" y="75"></point>
+        <point x="15" y="225"></point>
+        <point x="150" y="285"></point>
+        <point x="150" y="135"></point>
+      </polygon>
+      <line endX="150" startY="285" marked="false" color="255" endY="135" startX="150"></line>
+      <line endX="15" startY="135" marked="false" color="255" endY="75" startX="150"></line>
+      <line endX="285" startY="135" marked="false" color="255" endY="75" startX="150"></line>
+    </shape>
+    <shape name="bug" rotatable="true" editableColorIndex="0">
+      <circle x="96" y="182" marked="true" color="-1920102913" diameter="108" filled="true"></circle>
+      <circle x="110" y="127" marked="true" color="-1920102913" diameter="80" filled="true"></circle>
+      <circle x="110" y="75" marked="true" color="-1920102913" diameter="80" filled="true"></circle>
+      <line endX="80" startY="100" marked="true" color="-1920102913" endY="30" startX="150"></line>
+      <line endX="220" startY="100" marked="true" color="-1920102913" endY="30" startX="150"></line>
+    </shape>
+    <shape name="butterfly" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="165"></point>
+        <point x="209" y="199"></point>
+        <point x="225" y="225"></point>
+        <point x="225" y="255"></point>
+        <point x="195" y="270"></point>
+        <point x="165" y="255"></point>
+        <point x="150" y="240"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="165"></point>
+        <point x="89" y="198"></point>
+        <point x="75" y="225"></point>
+        <point x="75" y="255"></point>
+        <point x="105" y="270"></point>
+        <point x="135" y="255"></point>
+        <point x="150" y="240"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="139" y="148"></point>
+        <point x="100" y="105"></point>
+        <point x="55" y="90"></point>
+        <point x="25" y="90"></point>
+        <point x="10" y="105"></point>
+        <point x="10" y="135"></point>
+        <point x="25" y="180"></point>
+        <point x="40" y="195"></point>
+        <point x="85" y="194"></point>
+        <point x="139" y="163"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="162" y="150"></point>
+        <point x="200" y="105"></point>
+        <point x="245" y="90"></point>
+        <point x="275" y="90"></point>
+        <point x="290" y="105"></point>
+        <point x="290" y="135"></point>
+        <point x="275" y="180"></point>
+        <point x="260" y="195"></point>
+        <point x="215" y="195"></point>
+        <point x="162" y="165"></point>
+      </polygon>
+      <polygon color="255" filled="true" marked="false">
+        <point x="150" y="255"></point>
+        <point x="135" y="225"></point>
+        <point x="120" y="150"></point>
+        <point x="135" y="120"></point>
+        <point x="150" y="105"></point>
+        <point x="165" y="120"></point>
+        <point x="180" y="150"></point>
+        <point x="165" y="225"></point>
+      </polygon>
+      <circle x="135" y="90" marked="false" color="255" diameter="30" filled="true"></circle>
+      <line endX="195" startY="105" marked="false" color="255" endY="60" startX="150"></line>
+      <line endX="105" startY="105" marked="false" color="255" endY="60" startX="150"></line>
+    </shape>
+    <shape name="car" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="300" y="180"></point>
+        <point x="279" y="164"></point>
+        <point x="261" y="144"></point>
+        <point x="240" y="135"></point>
+        <point x="226" y="132"></point>
+        <point x="213" y="106"></point>
+        <point x="203" y="84"></point>
+        <point x="185" y="63"></point>
+        <point x="159" y="50"></point>
+        <point x="135" y="50"></point>
+        <point x="75" y="60"></point>
+        <point x="0" y="150"></point>
+        <point x="0" y="165"></point>
+        <point x="0" y="225"></point>
+        <point x="300" y="225"></point>
+        <point x="300" y="180"></point>
+      </polygon>
+      <circle x="180" y="180" marked="false" color="255" diameter="90" filled="true"></circle>
+      <circle x="30" y="180" marked="false" color="255" diameter="90" filled="true"></circle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="162" y="80"></point>
+        <point x="132" y="78"></point>
+        <point x="134" y="135"></point>
+        <point x="209" y="135"></point>
+        <point x="194" y="105"></point>
+        <point x="189" y="96"></point>
+        <point x="180" y="89"></point>
+      </polygon>
+      <circle x="47" y="195" marked="true" color="-1920102913" diameter="58" filled="true"></circle>
+      <circle x="195" y="195" marked="true" color="-1920102913" diameter="58" filled="true"></circle>
+    </shape>
+    <shape name="circle" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+    </shape>
+    <shape name="circle 2" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+      <circle x="30" y="30" marked="false" color="255" diameter="240" filled="true"></circle>
+    </shape>
+    <shape name="cow" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="200" y="193"></point>
+        <point x="197" y="249"></point>
+        <point x="179" y="249"></point>
+        <point x="177" y="196"></point>
+        <point x="166" y="187"></point>
+        <point x="140" y="189"></point>
+        <point x="93" y="191"></point>
+        <point x="78" y="179"></point>
+        <point x="72" y="211"></point>
+        <point x="49" y="209"></point>
+        <point x="48" y="181"></point>
+        <point x="37" y="149"></point>
+        <point x="25" y="120"></point>
+        <point x="25" y="89"></point>
+        <point x="45" y="72"></point>
+        <point x="103" y="84"></point>
+        <point x="179" y="75"></point>
+        <point x="198" y="76"></point>
+        <point x="252" y="64"></point>
+        <point x="272" y="81"></point>
+        <point x="293" y="103"></point>
+        <point x="285" y="121"></point>
+        <point x="255" y="121"></point>
+        <point x="242" y="118"></point>
+        <point x="224" y="167"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="73" y="210"></point>
+        <point x="86" y="251"></point>
+        <point x="62" y="249"></point>
+        <point x="48" y="208"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="25" y="114"></point>
+        <point x="16" y="195"></point>
+        <point x="9" y="204"></point>
+        <point x="23" y="213"></point>
+        <point x="25" y="200"></point>
+        <point x="39" y="123"></point>
+      </polygon>
+    </shape>
+    <shape name="cylinder" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+    </shape>
+    <shape name="dot" rotatable="false" editableColorIndex="0">
+      <circle x="90" y="90" marked="true" color="-1920102913" diameter="120" filled="true"></circle>
+    </shape>
+    <shape name="face happy" rotatable="false" editableColorIndex="0">
+      <circle x="8" y="8" marked="true" color="-1920102913" diameter="285" filled="true"></circle>
+      <circle x="60" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <circle x="180" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="150" y="255"></point>
+        <point x="90" y="239"></point>
+        <point x="62" y="213"></point>
+        <point x="47" y="191"></point>
+        <point x="67" y="179"></point>
+        <point x="90" y="203"></point>
+        <point x="109" y="218"></point>
+        <point x="150" y="225"></point>
+        <point x="192" y="218"></point>
+        <point x="210" y="203"></point>
+        <point x="227" y="181"></point>
+        <point x="251" y="194"></point>
+        <point x="236" y="217"></point>
+        <point x="212" y="240"></point>
+      </polygon>
+    </shape>
+    <shape name="face neutral" rotatable="false" editableColorIndex="0">
+      <circle x="8" y="7" marked="true" color="-1920102913" diameter="285" filled="true"></circle>
+      <circle x="60" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <circle x="180" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <rectangle endX="240" startY="195" marked="false" color="255" endY="225" startX="60" filled="true"></rectangle>
+    </shape>
+    <shape name="face sad" rotatable="false" editableColorIndex="0">
+      <circle x="8" y="8" marked="true" color="-1920102913" diameter="285" filled="true"></circle>
+      <circle x="60" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <circle x="180" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="150" y="168"></point>
+        <point x="90" y="184"></point>
+        <point x="62" y="210"></point>
+        <point x="47" y="232"></point>
+        <point x="67" y="244"></point>
+        <point x="90" y="220"></point>
+        <point x="109" y="205"></point>
+        <point x="150" y="198"></point>
+        <point x="192" y="205"></point>
+        <point x="210" y="220"></point>
+        <point x="227" y="242"></point>
+        <point x="251" y="229"></point>
+        <point x="236" y="206"></point>
+        <point x="212" y="183"></point>
+      </polygon>
+    </shape>
+    <shape name="fish" rotatable="false" editableColorIndex="0">
+      <polygon color="-1" filled="true" marked="false">
+        <point x="44" y="131"></point>
+        <point x="21" y="87"></point>
+        <point x="15" y="86"></point>
+        <point x="0" y="120"></point>
+        <point x="15" y="150"></point>
+        <point x="0" y="180"></point>
+        <point x="13" y="214"></point>
+        <point x="20" y="212"></point>
+        <point x="45" y="166"></point>
+      </polygon>
+      <polygon color="-1" filled="true" marked="false">
+        <point x="135" y="195"></point>
+        <point x="119" y="235"></point>
+        <point x="95" y="218"></point>
+        <point x="76" y="210"></point>
+        <point x="46" y="204"></point>
+        <point x="60" y="165"></point>
+      </polygon>
+      <polygon color="-1" filled="true" marked="false">
+        <point x="75" y="45"></point>
+        <point x="83" y="77"></point>
+        <point x="71" y="103"></point>
+        <point x="86" y="114"></point>
+        <point x="166" y="78"></point>
+        <point x="135" y="60"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="30" y="136"></point>
+        <point x="151" y="77"></point>
+        <point x="226" y="81"></point>
+        <point x="280" y="119"></point>
+        <point x="292" y="146"></point>
+        <point x="292" y="160"></point>
+        <point x="287" y="170"></point>
+        <point x="270" y="195"></point>
+        <point x="195" y="210"></point>
+        <point x="151" y="212"></point>
+        <point x="30" y="166"></point>
+      </polygon>
+      <circle x="215" y="106" marked="false" color="255" diameter="30" filled="true"></circle>
+    </shape>
+    <shape name="flag" rotatable="false" editableColorIndex="0">
+      <rectangle endX="75" startY="15" marked="true" color="-1920102913" endY="300" startX="60" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="90" y="150"></point>
+        <point x="270" y="90"></point>
+        <point x="90" y="30"></point>
+      </polygon>
+      <line endX="90" startY="135" marked="true" color="-1920102913" endY="135" startX="75"></line>
+      <line endX="90" startY="45" marked="true" color="-1920102913" endY="45" startX="75"></line>
+    </shape>
+    <shape name="flower" rotatable="false" editableColorIndex="0">
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="135" y="120"></point>
+        <point x="165" y="165"></point>
+        <point x="180" y="210"></point>
+        <point x="180" y="240"></point>
+        <point x="150" y="300"></point>
+        <point x="165" y="300"></point>
+        <point x="195" y="240"></point>
+        <point x="195" y="195"></point>
+        <point x="165" y="135"></point>
+      </polygon>
+      <circle x="85" y="132" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="130" y="147" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="192" y="85" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="85" y="40" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="177" y="40" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="177" y="132" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="70" y="85" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="130" y="25" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="96" y="51" marked="true" color="-1920102913" diameter="108" filled="true"></circle>
+      <circle x="113" y="68" marked="false" color="255" diameter="74" filled="true"></circle>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="189" y="233"></point>
+        <point x="219" y="188"></point>
+        <point x="249" y="173"></point>
+        <point x="279" y="188"></point>
+        <point x="234" y="218"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="180" y="255"></point>
+        <point x="150" y="210"></point>
+        <point x="105" y="210"></point>
+        <point x="75" y="240"></point>
+        <point x="135" y="240"></point>
+      </polygon>
+    </shape>
+    <shape name="house" rotatable="false" editableColorIndex="0">
+      <rectangle endX="255" startY="120" marked="true" color="-1920102913" endY="285" startX="45" filled="true"></rectangle>
+      <rectangle endX="180" startY="210" marked="false" color="255" endY="285" startX="120" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="15" y="120"></point>
+        <point x="150" y="15"></point>
+        <point x="285" y="120"></point>
+      </polygon>
+      <line endX="270" startY="120" marked="false" color="255" endY="120" startX="30"></line>
+    </shape>
+    <shape name="leaf" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="210"></point>
+        <point x="135" y="195"></point>
+        <point x="120" y="210"></point>
+        <point x="60" y="210"></point>
+        <point x="30" y="195"></point>
+        <point x="60" y="180"></point>
+        <point x="60" y="165"></point>
+        <point x="15" y="135"></point>
+        <point x="30" y="120"></point>
+        <point x="15" y="105"></point>
+        <point x="40" y="104"></point>
+        <point x="45" y="90"></point>
+        <point x="60" y="90"></point>
+        <point x="90" y="105"></point>
+        <point x="105" y="120"></point>
+        <point x="120" y="120"></point>
+        <point x="105" y="60"></point>
+        <point x="120" y="60"></point>
+        <point x="135" y="30"></point>
+        <point x="150" y="15"></point>
+        <point x="165" y="30"></point>
+        <point x="180" y="60"></point>
+        <point x="195" y="60"></point>
+        <point x="180" y="120"></point>
+        <point x="195" y="120"></point>
+        <point x="210" y="105"></point>
+        <point x="240" y="90"></point>
+        <point x="255" y="90"></point>
+        <point x="263" y="104"></point>
+        <point x="285" y="105"></point>
+        <point x="270" y="120"></point>
+        <point x="285" y="135"></point>
+        <point x="240" y="165"></point>
+        <point x="240" y="180"></point>
+        <point x="270" y="195"></point>
+        <point x="240" y="210"></point>
+        <point x="180" y="210"></point>
+        <point x="165" y="195"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="195"></point>
+        <point x="135" y="240"></point>
+        <point x="120" y="255"></point>
+        <point x="105" y="255"></point>
+        <point x="105" y="285"></point>
+        <point x="135" y="285"></point>
+        <point x="165" y="240"></point>
+        <point x="165" y="195"></point>
+      </polygon>
+    </shape>
+    <shape name="line" rotatable="true" editableColorIndex="0">
+      <line endX="150" startY="0" marked="true" color="-1920102913" endY="300" startX="150"></line>
+    </shape>
+    <shape name="line half" rotatable="true" editableColorIndex="0">
+      <line endX="150" startY="0" marked="true" color="-1920102913" endY="150" startX="150"></line>
+    </shape>
+    <shape name="pentagon" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="15"></point>
+        <point x="15" y="120"></point>
+        <point x="60" y="285"></point>
+        <point x="240" y="285"></point>
+        <point x="285" y="120"></point>
+      </polygon>
+    </shape>
+    <shape name="person" rotatable="false" editableColorIndex="0">
+      <circle x="110" y="5" marked="true" color="-1920102913" diameter="80" filled="true"></circle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="105" y="90"></point>
+        <point x="120" y="195"></point>
+        <point x="90" y="285"></point>
+        <point x="105" y="300"></point>
+        <point x="135" y="300"></point>
+        <point x="150" y="225"></point>
+        <point x="165" y="300"></point>
+        <point x="195" y="300"></point>
+        <point x="210" y="285"></point>
+        <point x="180" y="195"></point>
+        <point x="195" y="90"></point>
+      </polygon>
+      <rectangle endX="172" startY="79" marked="true" color="-1920102913" endY="94" startX="127" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="195" y="90"></point>
+        <point x="240" y="150"></point>
+        <point x="225" y="180"></point>
+        <point x="165" y="105"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="105" y="90"></point>
+        <point x="60" y="150"></point>
+        <point x="75" y="180"></point>
+        <point x="135" y="105"></point>
+      </polygon>
+    </shape>
+    <shape name="plant" rotatable="false" editableColorIndex="0">
+      <rectangle endX="165" startY="90" marked="true" color="-1920102913" endY="300" startX="135" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="255"></point>
+        <point x="90" y="210"></point>
+        <point x="45" y="195"></point>
+        <point x="75" y="255"></point>
+        <point x="135" y="285"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="165" y="255"></point>
+        <point x="210" y="210"></point>
+        <point x="255" y="195"></point>
+        <point x="225" y="255"></point>
+        <point x="165" y="285"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="180"></point>
+        <point x="90" y="135"></point>
+        <point x="45" y="120"></point>
+        <point x="75" y="180"></point>
+        <point x="135" y="210"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="165" y="180"></point>
+        <point x="165" y="210"></point>
+        <point x="225" y="180"></point>
+        <point x="255" y="120"></point>
+        <point x="210" y="135"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="105"></point>
+        <point x="90" y="60"></point>
+        <point x="45" y="45"></point>
+        <point x="75" y="105"></point>
+        <point x="135" y="135"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="165" y="105"></point>
+        <point x="165" y="135"></point>
+        <point x="225" y="105"></point>
+        <point x="255" y="45"></point>
+        <point x="210" y="60"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="90"></point>
+        <point x="120" y="45"></point>
+        <point x="150" y="15"></point>
+        <point x="180" y="45"></point>
+        <point x="165" y="90"></point>
+      </polygon>
+    </shape>
+    <shape name="sheep" rotatable="false" editableColorIndex="15">
+      <circle x="203" y="65" marked="true" color="-1" diameter="88" filled="true"></circle>
+      <circle x="70" y="65" marked="true" color="-1" diameter="162" filled="true"></circle>
+      <circle x="150" y="105" marked="true" color="-1" diameter="120" filled="true"></circle>
+      <polygon color="-1920102913" filled="true" marked="false">
+        <point x="218" y="120"></point>
+        <point x="240" y="165"></point>
+        <point x="255" y="165"></point>
+        <point x="278" y="120"></point>
+      </polygon>
+      <circle x="214" y="72" marked="false" color="-1920102913" diameter="67" filled="true"></circle>
+      <rectangle endX="179" startY="223" marked="true" color="-1" endY="298" startX="164" filled="true"></rectangle>
+      <polygon color="-1" filled="true" marked="true">
+        <point x="45" y="285"></point>
+        <point x="30" y="285"></point>
+        <point x="30" y="240"></point>
+        <point x="15" y="195"></point>
+        <point x="45" y="210"></point>
+      </polygon>
+      <circle x="3" y="83" marked="true" color="-1" diameter="150" filled="true"></circle>
+      <rectangle endX="80" startY="221" marked="true" color="-1" endY="296" startX="65" filled="true"></rectangle>
+      <polygon color="-1" filled="true" marked="true">
+        <point x="195" y="285"></point>
+        <point x="210" y="285"></point>
+        <point x="210" y="240"></point>
+        <point x="240" y="210"></point>
+        <point x="195" y="210"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="false">
+        <point x="276" y="85"></point>
+        <point x="285" y="105"></point>
+        <point x="302" y="99"></point>
+        <point x="294" y="83"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="false">
+        <point x="219" y="85"></point>
+        <point x="210" y="105"></point>
+        <point x="193" y="99"></point>
+        <point x="201" y="83"></point>
+      </polygon>
+    </shape>
+    <shape name="square" rotatable="false" editableColorIndex="0">
+      <rectangle endX="270" startY="30" marked="true" color="-1920102913" endY="270" startX="30" filled="true"></rectangle>
+    </shape>
+    <shape name="square 2" rotatable="false" editableColorIndex="0">
+      <rectangle endX="270" startY="30" marked="true" color="-1920102913" endY="270" startX="30" filled="true"></rectangle>
+      <rectangle endX="240" startY="60" marked="false" color="255" endY="240" startX="60" filled="true"></rectangle>
+    </shape>
+    <shape name="star" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="151" y="1"></point>
+        <point x="185" y="108"></point>
+        <point x="298" y="108"></point>
+        <point x="207" y="175"></point>
+        <point x="242" y="282"></point>
+        <point x="151" y="216"></point>
+        <point x="59" y="282"></point>
+        <point x="94" y="175"></point>
+        <point x="3" y="108"></point>
+        <point x="116" y="108"></point>
+      </polygon>
+    </shape>
+    <shape name="target" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+      <circle x="30" y="30" marked="false" color="255" diameter="240" filled="true"></circle>
+      <circle x="60" y="60" marked="true" color="-1920102913" diameter="180" filled="true"></circle>
+      <circle x="90" y="90" marked="false" color="255" diameter="120" filled="true"></circle>
+      <circle x="120" y="120" marked="true" color="-1920102913" diameter="60" filled="true"></circle>
+    </shape>
+    <shape name="tree" rotatable="false" editableColorIndex="0">
+      <circle x="118" y="3" marked="true" color="-1920102913" diameter="94" filled="true"></circle>
+      <rectangle endX="180" startY="195" marked="false" color="-1653716737" endY="300" startX="120" filled="true"></rectangle>
+      <circle x="65" y="21" marked="true" color="-1920102913" diameter="108" filled="true"></circle>
+      <circle x="116" y="41" marked="true" color="-1920102913" diameter="127" filled="true"></circle>
+      <circle x="45" y="90" marked="true" color="-1920102913" diameter="120" filled="true"></circle>
+      <circle x="104" y="74" marked="true" color="-1920102913" diameter="152" filled="true"></circle>
+    </shape>
+    <shape name="triangle" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="30"></point>
+        <point x="15" y="255"></point>
+        <point x="285" y="255"></point>
+      </polygon>
+    </shape>
+    <shape name="triangle 2" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="30"></point>
+        <point x="15" y="255"></point>
+        <point x="285" y="255"></point>
+      </polygon>
+      <polygon color="255" filled="true" marked="false">
+        <point x="151" y="99"></point>
+        <point x="225" y="223"></point>
+        <point x="75" y="224"></point>
+      </polygon>
+    </shape>
+    <shape name="truck" rotatable="false" editableColorIndex="0">
+      <rectangle endX="195" startY="45" marked="true" color="-1920102913" endY="187" startX="4" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="296" y="193"></point>
+        <point x="296" y="150"></point>
+        <point x="259" y="134"></point>
+        <point x="244" y="104"></point>
+        <point x="208" y="104"></point>
+        <point x="207" y="194"></point>
+      </polygon>
+      <rectangle endX="195" startY="60" marked="false" color="-1" endY="105" startX="195" filled="true"></rectangle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="238" y="112"></point>
+        <point x="252" y="141"></point>
+        <point x="219" y="141"></point>
+        <point x="218" y="112"></point>
+      </polygon>
+      <circle x="234" y="174" marked="false" color="255" diameter="42" filled="true"></circle>
+      <rectangle endX="214" startY="185" marked="true" color="-1920102913" endY="194" startX="181" filled="true"></rectangle>
+      <circle x="144" y="174" marked="false" color="255" diameter="42" filled="true"></circle>
+      <circle x="24" y="174" marked="false" color="255" diameter="42" filled="true"></circle>
+      <circle x="24" y="174" marked="true" color="-1920102913" diameter="42" filled="false"></circle>
+      <circle x="144" y="174" marked="true" color="-1920102913" diameter="42" filled="false"></circle>
+      <circle x="234" y="174" marked="true" color="-1920102913" diameter="42" filled="false"></circle>
+    </shape>
+    <shape name="turtle" rotatable="true" editableColorIndex="0">
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="215" y="204"></point>
+        <point x="240" y="233"></point>
+        <point x="246" y="254"></point>
+        <point x="228" y="266"></point>
+        <point x="215" y="252"></point>
+        <point x="193" y="210"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="195" y="90"></point>
+        <point x="225" y="75"></point>
+        <point x="245" y="75"></point>
+        <point x="260" y="89"></point>
+        <point x="269" y="108"></point>
+        <point x="261" y="124"></point>
+        <point x="240" y="105"></point>
+        <point x="225" y="105"></point>
+        <point x="210" y="105"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="105" y="90"></point>
+        <point x="75" y="75"></point>
+        <point x="55" y="75"></point>
+        <point x="40" y="89"></point>
+        <point x="31" y="108"></point>
+        <point x="39" y="124"></point>
+        <point x="60" y="105"></point>
+        <point x="75" y="105"></point>
+        <point x="90" y="105"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="132" y="85"></point>
+        <point x="134" y="64"></point>
+        <point x="107" y="51"></point>
+        <point x="108" y="17"></point>
+        <point x="150" y="2"></point>
+        <point x="192" y="18"></point>
+        <point x="192" y="52"></point>
+        <point x="169" y="65"></point>
+        <point x="172" y="87"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="85" y="204"></point>
+        <point x="60" y="233"></point>
+        <point x="54" y="254"></point>
+        <point x="72" y="266"></point>
+        <point x="85" y="252"></point>
+        <point x="107" y="210"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="119" y="75"></point>
+        <point x="179" y="75"></point>
+        <point x="209" y="101"></point>
+        <point x="224" y="135"></point>
+        <point x="220" y="225"></point>
+        <point x="175" y="261"></point>
+        <point x="128" y="261"></point>
+        <point x="81" y="224"></point>
+        <point x="74" y="135"></point>
+        <point x="88" y="99"></point>
+      </polygon>
+    </shape>
+    <shape name="wheel" rotatable="false" editableColorIndex="0">
+      <circle x="3" y="3" marked="true" color="-1920102913" diameter="294" filled="true"></circle>
+      <circle x="30" y="30" marked="false" color="255" diameter="240" filled="true"></circle>
+      <line endX="150" startY="285" marked="true" color="-1920102913" endY="15" startX="150"></line>
+      <line endX="285" startY="150" marked="true" color="-1920102913" endY="150" startX="15"></line>
+      <circle x="120" y="120" marked="true" color="-1920102913" diameter="60" filled="true"></circle>
+      <line endX="79" startY="40" marked="true" color="-1920102913" endY="269" startX="216"></line>
+      <line endX="269" startY="84" marked="true" color="-1920102913" endY="221" startX="40"></line>
+      <line endX="269" startY="216" marked="true" color="-1920102913" endY="79" startX="40"></line>
+      <line endX="221" startY="40" marked="true" color="-1920102913" endY="269" startX="84"></line>
+    </shape>
+    <shape name="wolf" rotatable="false" editableColorIndex="0">
+      <polygon color="255" filled="true" marked="false">
+        <point x="253" y="133"></point>
+        <point x="245" y="131"></point>
+        <point x="245" y="133"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="2" y="194"></point>
+        <point x="13" y="197"></point>
+        <point x="30" y="191"></point>
+        <point x="38" y="193"></point>
+        <point x="38" y="205"></point>
+        <point x="20" y="226"></point>
+        <point x="20" y="257"></point>
+        <point x="27" y="265"></point>
+        <point x="38" y="266"></point>
+        <point x="40" y="260"></point>
+        <point x="31" y="253"></point>
+        <point x="31" y="230"></point>
+        <point x="60" y="206"></point>
+        <point x="68" y="198"></point>
+        <point x="75" y="209"></point>
+        <point x="66" y="228"></point>
+        <point x="65" y="243"></point>
+        <point x="82" y="261"></point>
+        <point x="84" y="268"></point>
+        <point x="100" y="267"></point>
+        <point x="103" y="261"></point>
+        <point x="77" y="239"></point>
+        <point x="79" y="231"></point>
+        <point x="100" y="207"></point>
+        <point x="98" y="196"></point>
+        <point x="119" y="201"></point>
+        <point x="143" y="202"></point>
+        <point x="160" y="195"></point>
+        <point x="166" y="210"></point>
+        <point x="172" y="213"></point>
+        <point x="173" y="238"></point>
+        <point x="167" y="251"></point>
+        <point x="160" y="248"></point>
+        <point x="154" y="265"></point>
+        <point x="169" y="264"></point>
+        <point x="178" y="247"></point>
+        <point x="186" y="240"></point>
+        <point x="198" y="260"></point>
+        <point x="200" y="271"></point>
+        <point x="217" y="271"></point>
+        <point x="219" y="262"></point>
+        <point x="207" y="258"></point>
+        <point x="195" y="230"></point>
+        <point x="192" y="198"></point>
+        <point x="210" y="184"></point>
+        <point x="227" y="164"></point>
+        <point x="242" y="144"></point>
+        <point x="259" y="145"></point>
+        <point x="284" y="151"></point>
+        <point x="277" y="141"></point>
+        <point x="293" y="140"></point>
+        <point x="299" y="134"></point>
+        <point x="297" y="127"></point>
+        <point x="273" y="119"></point>
+        <point x="270" y="105"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="-1" y="195"></point>
+        <point x="14" y="180"></point>
+        <point x="36" y="166"></point>
+        <point x="40" y="153"></point>
+        <point x="53" y="140"></point>
+        <point x="82" y="131"></point>
+        <point x="134" y="133"></point>
+        <point x="159" y="126"></point>
+        <point x="188" y="115"></point>
+        <point x="227" y="108"></point>
+        <point x="236" y="102"></point>
+        <point x="238" y="98"></point>
+        <point x="268" y="86"></point>
+        <point x="269" y="92"></point>
+        <point x="281" y="87"></point>
+        <point x="269" y="103"></point>
+        <point x="269" y="113"></point>
+      </polygon>
+    </shape>
+    <shape name="x" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="270" y="75"></point>
+        <point x="225" y="30"></point>
+        <point x="30" y="225"></point>
+        <point x="75" y="270"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="30" y="75"></point>
+        <point x="75" y="30"></point>
+        <point x="270" y="225"></point>
+        <point x="225" y="270"></point>
+      </polygon>
+    </shape>
+  </turtleShapes>
+  <linkShapes>
+    <shape name="default" curviness="0.0">
+      <lines>
+        <line x="-0.2" visible="false">
+          <dash value="0.0"></dash>
+          <dash value="1.0"></dash>
+        </line>
+        <line x="0.0" visible="true">
+          <dash value="1.0"></dash>
+          <dash value="0.0"></dash>
+        </line>
+        <line x="0.2" visible="false">
+          <dash value="0.0"></dash>
+          <dash value="1.0"></dash>
+        </line>
+      </lines>
+      <indicator>
+        <shape name="link direction" rotatable="true" editableColorIndex="0">
+          <line endX="90" startY="150" marked="true" color="-1920102913" endY="180" startX="150"></line>
+          <line endX="210" startY="150" marked="true" color="-1920102913" endY="180" startX="150"></line>
+        </shape>
+      </indicator>
+    </shape>
+  </linkShapes>
+  <previewCommands>setup repeat 75 [ go ]</previewCommands>
+</model>
